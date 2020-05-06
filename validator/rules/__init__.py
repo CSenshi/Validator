@@ -10,7 +10,7 @@ Import all modules from Rules folder dynamicly
 # Iterate each module in the given package
 for (_, file, _) in pkgutil.iter_modules([Path(__file__).parent]):
     # Get Absolute Path
-    module_abs_path = f"Validator.Rules.{file}"
+    module_abs_path = f"validator.rules.{file}"
 
     pkg = importlib.import_module(module_abs_path)
 
