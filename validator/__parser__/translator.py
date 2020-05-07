@@ -1,3 +1,6 @@
+from validator.rules import Rule
+
+
 """
 Translator class is used by Parser class and implements translation
 of one given generic rule to specified and final version
