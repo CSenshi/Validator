@@ -1,4 +1,4 @@
-from . import Rule
+from validator.rules import Rule
 
 
 class Mail(Rule):
