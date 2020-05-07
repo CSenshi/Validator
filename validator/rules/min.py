@@ -13,7 +13,7 @@ class Min(Rule):
     """
 
     def __init__(self, min_value):
-        self.min_value
+        self.min_value = min_value
 
     def __call__(self, arg):
         return self.min_value < arg
