@@ -1,6 +1,9 @@
-class Required(object):
+from . import Rule
+
+
+class Required(Rule):
     def __init__(self):
         pass
 
-    def __call__(self):
+    def __call__(self, arg):
         pass

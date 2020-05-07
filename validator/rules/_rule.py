@@ -1,9 +1,6 @@
-from . import Rule
-
-
-class Mail(Rule):
+class Rule:
     def __init__(self):
         pass
 
     def __call__(self, arg):
-        pass
+        return False

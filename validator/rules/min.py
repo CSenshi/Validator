@@ -1,6 +1,9 @@
-class Min(object):
+from . import Rule
+
+
+class Min(Rule):
     def __init__(self):
         pass
 
-    def __call__(self):
+    def __call__(self, arg):
         pass
