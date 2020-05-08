@@ -16,4 +16,4 @@ class Max(Rule):
         self.max_value = max_value
 
     def __call__(self, arg):
-        return self.max_value > arg
+        return self.max_value >= arg
