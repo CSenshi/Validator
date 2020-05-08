@@ -16,4 +16,4 @@ class Min(Rule):
         self.min_value = min_value
 
     def __call__(self, arg):
-        return self.min_value < arg
+        return self.min_value <= arg
