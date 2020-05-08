@@ -15,5 +15,9 @@ class Validator:
         self.rules = Parser(rules).parse()
 
     def validate(self):
+        self.check_rules()
         # ToDo: Implement Validation
         return True
+
+    def check_rules(self):
+        pass
