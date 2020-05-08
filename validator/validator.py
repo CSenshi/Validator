@@ -15,8 +15,16 @@ class Validator:
         self.rules = Parser(rules).parse()
 
     def validate(self):
+        # check for internal error (incorrect rules)
         self.check_rules()
-        # ToDo: Implement Validation
+
+        # at this point all rules are being correctly passed
+        for key in self.rules:
+            rules_array = self.rules[key]
+            req_value = self.request[key]
+            for rule in rules_array:
+                if not rule(req_value):
+                    return False
         return True
 
     def check_rules(self):
