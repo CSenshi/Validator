@@ -32,7 +32,7 @@ doctest:
 	@echo ""
 
 pytest:
-	pytest $(PYTEST_TEST)
+	python3 -m pytest $(PYTEST_TEST)
 	@echo ""
 
 .PHONY: init test
