@@ -1,4 +1,4 @@
-from validator.rules import Rule
+from validator.rules_src import Rule
 
 
 class Max(Rule):
@@ -17,3 +17,6 @@ class Max(Rule):
 
     def __call__(self, arg):
         return self.max_value >= arg
+
+    def __from_str__(self):
+        self.max_value = int(self.max_value)

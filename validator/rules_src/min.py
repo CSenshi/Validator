@@ -1,4 +1,4 @@
-from validator.rules import Rule
+from validator.rules_src import Rule
 
 
 class Min(Rule):
@@ -17,3 +17,6 @@ class Min(Rule):
 
     def __call__(self, arg):
         return self.min_value <= arg
+
+    def __from_str__(self):
+        self.min_value = int(self.min_value)

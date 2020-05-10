@@ -4,3 +4,6 @@ class Rule:
 
     def __call__(self, arg):
         return False
+
+    def __from_str__(self):
+        pass
