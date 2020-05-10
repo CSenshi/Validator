@@ -21,7 +21,7 @@ for (_, file, _) in pkgutil.iter_modules([Path(__file__).parent]):
     # Get Absolute Path
     module_abs_path = f"validator.rules_src.{file}"
 
-    # import dynamicly given mo
+    # Import given module
     pkg = importlib.import_module(module_abs_path)
 
     # Import all classes from given modules
