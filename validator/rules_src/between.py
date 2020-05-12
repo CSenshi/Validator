@@ -3,7 +3,6 @@ from validator.rules_src.min import Min
 
 
 class Between(Max, Min):
-
     """
     >>> TrueBetween = Between(2, 15)
     >>> TrueBetween(23)
