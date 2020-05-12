@@ -1,12 +1,23 @@
+import re
 from validator.rules_src import Rule
 
 
 class Mail(Rule):
+    """
+    >>> TrueMail = Mail()
+    >>> TrueMail('abcd@ef.gh')
+    True
+
+    >>> TrueMail = Mail()
+    >>> TrueMail('aaa.com')
+    False
+    """
+
     def __init__(self):
-        pass
+        self.regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
 
     def __call__(self, arg):
-        pass
+        return re.search(self.regex, arg) is not None
 
     def __from_str__(self):
         pass
