@@ -7,7 +7,7 @@ rules_file = open(rules_src, "w")
 
 # import parrent rule class
 rules_pkg_path = "validator.rules_src"
-line = f"from {rules_pkg_path} import Rule \n\n"
+line = f"from {rules_pkg_path} import Rule\n\n"
 rules_file.writelines(line)
 
 # import all rules from rules_src module
