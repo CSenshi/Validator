@@ -39,3 +39,5 @@ jobs:
         make
         pytest --doctest-modules validator/
         pytest
+        black --check .
+        pycodestyle .
