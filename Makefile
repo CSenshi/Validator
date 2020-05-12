@@ -10,6 +10,10 @@ ifdef TEST
 	DOCEST_TEST=validator/rules_src/$(TEST).py
 endif
 
+ifdef PEP8
+	SHOW_PEP=--show-pep8 
+endif
+
 init:
 	@echo Generating rules python file...
 	chmod 755 $(RULES_GENERATOR_SCRIPT)
@@ -43,7 +47,7 @@ _check_format:
 	black --check .
 
 _check_standarts:
-	pycodestyle --show-source --show-pep8 .
+	pycodestyle --show-source $(SHOW_PEP) .
 
 
 # Fix formating and most of PEP8 standarts
