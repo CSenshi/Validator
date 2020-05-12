@@ -16,16 +16,17 @@ init:
 	$(RULES_GENERATOR_SCRIPT) $(GENERATED_RULES_FILE)
 	@echo Done!
 
+install:
+	pip3 install -r requirements.txt
+
 clean:
 ifneq ("$(wildcard $(GENERATED_RULES_FILE))","")
 	@echo removing generated rules file...
 	rm $(GENERATED_RULES_FILE)
 endif
 
-test: doctest pytest
-
-install:
-	pip3 install -r requirements.txt
+# Test with pytest test/ folder and doctests 
+test: doctest pytest check
 
 doctest:
 	pytest --doctest-modules $(DOCEST_TEST)
@@ -34,5 +35,25 @@ doctest:
 pytest:
 	python3 -m pytest $(PYTEST_TEST)
 	@echo ""
+
+# Check for formating and PEP8 standarts
+check: _check_format _check_standarts
+
+_check_format:
+	black --check .
+
+_check_standarts:
+	pycodestyle --show-source --show-pep8 .
+
+
+# Fix formating and most of PEP8 standarts
+fix: _fix_format _fix_style
+
+_fix_format:
+	black .
+
+_fix_style:
+	autopep8 --in-place --aggressive --aggressive --recursive .
+
 
 .PHONY: init test
