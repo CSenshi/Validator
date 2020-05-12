@@ -15,7 +15,7 @@ def test_between_01():
     assert rule(value_to_check) == False
 
 
-def test_max_02():
+def test_between_02():
 
     rule = Between(-15, 30)
     value_to_check = -15
@@ -30,7 +30,7 @@ def test_max_02():
     assert rule(value_to_check) == True
 
 
-def test_max_03():
+def test_between_03():
     rule = Between(5, 5)
     value_to_check = 5
     assert rule(value_to_check) == True
