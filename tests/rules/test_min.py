@@ -8,7 +8,7 @@ def test_min_01():
 
     rule = Min(18)
     value_to_check = 13
-    assert rule(value_to_check) == False
+    assert not rule(value_to_check)
 
 
 def test_min_02():
@@ -26,7 +26,7 @@ def test_min_02():
 
     rule = Min(999)
     value_to_check = -999
-    assert rule(value_to_check) == False
+    assert not rule(value_to_check)
 
 
 def test_min_03():

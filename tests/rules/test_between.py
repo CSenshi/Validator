@@ -8,11 +8,11 @@ def test_between_01():
 
     rule = Between(2, 18)
     value_to_check = 1
-    assert rule(value_to_check) == False
+    assert not rule(value_to_check)
 
     rule = Between(2, 18)
     value_to_check = 19
-    assert rule(value_to_check) == False
+    assert not rule(value_to_check)
 
 
 def test_between_02():
@@ -37,4 +37,4 @@ def test_between_03():
 
     rule = Between(5, 5)
     value_to_check = 0
-    assert rule(value_to_check) == False
+    assert not rule(value_to_check)
