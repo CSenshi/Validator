@@ -2,7 +2,7 @@ from validator import rules as R
 import re
 
 # Some needed Variables
-target_char, target_regex = ':', '|'
+target_char, target_regex = ":", "|"
 
 """
 Translator class is used by Parser class and implements translation
@@ -22,9 +22,7 @@ class Translator:
 
     def translate(self):
         # First step. Split whole string to array.
-        mid_arr = re.split(r'[' + target_regex + ']', self.value)
-
-        print(mid_arr)
+        mid_arr = re.split(r"[" + target_regex + "]", self.value)
 
         new_rules = []
         # Second step: Loop throught array and initialize class objects.
@@ -36,14 +34,13 @@ class Translator:
                 target_arr = class_str.split(target_char)
                 class_name, class_arg = target_arr
 
+                class_arg = class_arg.split(",")
                 # Initialize class
-                my_class = R.__all__[class_name](class_arg)
+                my_class = R.__all__[class_name](*class_arg)
                 my_class.__from_str__()
-                new_rules.append(my_class)
 
-                print(my_class(25))  # Just for checking
             else:
-                my_class = R.__all__[class_str]
-                new_rules.append(my_class)
+                my_class = R.__all__[class_str]()
 
+            new_rules.append(my_class)
         return new_rules
