@@ -26,6 +26,7 @@ class Translator:
 
         print(mid_arr)
 
+        new_rules = []
         # Second step: Loop throught array and initialize class objects.
         for class_str in mid_arr:
             class_str = class_str.capitalize()
@@ -38,9 +39,11 @@ class Translator:
                 # Initialize class
                 my_class = R.__all__[class_name](class_arg)
                 my_class.__from_str__()
+                new_rules.append(my_class)
 
                 print(my_class(25))  # Just for checking
             else:
-                R.__all__[class_str]
+                my_class = R.__all__[class_str]
+                new_rules.append(my_class)
 
-        return 0
+        return new_rules
