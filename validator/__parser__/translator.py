@@ -12,8 +12,8 @@ of one given generic rule to specified and final version
 
 Example
 
->>> before_value     = "required|min:18|max:30|between:10,25"
->>> translated_value = [Rules.Required(), Rules.Min(18), Rules.max(30), Rules.between(10, 25)]
+>>> before_value     = "required|min:18|between:10,25"
+>>> translated_value = [Rules.Required(), Rules.Min(18), Rules.between(10, 25)]
 
 """
 
@@ -43,7 +43,7 @@ class Translator:
 
         # Check for code level
         if level_flag:
-            return self.value  # It means we have already final format. Class level
+            return self.value  # It means we have already final format
 
         # Second step: Loop throught array and initialize class objects.
         for class_str in mid_arr:

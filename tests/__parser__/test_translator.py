@@ -53,8 +53,8 @@ def test_translator_mid():
         ["required"],
         ["required", "mail", "max:30"],
         ["required", "min:20", "max:30"],
-        ["required", "between:10,20"],
     ]
+    target_arr.append(["required", "between:10,20"])
     for _ in target_arr:
         target_str = _
         translator = Translator(target_str)
@@ -88,13 +88,8 @@ def test_translator_single():
 def test_translator_many():
     min_value, max_value = 10, 20
     # between min
-    target_str = (
-        "between:" +
-        str(min_value) +
-        "," +
-        str(max_value) +
-        "|min:" +
-        str(min_value))
+    target_str = "between:" + str(min_value) + "," + str(max_value)
+    target_str += "|min:" + str(min_value)
     translator = Translator(target_str)
     result_arr = translator.translate()
 
@@ -105,13 +100,8 @@ def test_translator_many():
     )
 
     # betweeen max
-    target_str = (
-        "between:" +
-        str(min_value) +
-        "," +
-        str(max_value) +
-        "|max:" +
-        str(max_value))
+    target_str = "between:" + str(min_value) + "," + str(max_value)
+    target_str += "|max:" + str(max_value)
     translator = Translator(target_str)
     result_arr = translator.translate()
 
@@ -122,16 +112,9 @@ def test_translator_many():
     )
 
     # betweeen max min
-    target_str = (
-        "between:"
-        + str(min_value)
-        + ","
-        + str(max_value)
-        + "|max:"
-        + str(max_value)
-        + "|min:"
-        + str(min_value)
-    )
+    target_str = "between:" + str(min_value) + "," + str(max_value)
+
+    target_str += "|min:" + str(min_value) + "|max:" + str(max_value)
     translator = Translator(target_str)
     result_arr = translator.translate()
 
