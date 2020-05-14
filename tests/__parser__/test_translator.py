@@ -121,6 +121,6 @@ def test_translator_many():
     assert (
         (result_arr[0].max_value == max_value)
         and (result_arr[0].min_value == min_value)
-        and (result_arr[1].max_value == max_value)
-        and (result_arr[2].min_value == min_value)
+        and (result_arr[1].min_value == min_value)
+        and (result_arr[2].max_value == max_value)
     )
