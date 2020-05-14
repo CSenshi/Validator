@@ -11,7 +11,7 @@ line = f"from {rules_pkg_path} import Rule\n"
 rules_file.writelines(line)
 
 # import __all__ object
-line = f"from {rules_pkg_path} import __all__ \n"
+line = f"from {rules_pkg_path} import __all__\n"
 rules_file.writelines(line)
 
 # import all rules from rules_src module
