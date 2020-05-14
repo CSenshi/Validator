@@ -3,9 +3,6 @@ from validator import rules as R
 
 r = range
 
-# translator = Translator(
-#     ['required', 'min:18', 'max:30', 'between:10,25', 'mail'])
-
 
 # This method loops through classes and checks its instance
 def instanceChecker(target_str, result_arr, flag):
