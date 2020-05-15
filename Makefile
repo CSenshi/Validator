@@ -41,7 +41,7 @@ pytest:
 	@echo ""
 
 # Check for formating and PEP8 standarts
-check: _check_format _check_standarts
+check: _check_standarts
 
 _check_format:
 	black --check .
@@ -51,7 +51,7 @@ _check_standarts:
 
 
 # Fix formating and most of PEP8 standarts
-fix: _fix_format _fix_style
+fix: _fix_style
 
 _fix_format:
 	black .
