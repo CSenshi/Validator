@@ -24,17 +24,15 @@ class Translator:
         self.value = value
 
     def check_class(self):
-        level_flag = False
-
         if isinstance(self.value, str):  # Checking for first level
             mid_arr = re.split(r"[" + target_regex + "]", self.value)
-            return level_flag, mid_arr
+            return False, mid_arr
 
         elif isinstance(self.value, list):
-            return level_flag, self.value
+            return False, self.value
 
         # Otherwise its broken object so lets return True and none
-        return not level_flag, None
+        return True, None
 
     def create_class(self, class_str):
         class_str = class_str.capitalize()
