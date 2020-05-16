@@ -40,24 +40,12 @@ pytest:
 	python3 -m pytest $(PYTEST_TEST)
 	@echo ""
 
-# Check for formating and PEP8 standarts
-check: _check_format _check_standarts
-
-_check_format:
+# Check for formating
+check:
 	black --check .
 
-_check_standarts:
-	pycodestyle --show-source $(SHOW_PEP) .
-
-
-# Fix formating and most of PEP8 standarts
-fix: _fix_format _fix_style
-
-_fix_format:
+# Fix formating
+fix:
 	black .
-
-_fix_style:
-	autopep8 --in-place --aggressive --aggressive --recursive .
-
 
 .PHONY: init test
