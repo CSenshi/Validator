@@ -1,4 +1,2 @@
 # Empty for now
-pycodestyle
 black
-autopep8
