@@ -34,36 +34,42 @@ class Translator:
         # Otherwise its broken object so lets return True and none
         return True, None
 
-    def create_class(self, class_str):
-        class_str = "".join(class_str.lower().split("_"))
-        # Devided between many args and zero args
-        if target_char in class_str:
-            # Split by target character
-            target_arr = class_str.split(target_char)
-            class_name, class_arg = target_arr
-
-            class_arg = class_arg.split(target_args)
-            # Initialize class
-            my_class = R.__all__[class_name](*class_arg)
-            my_class.__from_str__()
-        else:
-            my_class = R.__all__[class_str]()
-        return my_class
-
     def translate(self):
         # First step. Check for types and get array ready for looping.
         level_flag, mid_arr = self.check_class()
-        new_rules = []
 
         if level_flag:
             return mid_arr  # Which will be None
 
         # Second step: Loop throught array and initialize class objects.
-        for class_str in mid_arr:
-            # if string
-            if isinstance(class_str, str):
-                my_class = self.create_class(class_str)
-                new_rules.append(my_class)
-            else:  # To Do: checking class types or bad info types!!
-                new_rules.append(class_str)
+        new_rules = []
+        for elem in mid_arr:
+            if isinstance(elem, str):
+                rule = self._translate_str(elem)
+            elif isinstance(elem, R.Rule):
+                rule = elem
+            else:
+                continue
+            new_rules.append(rule)
         return new_rules
+
+
+    def _translate_str(self, class_str):
+        class_str = "".join(class_str.lower().split("_"))
+
+        args = []
+        if target_char in class_str:
+            # extract rule_name and arguments from string
+            class_str, args_str = class_str.split(target_char)
+            # Split arguments into array
+            args = args_str.split(target_args)
+
+        # Initialize class
+        if not class_str in R.__all__:
+            # ToDo: change to throwing exception
+            return None
+
+        my_class = R.__all__[class_str](*args)
+        my_class.__from_str__()
+
+        return my_class
