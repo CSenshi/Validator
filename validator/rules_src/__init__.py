@@ -26,6 +26,6 @@ for (_, file, _) in pkgutil.iter_modules([Path(__file__).parent]):
 
     # Import all classes from given modules
     names = [x for x in pkg.__dict__ if not x.startswith("_")]
-
+    print(names)
     # add class from module to globals() adn all (e.g. add 'min.Min')
-    __all__.update({k: getattr(pkg, k) for k in names})
+    __all__.update({k.lower(): getattr(pkg, k) for k in names})

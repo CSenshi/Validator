@@ -35,7 +35,7 @@ class Translator:
         return True, None
 
     def create_class(self, class_str):
-        class_str = class_str.capitalize()
+        class_str = "".join(class_str.lower().split("_"))
         # Devided between many args and zero args
         if target_char in class_str:
             # Split by target character
