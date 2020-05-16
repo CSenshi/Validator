@@ -23,36 +23,34 @@ class Translator:
     def __init__(self, value):
         self.value = value
 
-    def check_class(self):
-        if isinstance(self.value, str):  # Checking for first level
-            mid_arr = re.split(r"[" + target_regex + "]", self.value)
-            return False, mid_arr
-
-        elif isinstance(self.value, list):
-            return False, self.value
-
-        # Otherwise its broken object so lets return True and none
-        return True, None
-
     def translate(self):
         # First step. Check for types and get array ready for looping.
-        level_flag, mid_arr = self.check_class()
-
-        if level_flag:
-            return mid_arr  # Which will be None
+        arr = self._value_to_array()
 
         # Second step: Loop throught array and initialize class objects.
-        new_rules = []
-        for elem in mid_arr:
+        rules_arr = []
+        for elem in arr:
             if isinstance(elem, str):
                 rule = self._translate_str(elem)
             elif isinstance(elem, R.Rule):
                 rule = elem
             else:
+                # ToDo: throw error
                 continue
-            new_rules.append(rule)
-        return new_rules
+            rules_arr.append(rule)
+        return rules_arr
 
+    def _value_to_array(self):
+        # if value is string transform to string
+        if isinstance(self.value, str):
+            return re.split("[" + target_regex + "]", self.value)
+
+        # if value is array return
+        if isinstance(self.value, list):
+            return self.value
+
+        # at this point we should return given value tranformed into array
+        return [self.value]
 
     def _translate_str(self, class_str):
         class_str = "".join(class_str.lower().split("_"))
