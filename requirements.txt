@@ -1,4 +1,3 @@
 # Empty for now
 black
 pytest
-inspect

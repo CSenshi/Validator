@@ -34,10 +34,14 @@ class Translator:
                 rule = self._translate_str(elem)
             elif isinstance(elem, R.Rule):
                 rule = elem
+            elif inspect.isclass(elem) and issubclass(elem, R.Rule):
+                rule = self._translate_class(elem)
             else:
                 # ToDo: throw error
                 continue
-            rules_arr.append(rule)
+
+            if rule:
+                rules_arr.append(rule)
         return rules_arr
 
     def _value_to_array(self):
@@ -52,8 +56,13 @@ class Translator:
         # at this point we should return given value tranformed into array
         return [self.value]
 
-    def _translate_str(self, class_str):
-        class_str = "".join(class_str.lower().split("_"))
+    def _translate_str(self, elem):
+        """
+        Translates strings to Rule instances
+        "required" -> R.Required()
+        "between:10,20" -> R.Between(10, 20)
+        """
+        class_str = "".join(elem.lower().split("_"))
 
         args = []
         if target_char in class_str:
@@ -78,6 +87,18 @@ class Translator:
         rule_instance.__from_str__()
 
         return rule_instance
+
+    def _translate_class(self, elem):
+        """
+        Translates Rule classes to Rule Instances
+        R.Required -> R.Required()
+        """
+        # Chechk for arguments count
+        if not self._validate_args_count(elem, []):
+            # ToDo: Throw Exception
+            return None
+
+        return elem()
 
     def _validate_args_count(self, init_rule, args):
         a = inspect.getfullargspec(init_rule)
