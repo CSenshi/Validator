@@ -30,6 +30,7 @@ class Translator:
         # Second step: Loop throught array and initialize class objects.
         rules_arr = []
         for elem in arr:
+            print(elem, elem.__class__)
             if isinstance(elem, str):
                 rule = self._translate_str(elem)
             elif isinstance(elem, R.Rule):
@@ -38,6 +39,7 @@ class Translator:
                 # ToDo: throw error
                 continue
             rules_arr.append(rule)
+        print(rules_arr)
         return rules_arr
 
     def _value_to_array(self):
@@ -64,10 +66,23 @@ class Translator:
 
         # Initialize class
         if not class_str in R.__all__:
-            # ToDo: change to throwing exception
+            # ToDo: Throw Exception
             return None
+        
+        init_rule = R.__all__[class_str]
 
-        my_class = R.__all__[class_str](*args)
-        my_class.__from_str__()
+        # Chechk for arguments count 
+        if not self._validate_args_count(init_rule, args):
+            # ToDo: Throw Exception
+            return None
+        
+        rule_instance = init_rule(*args)
+        rule_instance.__from_str__()
 
-        return my_class
+        return rule_instance
+
+    def _validate_args_count(self, init_rule, args):
+        a = inspect.getfullargspec(init_rule)
+        # ToDo: check for positional arguments
+        return len(args) + 1 == len(a.args)
+            
