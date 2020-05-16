@@ -78,20 +78,20 @@ def test_translator_single():
     target_str = f"between:{min_value},{max_value}"
     translator = Translator(target_str)
     result_arr = translator.translate()
-    assert(result_arr[0].max_value == max_value)
-    assert(result_arr[0].min_value == min_value)
+    assert result_arr[0].max_value == max_value
+    assert result_arr[0].min_value == min_value
 
     # min
     target_str = f"min:{min_value}"
     translator = Translator(target_str)
     result_arr = translator.translate()
-    assert (result_arr[0].min_value == min_value)
+    assert result_arr[0].min_value == min_value
 
     # max
     target_str = f"max:{max_value}"
     translator = Translator(target_str)
     result_arr = translator.translate()
-    assert (result_arr[0].max_value == max_value)
+    assert result_arr[0].max_value == max_value
 
 
 # many features checking value
@@ -101,9 +101,9 @@ def test_translator_many():
     target_str = f"between:{min_value},{max_value}|min:{min_value}"
     translator = Translator(target_str)
     result_arr = translator.translate()
-    assert(result_arr[0].max_value == max_value)
-    assert(result_arr[0].min_value == min_value)
-    assert(result_arr[1].min_value == min_value)
+    assert result_arr[0].max_value == max_value
+    assert result_arr[0].min_value == min_value
+    assert result_arr[1].min_value == min_value
 
     # betweeen max
     target_str = "between:" + str(min_value) + "," + str(max_value)
@@ -112,9 +112,9 @@ def test_translator_many():
     translator = Translator(target_str)
     result_arr = translator.translate()
 
-    assert(result_arr[0].max_value == max_value)
-    assert(result_arr[0].min_value == min_value)
-    assert(result_arr[1].max_value == max_value)
+    assert result_arr[0].max_value == max_value
+    assert result_arr[0].min_value == min_value
+    assert result_arr[1].max_value == max_value
 
     # betweeen max min
     target_str = f"between:{min_value},{max_value}|min:{min_value}"
@@ -122,7 +122,7 @@ def test_translator_many():
     translator = Translator(target_str)
     result_arr = translator.translate()
 
-    assert(result_arr[0].max_value == max_value)
-    assert(result_arr[0].min_value == min_value)
-    assert(result_arr[1].min_value == min_value)
-    assert(result_arr[2].max_value == max_value)
+    assert result_arr[0].max_value == max_value
+    assert result_arr[0].min_value == min_value
+    assert result_arr[1].min_value == min_value
+    assert result_arr[2].max_value == max_value
