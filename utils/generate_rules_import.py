@@ -16,6 +16,5 @@ rules_file.writelines(line)
 
 # import all rules from rules_src module
 for (_, file, _) in pkgutil.iter_modules(["validator/rules_src"]):
-    class_name = file.capitalize()
-    line = f"from {rules_pkg_path}.{file} import {class_name}\n"
+    line = f"from {rules_pkg_path}.{file} import *\n"
     rules_file.write(line)

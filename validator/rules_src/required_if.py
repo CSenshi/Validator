@@ -1,5 +1,6 @@
 from validator.rules_src.required import Required
 
+
 class RequiredIf(Required):
     """
     >>> TrueRequiredIf = RequiredIf('a')
@@ -14,7 +15,6 @@ class RequiredIf(Required):
     def __init__(self, requirement):
         Required.__init__(self)
         self.requirement = requirement
-        
 
     def __call__(self, arg):
         if not Required.__call__(self, arg):
