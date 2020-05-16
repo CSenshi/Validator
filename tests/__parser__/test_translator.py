@@ -11,7 +11,6 @@ def instanceChecker(target_str, result_arr, flag):
     else:
         target_arr = target_str
 
-    target_arr = [_.capitalize() for _ in target_arr]
     for _ in range(0, len(target_arr)):
         if ":" in target_arr[_]:
             target_arr[_] = target_arr[_].split(":")[0]
