@@ -16,10 +16,10 @@ class Required(Rule):
         pass
 
     def __call__(self, arg):
-        if arg is None:
+        if arg is None or (hasattr(arg, "__len__") and len(arg) == 0):
+            err_msg = "Field was empty"
+            self.set_errror_message(err_msg)
             return False
-        if hasattr(arg, "__len__"):
-            return len(arg) != 0
         return True
 
     def __from_str__(self):

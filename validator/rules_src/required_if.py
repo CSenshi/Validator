@@ -17,9 +17,12 @@ class RequiredIf(Required):
         self.requirement = requirement
 
     def __call__(self, arg):
-        if not Required.__call__(self, arg):
-            return False
-        return self.requirement in arg
+        if Required.__call__(self, arg) and self.requirement in arg:
+            return True
+
+        err_msg = "Required: {} not in {}".format(self.requirement, arg)
+        self.set_errror_message(err_msg)
+        return False
 
     def __from_str__(self):
         pass

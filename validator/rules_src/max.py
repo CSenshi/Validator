@@ -16,7 +16,12 @@ class Max(Rule):
         self.max_value = max_value
 
     def __call__(self, arg):
-        return self.max_value >= arg
+        if self.max_value >= arg:
+            return True
+
+        err_msg = "Expected Maximum: {}, Got: {}".format(self.max_value, arg)
+        self.set_errror_message(err_msg)
+        return False
 
     def __from_str__(self):
         self.max_value = int(self.max_value)

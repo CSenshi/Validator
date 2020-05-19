@@ -16,7 +16,12 @@ class Min(Rule):
         self.min_value = min_value
 
     def __call__(self, arg):
-        return self.min_value <= arg
+        if self.min_value <= arg:
+            return True
+
+        err_msg = "Expected Minumum: {}, Got: {}".format(self.min_value, arg)
+        self.set_errror_message(err_msg)
+        return False
 
     def __from_str__(self):
         self.min_value = int(self.min_value)
