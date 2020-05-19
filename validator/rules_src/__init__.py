@@ -14,10 +14,13 @@ class Rule:
     def __from_str__(self):
         pass
 
+    def get_class_name(self):
+        return type(self).__name__
+
     def set_errror_message(self, message):
         self.error_message = message
 
-    def get_error_message(self, message):
+    def get_error_message(self):
         return self.error_message
 
 
