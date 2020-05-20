@@ -1,12 +1,14 @@
 from validator.rules_src import Rule
 
 
-class {}(Rule):
+class {0}(Rule):
     """
-    >>> 
+    >>> True{0} = {0}()
+    >>> True{0}(...)
     True
 
-    >>> 
+    >>> False{0} = {0}()
+    >>> False{0}(...)
     False
     """
 
