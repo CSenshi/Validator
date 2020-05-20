@@ -19,7 +19,7 @@ class Max(Rule):
         if self.max_value >= arg:
             return True
 
-        err_msg = "Expected Maximum: {}, Got: {}".format(self.max_value, arg)
+        err_msg = f"Expected Maximum: {self.max_value}, Got: {arg}"
         self.set_errror_message(err_msg)
         return False
 

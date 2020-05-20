@@ -19,7 +19,7 @@ class Min(Rule):
         if self.min_value <= arg:
             return True
 
-        err_msg = "Expected Minumum: {}, Got: {}".format(self.min_value, arg)
+        err_msg = f"Expected Minumum: {self.min_value}, Got: {arg}"
         self.set_errror_message(err_msg)
         return False
 
