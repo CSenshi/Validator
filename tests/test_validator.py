@@ -50,7 +50,7 @@ def test_validator_002_simple():
     assert not result[0]
 
 
-def test_validator_003_complex():
+def test_validator_003_error_msg():
     request = {"age": 100}
     rule = {"age": [R.Between(18, 90)]}
     result, errors = Validator(request, rule).validate()
@@ -65,16 +65,19 @@ def test_validator_003_complex():
         "surname": [R.Required(), R.Mail()],
     }
     result, errors = Validator(request, rule).validate()
+
+    # Test General
     assert not result
     assert len(errors) == 1
     assert "surname" in errors.keys()
 
+    # Test Error 1
     mail_err = errors["surname"]
     assert len(mail_err) == 1
     assert "Mail" in mail_err.keys()
 
 
-def test_validator_004_complex():
+def test_validator_004_error_msg():
     request = {
         "age": 53,
         "name": "Peter",
@@ -91,20 +94,25 @@ def test_validator_004_complex():
     }
     result, errors = Validator(request, rule).validate()
 
+    # Test General
+    assert not result
     assert len(errors) == 3
     assert "age" in errors
     assert "profession" in errors
     assert "mail" in errors
 
+    # Test Error 1
     age_err = errors["age"]
     assert len(age_err) == 1
     assert "Between" in age_err
 
+    # Test Error 2
     profession_err = errors["profession"]
     assert len(profession_err) == 2
     assert "Required" in profession_err
     assert "Mail" in profession_err
 
+    # Test Error 3
     mail_err = errors["mail"]
     assert len(mail_err) == 1
     assert "Mail" in mail_err
