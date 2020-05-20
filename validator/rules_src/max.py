@@ -13,10 +13,15 @@ class Max(Rule):
     """
 
     def __init__(self, max_value):
+        Rule.__init__(self)
         self.max_value = max_value
 
     def __call__(self, arg):
-        return self.max_value >= arg
+        if self.max_value >= arg:
+            return True
+
+        self.set_errror_message(f"Expected Maximum: {self.max_value}, Got: {arg}")
+        return False
 
     def __from_str__(self):
         self.max_value = int(self.max_value)

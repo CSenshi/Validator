@@ -13,10 +13,15 @@ class Min(Rule):
     """
 
     def __init__(self, min_value):
+        Rule.__init__(self)
         self.min_value = min_value
 
     def __call__(self, arg):
-        return self.min_value <= arg
+        if self.min_value <= arg:
+            return True
+
+        self.set_errror_message(f"Expected Minumum: {self.min_value}, Got: {arg}")
+        return False
 
     def __from_str__(self):
         self.min_value = int(self.min_value)

@@ -18,14 +18,25 @@ class Validator:
         # check for internal error (incorrect rules)
         self.check_rules()
 
+        # prepare variables
+        result = True
+        errors = {}
+
         # at this point all rules are being correctly passed
         for key in self.rules:
             rules_array = self.rules[key]
             req_value = self.request[key]
+            errors_on_key = {}
+
             for rule in rules_array:
                 if not rule(req_value):
-                    return False
-        return True
+                    result = False
+                    errors_on_key[rule.get_class_name()] = rule.get_error_message()
+
+            if errors_on_key:
+                errors[key] = errors_on_key
+
+        return result, errors
 
     def check_rules(self):
         pass

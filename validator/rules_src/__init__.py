@@ -6,13 +6,22 @@ from pathlib import Path
 
 class Rule:
     def __init__(self):
-        pass
+        self.error_message = "error"
 
     def __call__(self, arg):
         return False
 
     def __from_str__(self):
         pass
+
+    def get_class_name(self):
+        return type(self).__name__
+
+    def set_errror_message(self, message):
+        self.error_message = message
+
+    def get_error_message(self):
+        return self.error_message
 
 
 # Iterate each module in the given package and fill __all__ dictionary

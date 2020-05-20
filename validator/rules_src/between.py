@@ -18,7 +18,13 @@ class Between(Max, Min):
         Max.__init__(self, max_value)
 
     def __call__(self, arg):
-        return Min.__call__(self, arg) and Max.__call__(self, arg)
+        if Min.__call__(self, arg) and Max.__call__(self, arg):
+            return True
+
+        self.set_errror_message(
+            f"Expected Between: {self.min_value} and {self.max_value}, Got: {arg}"
+        )
+        return False
 
     def __from_str__(self):
         Min.__from_str__(self)

@@ -14,10 +14,15 @@ class Mail(Rule):
     """
 
     def __init__(self):
+        Rule.__init__(self)
         self.regex = r"^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
 
     def __call__(self, arg):
-        return re.search(self.regex, arg) is not None
+        if re.search(self.regex, arg) is not None:
+            return True
+
+        self.set_errror_message(f"Expected a Mail, Got: {arg}")
+        return False
 
     def __from_str__(self):
         pass
