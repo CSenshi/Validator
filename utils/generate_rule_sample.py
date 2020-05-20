@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import sys
 from pathlib import Path
@@ -62,6 +63,6 @@ if __name__ == "__main__":
     # create test file sample
     test_file_path = create_test_file(file_name)
 
-    print("Generation of sample rule and tests completed successfully.\n")
+    print("\nGeneration of sample rule and tests completed successfully.\n")
     print(f"Rule -  {rule_file_path}")
     print(f"Test -  {test_file_path}")

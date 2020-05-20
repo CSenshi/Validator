@@ -3,6 +3,8 @@ from validator.rules_src import Rule
 
 class {0}(Rule):
     """
+    *** ToDo: Describe your rule ***
+    
     >>> True{0} = {0}()
     >>> True{0}(...)
     True
@@ -13,10 +15,18 @@ class {0}(Rule):
     """
 
     def __init__(self):
-        pass
+        Rule.__init__(self)
+        # ToDo: takes in as many arguments, as it takes. Lleave empty if nothing needs to be initialized 
 
     def __call__(self, arg):
         pass
+        # ToDo: arg is value to be validated, insert your rule's logic here 
 
     def __from_str__(self):
         pass
+        # ToDo: used to convert arguments passed in __init__ from string to needed type
+        #       leave empty if nothing needs to be done
+        #
+        # Example: when someone uses string rule e.g. 'min:18|max:30' 18 and 30 are string types as default
+        #          and are passed as string to __init__
+        #          if you need them as integers you should do casting to integer in this method

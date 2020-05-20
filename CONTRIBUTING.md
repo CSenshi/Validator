@@ -5,7 +5,11 @@ First of all we need to set up our project with easy to go commands. Just run fo
 * ``` make install ``` Will install all of packages used by project
 * ``` make ``` Will generate rules.py file which is used to import rules
 
-At this point you are done with setting up your project and should be able to start coding. 
+At this point you are done with setting up your project and should be able to start coding.
+
+## Creating new Rule
+If you wish to contribute with new rule, please use our written generator to generate new rule template class and tests
+* ``` make generate-rule F_NAME=new_rule ``` Will generate new rule in rules_src/ folder. Takes in one argument F_NAME which is rule's file name and automatically generates rule's class name which will be NewRule (converted to CapWords convention)
 
 ## Testing
 For testing we use pytest framework. All of the tests are located in the tests/ directory. As you can see we write speerate kind of tests in seperate functions, so please use it to make testing even better. We also support doctests and we do preffer 2 doctests for each rule(one for True evaluation and second for False), it will make easier for users to know what given rule is capable of doing. Finally, the code conduct, we test PEP standards and code formating using tools defined in Code Style.
