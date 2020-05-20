@@ -6,7 +6,7 @@ from pathlib import Path
 
 class Rule:
     def __init__(self):
-        self.error_message = ""
+        self.error_message = "error"
 
     def __call__(self, arg):
         return False
