@@ -61,7 +61,7 @@ if __name__ == "__main__":
     rule_file_path = create_rule_file(file_name)
     # create test file sample
     test_file_path = create_test_file(file_name)
-    
+
     print("Generation of sample rule and tests completed successfully.\n")
     print(f"Rule -  {rule_file_path}")
     print(f"Test -  {test_file_path}")
