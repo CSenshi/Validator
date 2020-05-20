@@ -33,6 +33,7 @@ def create_rule_file(file_name):
     # write rule file
     with open(rule_path, "x") as f:
         f.write(file_content)
+    return rule_path
 
 
 def create_test_file(file_name):
@@ -50,12 +51,16 @@ def create_test_file(file_name):
     # write test file
     with open(test_path, "x") as f:
         f.write(file_content)
+    return test_path
 
 
 if __name__ == "__main__":
     # get file name from passed argument
     file_name = sys.argv[1]
     # create rule file sample
-    create_rule_file(file_name)
+    rule_file_path = create_rule_file(file_name)
     # create test file sample
-    create_test_file(file_name)
+    test_file_path = create_test_file(file_name)
+    print('Generation of sample rule and tests completed successfully.\n')
+    print(f"Rule -  {rule_file_path}")
+    print(f"Test -  {test_file_path}")
