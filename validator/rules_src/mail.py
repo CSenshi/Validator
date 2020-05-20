@@ -21,8 +21,7 @@ class Mail(Rule):
         if re.search(self.regex, arg) is not None:
             return True
 
-        err_msg = f"Expected a Mail, Got: {arg}"
-        self.set_errror_message(err_msg)
+        self.set_errror_message(f"Expected a Mail, Got: {arg}")
         return False
 
     def __from_str__(self):

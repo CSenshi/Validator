@@ -20,8 +20,7 @@ class RequiredIf(Required):
         if Required.__call__(self, arg) and self.requirement in arg:
             return True
 
-        err_msg = f"Required: {self.requirement} not in {arg}"
-        self.set_errror_message(err_msg)
+        self.set_errror_message(f"Required: {self.requirement} not in {arg}")
         return False
 
     def __from_str__(self):

@@ -20,8 +20,7 @@ class Max(Rule):
         if self.max_value >= arg:
             return True
 
-        err_msg = f"Expected Maximum: {self.max_value}, Got: {arg}"
-        self.set_errror_message(err_msg)
+        self.set_errror_message(f"Expected Maximum: {self.max_value}, Got: {arg}")
         return False
 
     def __from_str__(self):

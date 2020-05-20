@@ -17,8 +17,7 @@ class Required(Rule):
 
     def __call__(self, arg):
         if arg is None or (hasattr(arg, "__len__") and len(arg) == 0):
-            err_msg = "Field was empty"
-            self.set_errror_message(err_msg)
+            self.set_errror_message("Field was empty")
             return False
         return True
 

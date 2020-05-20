@@ -21,8 +21,7 @@ class Between(Max, Min):
         if Min.__call__(self, arg) and Max.__call__(self, arg):
             return True
 
-        err_msg = f"Expected Between: {self.min_value} and {self.max_value}, Got: {arg}"
-        self.set_errror_message(err_msg)
+        self.set_errror_message(f"Expected Between: {self.min_value} and {self.max_value}, Got: {arg}")
         return False
 
     def __from_str__(self):
