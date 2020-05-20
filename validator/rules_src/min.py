@@ -13,6 +13,7 @@ class Min(Rule):
     """
 
     def __init__(self, min_value):
+        Rule.__init__(self)
         self.min_value = min_value
 
     def __call__(self, arg):

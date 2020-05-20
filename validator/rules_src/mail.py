@@ -14,6 +14,7 @@ class Mail(Rule):
     """
 
     def __init__(self):
+        Rule.__init__(self)
         self.regex = r"^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
 
     def __call__(self, arg):

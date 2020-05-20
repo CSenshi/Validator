@@ -13,7 +13,7 @@ class Required(Rule):
     """
 
     def __init__(self):
-        pass
+        Rule.__init__(self)
 
     def __call__(self, arg):
         if arg is None or (hasattr(arg, "__len__") and len(arg) == 0):

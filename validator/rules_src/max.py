@@ -13,6 +13,7 @@ class Max(Rule):
     """
 
     def __init__(self, max_value):
+        Rule.__init__(self)
         self.max_value = max_value
 
     def __call__(self, arg):
