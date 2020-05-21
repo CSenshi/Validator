@@ -1,0 +1,9 @@
+from validator.rules import {0}
+
+
+def test_{1}_01():
+    pass
+
+
+def test_{1}_02():
+    pass
