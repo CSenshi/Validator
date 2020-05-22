@@ -43,11 +43,11 @@ class Validator:
     def check_rules(self):
         if not type(self.rules) is dict:
             False
-        for _, value in self.rules.items:
+        for _, value in self.rules.items():
             if not type(value) is list:
                 False
 
-        for _, value in self.rules.items:
+        for _, value in self.rules.items():
             for rule in value:
                 if not isinstance(rule, R.Rule):
                     False
