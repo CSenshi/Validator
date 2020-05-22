@@ -1,6 +1,8 @@
 from validator import rules as R
 import re
 import inspect
+from validator import errors
+
 
 # Some needed Variables
 target_char, target_regex, target_args = ":", "|", ","
@@ -37,7 +39,7 @@ class Translator:
             elif inspect.isclass(elem) and issubclass(elem, R.Rule):
                 rule = self._translate_class(elem)
             else:
-                # ToDo: throw error
+                raise 
                 continue
 
             if rule:
@@ -74,14 +76,14 @@ class Translator:
         # Initialize class
         if not class_str in R.__all__:
             # ToDo: Throw Exception
-            return None
+            raise errors.NoRuleError
 
         init_rule = R.__all__[class_str]
 
         # Chechk for arguments count
         if not self._validate_args_count(init_rule, args):
             # ToDo: Throw Exception
-            return None
+            raise errors.ArgsCountError
 
         rule_instance = init_rule(*args)
         rule_instance.__from_str__()
@@ -96,7 +98,7 @@ class Translator:
         # Chechk for arguments count
         if not self._validate_args_count(elem, []):
             # ToDo: Throw Exception
-            return None
+            raise errors.ArgsCountError
 
         return elem()
 
