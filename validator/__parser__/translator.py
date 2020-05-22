@@ -39,9 +39,7 @@ class Translator:
             elif inspect.isclass(elem) and issubclass(elem, R.Rule):
                 rule = self._translate_class(elem)
             else:
-                raise 
-                continue
-
+                raise errors.UnknownTranslatorArgError
             if rule:
                 rules_arr.append(rule)
         return rules_arr
