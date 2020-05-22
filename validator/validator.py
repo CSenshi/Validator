@@ -1,4 +1,6 @@
 from validator.__parser__.parser import Parser
+from validator import rules as R
+from validator import exceptions as exc
 
 """
 Validator class takes 2 inputs:
@@ -16,7 +18,8 @@ class Validator:
 
     def validate(self):
         # check for internal error (incorrect rules)
-        self.check_rules()
+        if not self.check_rules():
+            raise exc.RulesFormatError
 
         # prepare variables
         result = True
@@ -39,4 +42,17 @@ class Validator:
         return result, errors
 
     def check_rules(self):
-        pass
+        # check for rules' type (should be dictionary)
+        if not type(self.rules) is dict:
+            False
+
+        for _, value in self.rules.items():
+            # check for dictionary's value's type (should be list)
+            if not type(value) is list:
+                False
+            for rule in value:
+                # check for each value being R.Rule class instance
+                if not isinstance(rule, R.Rule):
+                    False
+
+        return True
