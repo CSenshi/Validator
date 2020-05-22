@@ -73,14 +73,12 @@ class Translator:
 
         # Initialize class
         if not class_str in R.__all__:
-            # ToDo: Throw Exception
             raise errors.NoRuleError
 
         init_rule = R.__all__[class_str]
 
         # Chechk for arguments count
         if not self._validate_args_count(init_rule, args):
-            # ToDo: Throw Exception
             raise errors.ArgsCountError
 
         rule_instance = init_rule(*args)
@@ -95,7 +93,6 @@ class Translator:
         """
         # Chechk for arguments count
         if not self._validate_args_count(elem, []):
-            # ToDo: Throw Exception
             raise errors.ArgsCountError
 
         return elem()
