@@ -11,3 +11,8 @@ class NoRuleError(Exception):
 # Invalid arguments for translating exception
 class UnknownTranslatorArgError(Exception):
     pass
+
+
+# Incorrect format for rules dictionary
+class RulesFormatError(Exception):
+    pass

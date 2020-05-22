@@ -1,7 +1,7 @@
 from validator import rules as R
 import re
 import inspect
-from validator import errors
+from validator import exceptions as exc
 
 
 # Some needed Variables
@@ -39,7 +39,7 @@ class Translator:
             elif inspect.isclass(elem) and issubclass(elem, R.Rule):
                 rule = self._translate_class(elem)
             else:
-                raise errors.UnknownTranslatorArgError
+                raise exc.UnknownTranslatorArgError
             if rule:
                 rules_arr.append(rule)
         return rules_arr
@@ -73,13 +73,13 @@ class Translator:
 
         # Initialize class
         if not class_str in R.__all__:
-            raise errors.NoRuleError
+            raise exc.NoRuleError
 
         init_rule = R.__all__[class_str]
 
         # Chechk for arguments count
         if not self._validate_args_count(init_rule, args):
-            raise errors.ArgsCountError
+            raise exc.ArgsCountError
 
         rule_instance = init_rule(*args)
         rule_instance.__from_str__()
@@ -93,7 +93,7 @@ class Translator:
         """
         # Chechk for arguments count
         if not self._validate_args_count(elem, []):
-            raise errors.ArgsCountError
+            raise exc.ArgsCountError
 
         return elem()
 
