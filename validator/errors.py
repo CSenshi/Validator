@@ -30,3 +30,16 @@ class NoRuleError(Exception):
         else:
             return 'NoRuleError has been raised'
 
+# Invalid arguments for translating exception
+class UnknownTranslatorArgError(Exception):
+    def __init__(self, *args):
+        if args:
+            self.message = args[0]
+        else:
+            self.message = None
+
+    def __str__(self):
+        if self.message:
+            return 'UnknownTranslatorArgError, {} '.format(self.message)
+        else:
+            return 'UnknownTranslatorArgError has been raised'
