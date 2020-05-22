@@ -1,4 +1,5 @@
 from validator.__parser__.parser import Parser
+from validator import rules as R
 
 """
 Validator class takes 2 inputs:
@@ -31,7 +32,8 @@ class Validator:
             for rule in rules_array:
                 if not rule(req_value):
                     result = False
-                    errors_on_key[rule.get_class_name()] = rule.get_error_message()
+                    errors_on_key[rule.get_class_name(
+                    )] = rule.get_error_message()
 
             if errors_on_key:
                 errors[key] = errors_on_key
@@ -39,4 +41,15 @@ class Validator:
         return result, errors
 
     def check_rules(self):
-        pass
+        if not type(self.rules) is dict:
+            False
+        for _, value in self.rules.items:
+            if not type(value) is list:
+                False
+
+        for _, value in self.rules.items:
+            for rule in value:
+                if not isinstance(rule, R.Rule):
+                    False
+
+        return True
