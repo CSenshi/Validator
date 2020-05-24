@@ -2,6 +2,21 @@ from validator.__parser__.parser import Parser
 from validator import rules as R
 
 
+# checks if input dictionary has the same keys target dictionary
+# and in those keys, the samme rules are written as an array
+def instances_checker(input_dict, target_dict):
+    for key in target_dict.keys():
+        if input_dict[key] and len(input_dict[key]) == len(target_dict[key]):
+            for i in range(len(input_dict[key])):
+                if not isinstance(input_dict[key][i], target_dict[key][i].__class__):
+                    return False
+        else:
+            return False
+
+    # if all match, all is left to do, is to check if their lengths are the same
+    return len(input_dict) == len(target_dict)
+
+
 def test_parser_text_simple():
     key = "firstName"
     rules = {key: "required"}
@@ -67,5 +82,70 @@ def test_parser_arrays_simple():
     assert parsed_rules[key2][1].max_value == max_val
 
 
-def test_parser_mixed():
-    pass
+def test_parser_mixed_01():
+    # checking abstract university student object rules
+    rules = {
+        "name": R.Required(),
+        "suranme": R.Required,
+        "university_mail": [R.Required, "mail"],
+        "faculty_name": [R.Required],
+        "current_semester": ["required", R.Min(1)],
+        "credits_amount": [R.Required, R.Between(0, 240)],
+        "credits_current_semester": [R.Min(0), R.Max(75)],
+        "debt": [R.Max(0)],
+    }
+    parsed_rules_goal = {
+        "name": [R.Required()],
+        "suranme": [R.Required()],
+        "university_mail": [R.Required(), R.Mail()],
+        "faculty_name": [R.Required()],
+        "current_semester": [R.Required(), R.Min(1)],
+        "credits_amount": [R.Required(), R.Between(0, 240)],
+        "credits_current_semester": [R.Min(0), R.Max(75)],
+        "debt": [R.Max(0)],
+    }
+    parsed_rules = Parser(rules).parse()
+
+    assert instances_checker(parsed_rules, parsed_rules_goal)
+    assert parsed_rules["current_semester"][1].min_value == 1
+    assert parsed_rules["credits_amount"][1].min_value == 0
+    assert parsed_rules["credits_amount"][1].max_value == 240
+    assert parsed_rules["credits_current_semester"][0].min_value == 0
+    assert parsed_rules["credits_current_semester"][1].max_value == 75
+    assert parsed_rules["debt"][0].max_value == 0
+
+
+def test_parser_mixed_02():
+    # checking abstract football match object rules
+    rules = {
+        "team1": "required",
+        "team2": R.Required,
+        "team1_goals": ["required", "mail"],
+        "team2_goals": [R.Required],
+        "offides": [R.Required()],
+        "fouls": [R.Required()],
+        "corner_kicks": "required|min:1",
+        "penalties": ["max:0"],
+        "yellow_cards": [R.Required(), R.Between(0, 240)],
+        "red_cards": [R.Min(0), R.Max(75)],
+    }
+    parsed_rules_goal = {
+        "team1": [R.Required()],
+        "team2": [R.Required()],
+        "team1_goals": [R.Required(), R.Mail()],
+        "team2_goals": [R.Required()],
+        "offides": [R.Required()],
+        "fouls": [R.Required()],
+        "corner_kicks": [R.Required(), R.Min(1)],
+        "penalties": [R.Max(0)],
+        "yellow_cards": [R.Required(), R.Between(0, 240)],
+        "red_cards": [R.Min(0), R.Max(75)],
+    }
+    parsed_rules = Parser(rules).parse()
+
+    assert instances_checker(parsed_rules, parsed_rules_goal)
+    assert parsed_rules["corner_kicks"][1].min_value == 1
+    assert parsed_rules["yellow_cards"][1].min_value == 0
+    assert parsed_rules["yellow_cards"][1].max_value == 240
+    assert parsed_rules["red_cards"][0].min_value == 0
+    assert parsed_rules["red_cards"][1].max_value == 75
