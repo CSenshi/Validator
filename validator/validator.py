@@ -15,12 +15,11 @@ class Validator:
     def __init__(self, request, rules):
         self.request = request
         self.rules = Parser(rules).parse()
-
-    def validate(self):
         # check for internal error (incorrect rules)
         if not self.check_rules():
             raise exc.RulesFormatError
 
+    def validate(self):
         # prepare variables
         result = True
         errors = {}
