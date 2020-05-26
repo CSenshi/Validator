@@ -10,7 +10,7 @@ def test_validator_001_simple():
     request = {"age": 13}
     rule = {"age": [R.Min(18)]}
     result = Validator(request, rule).validate()
-    assert not result[0]
+    assert not result
 
     request = {"age": 13}
     rule = {"age": [R.Max(18)]}
@@ -25,7 +25,7 @@ def test_validator_001_simple():
     request = {"name": ""}
     rule = {"name": [R.Required()]}
     result = Validator(request, rule).validate()
-    assert not result[0]
+    assert not result
 
 
 def test_validator_002_simple():
@@ -37,7 +37,7 @@ def test_validator_002_simple():
     request = {"age": 33}
     rule = {"age": [R.Min(18), R.Max(30)]}
     result = Validator(request, rule).validate()
-    assert not result[0]
+    assert not result
 
     request = {"age": 23, "name": "Jon"}
     rule = {"age": [R.Min(18)], "name": [R.Required()]}
@@ -47,13 +47,15 @@ def test_validator_002_simple():
     request = {"age": 23, "name": ""}
     rule = {"age": [R.Min(18), R.Max(30)], "name": [R.Required()]}
     result = Validator(request, rule).validate()
-    assert not result[0]
+    assert not result
 
 
 def test_validator_003_error_msg():
     request = {"age": 100}
     rule = {"age": [R.Between(18, 90)]}
-    result, errors = Validator(request, rule).validate()
+    val = Validator(request, rule)
+    result = val.validate()
+    errors = val.get_error_messages()
     assert not result
     assert "age" in errors.keys()
     assert "Between" in errors["age"].keys()
@@ -64,7 +66,9 @@ def test_validator_003_error_msg():
         "name": [R.Required()],
         "surname": [R.Required(), R.Mail()],
     }
-    result, errors = Validator(request, rule).validate()
+    val = Validator(request, rule)
+    result = val.validate()
+    errors = val.get_error_messages()
 
     # Test General
     assert not result
@@ -92,7 +96,9 @@ def test_validator_004_error_msg():
         "profession": [R.Required, R.Mail],
         "mail": [R.Required(), R.Mail()],
     }
-    result, errors = Validator(request, rule).validate()
+    val = Validator(request, rule)
+    result = val.validate()
+    errors = val.get_error_messages()
 
     # Test General
     assert not result
