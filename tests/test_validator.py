@@ -1,5 +1,6 @@
 from validator import Validator, validate, rules as R
 
+
 def test_validator_001_simple():
     request = {"age": 23}
     rule = {"age": [R.Min(18)]}
