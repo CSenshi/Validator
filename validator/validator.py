@@ -24,7 +24,6 @@ class Validator:
     def validate(self):
         # prepare variables
         result = True
-        self.errors = {}
 
         # at this point all rules are being correctly passed
         for key in self.rules:
