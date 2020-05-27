@@ -68,14 +68,14 @@ def validate(req, rules, return_errors=False):
     Validates request with given rules
   
     Parameters: 
-    req (dict): request
-    rules (dict): rules
-    return_errors (bool): True/False according the necessity of returning error messages (False by default)
+        req (dict): request
+        rules (dict): rules
+        return_errors (bool): True/False according the necessity of returning error messages (False by default)
   
     Returns: 
-    result (bool): the result of the validation (if return_errors parameter was False)
-    OR
-    (result, error_messages): pair of the validation result and error messages object (if return_errors was True)
+        result (bool): the result of the validation (if return_errors parameter was False)
+        OR
+        (result, error_messages): pair of the validation result and error messages object (if return_errors was True)
     """
     val = Validator(req, rules)
     result = val.validate()
