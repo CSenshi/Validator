@@ -3,12 +3,10 @@ from validator.rules_src import Rule
 
 class Min(Rule):
     """
-    >>> TrueMin = Min(18)
-    >>> TrueMin(23)
+    >>> Min(18).check(23)
     True
 
-    >>> TrueMin = Min(18)
-    >>> TrueMin(15)
+    >>> Min(18).check(15)
     False
     """
 
@@ -16,7 +14,7 @@ class Min(Rule):
         Rule.__init__(self)
         self.min_value = min_value
 
-    def __call__(self, arg):
+    def check(self, arg):
         if self.min_value <= arg:
             return True
 

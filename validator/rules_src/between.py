@@ -4,12 +4,10 @@ from validator.rules_src.min import Min
 
 class Between(Max, Min):
     """
-    >>> TrueBetween = Between(2, 15)
-    >>> TrueBetween(23)
+    >>> Between(2, 15).check(23)
     False
 
-    >>> TrueBetween = Between(2, 15)
-    >>> TrueBetween(12)
+    >>> Between(2, 15).check(12)
     True
     """
 
@@ -17,8 +15,8 @@ class Between(Max, Min):
         Min.__init__(self, min_value)
         Max.__init__(self, max_value)
 
-    def __call__(self, arg):
-        if Min.__call__(self, arg) and Max.__call__(self, arg):
+    def check(self, arg):
+        if Min.check(self, arg) and Max.check(self, arg):
             return True
 
         self.set_errror_message(

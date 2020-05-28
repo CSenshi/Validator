@@ -32,7 +32,7 @@ class Validator:
             errors_on_key = {}
 
             for rule in rules_array:
-                if not rule(req_value):
+                if not rule.check(req_value):
                     result = False
                     errors_on_key[rule.get_class_name()] = rule.get_error_message()
 
@@ -81,6 +81,6 @@ def validate(req, rules, return_errors=False):
     if return_errors:
         errors = val.get_error_messages()
         # if return_errors was True return pair as a tuple
-        return (result, errors)
+        return result, errors
     # return validation result
     return result

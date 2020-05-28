@@ -6,7 +6,7 @@ def test_mail_01():
     emails = ["nikalosa@gmail.com", "abgdev@aa.bl", "zz.zz@zz.zz"]
 
     for email in emails:
-        assert rule(email)
+        assert rule.check(email)
 
 
 def test_mail_02():
@@ -14,4 +14,4 @@ def test_mail_02():
     emails = ["pochxu@gmail", "ankitrai326.com", "zz@.z"]
 
     for email in emails:
-        assert not rule(email)
+        assert not rule.check(email)

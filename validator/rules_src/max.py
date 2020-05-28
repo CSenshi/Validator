@@ -3,12 +3,10 @@ from validator.rules_src import Rule
 
 class Max(Rule):
     """
-    >>> TrueMax = Max(18)
-    >>> TrueMax(23)
+    >>> Max(18).check(23)
     False
 
-    >>> TrueMax = Max(18)
-    >>> TrueMax(15)
+    >>> Max(18).check(15)
     True
     """
 
@@ -16,7 +14,7 @@ class Max(Rule):
         Rule.__init__(self)
         self.max_value = max_value
 
-    def __call__(self, arg):
+    def check(self, arg):
         if self.max_value >= arg:
             return True
 

@@ -1,4 +1,4 @@
-from validator import Validator, validate, rules as R
+from validator import Validator, validate,rules as R
 
 
 def test_validator_001_simple():
