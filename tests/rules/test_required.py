@@ -12,19 +12,19 @@ def test_required_01():
 def test_required_02():
     rule = Required()
     value_to_check = 0
-    assert rule(value_to_check)
+    assert rule.check(value_to_check)
 
     value_to_check = False
-    assert rule(value_to_check)
+    assert rule.check(value_to_check)
 
     value_to_check = "Not empty"
-    assert rule(value_to_check)
+    assert rule.check(value_to_check)
 
     value_to_check = "სხვა ენა ვცადოთ?"
-    assert rule(value_to_check)
+    assert rule.check(value_to_check)
 
     value_to_check = ["Something here"]
-    assert rule(value_to_check)
+    assert rule.check(value_to_check)
 
     value_to_check = {"Still not empty"}
-    assert rule(value_to_check)
+    assert rule.check(value_to_check)

@@ -4,12 +4,10 @@ from validator.rules_src import Rule
 
 class Mail(Rule):
     """
-    >>> TrueMail = Mail()
-    >>> TrueMail('abcd@ef.gh')
+    >>> Mail().check('abcd@ef.gh')
     True
 
-    >>> TrueMail = Mail()
-    >>> TrueMail('aaa.com')
+    >>> Mail().check('aaa.com')
     False
     """
 
@@ -17,7 +15,7 @@ class Mail(Rule):
         Rule.__init__(self)
         self.regex = r"^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
 
-    def __call__(self, arg):
+    def check(self, arg):
         if re.search(self.regex, arg) is not None:
             return True
 

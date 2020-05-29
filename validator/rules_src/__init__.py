@@ -1,17 +1,20 @@
 import importlib
-import os
 import pkgutil
 from pathlib import Path
+from abc import ABCMeta
 
 
-class Rule:
+class Rule(metaclass=ABCMeta):
     def __init__(self):
         self.error_message = "error"
 
     def __call__(self, arg):
-        return False
+        return self.check(arg)
 
-    def __from_str__(self):
+    def check(self, arg):
+        pass
+
+    def __from_str__(self, arg):
         pass
 
     def get_class_name(self):

@@ -200,7 +200,7 @@ def test_validator_007_error_msg():
     assert "Mail" in mail_err
 
 
-def test_validator_007_error_msg():
+def test_validator_008_error_msg():
     request = {
         "age": 53,
         "name": "Peter",
