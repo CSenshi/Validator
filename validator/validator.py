@@ -84,3 +84,33 @@ def validate(req, rules, return_errors=False):
         return result, errors
     # return validation result
     return result
+
+
+def validate_many(requests, rules, return_errors=False):
+    """
+       Validates many requests with given rules
+
+       Parameters:
+           requests (list): requests
+           rules (dict): rules
+           return_errors (bool): True/False according the necessity of returning error messages (False by default)
+
+       Returns:
+           result (bool): the result of the validation (if return_errors parameter was False)
+           OR
+           (result, error_messages): pair of the validation result and error messages object (if return_errors was True)
+       """
+    def get_validation_result(_result, _errors, _return_errors=return_errors):
+        return _result if not _return_errors else (_result, _errors)
+
+    result, errors = False, None
+    for request in requests:
+        if return_errors:
+            result, errors = validate(request, rules, return_errors)
+        else:
+            result = validate(request, rules)
+
+        if not result:
+            return get_validation_result(result, errors)
+
+    return get_validation_result(result, errors)
