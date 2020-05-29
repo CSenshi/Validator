@@ -11,7 +11,7 @@ class Rule(metaclass=ABCMeta):
     def __call__(self, arg):
         return self.check(arg)
 
-    def check(self, arg) -> bool:
+    def check(self, arg):
         pass
 
     def __from_str__(self, arg):

@@ -32,7 +32,7 @@ class Validator:
             errors_on_key = {}
 
             for rule in rules_array:
-                if not rule.check(req_value):
+                if not rule(req_value):
                     result = False
                     errors_on_key[rule.get_class_name()] = rule.get_error_message()
 
