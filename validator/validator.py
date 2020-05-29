@@ -100,6 +100,7 @@ def validate_many(requests, rules, return_errors=False):
            OR
            (result, error_messages): pair of the validation result and error messages object (if return_errors was True)
        """
+
     def get_validation_result(_result, _errors, _return_errors=return_errors):
         return _result if not _return_errors else (_result, _errors)
 
