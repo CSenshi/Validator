@@ -243,7 +243,7 @@ def test_validate_004_error_msg():
 
 
 # !!! TEST : Function validate_many !!! #
-def test_validator_many():
+def test_validate_many_001():
     requests = [{"age": 19}, {"age": 20}, {"age": 21}, {"age": 22}]
     rule = {"age": [R.Min(18)]}
     result = validate_many(requests, rule)
@@ -275,7 +275,7 @@ def test_validator_many():
     assert not result
 
 
-def test_validator_many_errors_msg():
+def test_validate_many_002_errors_msg():
     requests = [{"age": 11}, {"age": 12}, {"age": 13}, {"age": 14}]
     rule = {"age": [R.Min(18)]}
     result, errors = validate_many(requests, rule, True)
@@ -319,3 +319,35 @@ def test_validator_many_errors_msg():
     assert "Required" in errors[2]["name"]
     assert "Field was empty" in errors[1]["name"]["Required"]
     assert "Field was empty" in errors[2]["name"]["Required"]
+
+
+def test_validate_many_003_errors_msg():
+    requests = [
+        {"first_name": "Jon", "last_name": "Doe", "age": 40},
+        {"first_name": "", "last_name": "Doe", "age": 40},
+        {"first_name": "Jon", "last_name": "", "age": 40},
+        {"first_name": "Jon", "last_name": "Doe", "age": 10},
+        {"first_name": "", "last_name": "", "age": 10},
+    ]
+    rule = {"first_name": R.Required, "last_name": R.Required, "age": R.Min(18)}
+
+    result, errors = validate_many(requests, rule, True)
+
+    assert not result
+    assert len(errors) == 5
+
+    assert len(errors[0]) == 0
+
+    assert len(errors[1]) == 1
+    assert "first_name" in errors[1]
+
+    assert len(errors[2]) == 1
+    assert "last_name" in errors[2]
+
+    assert len(errors[3]) == 1
+    assert "age" in errors[3]
+
+    assert len(errors[4]) == 3
+    assert "first_name" in errors[4]
+    assert "last_name" in errors[4]
+    assert "age" in errors[4]
