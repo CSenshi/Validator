@@ -280,22 +280,38 @@ def test_validator_many_errors_msg():
     rule = {"age": [R.Min(18)]}
     result, errors = validate_many(requests, rule, True)
     assert not result
-    assert "age" in errors
-    assert "Min" in errors["age"]
-    assert "Got: 11" in errors["age"]["Min"]
+    assert "age" in errors[0]
+    assert "age" in errors[1]
+    assert "age" in errors[2]
+    assert "age" in errors[3]
+    assert "Min" in errors[0]["age"]
+    assert "Min" in errors[1]["age"]
+    assert "Min" in errors[2]["age"]
+    assert "Min" in errors[3]["age"]
+    assert "Got: 11" in errors[0]["age"]["Min"]
+    assert "Got: 12" in errors[1]["age"]["Min"]
+    assert "Got: 13" in errors[2]["age"]["Min"]
+    assert "Got: 14" in errors[3]["age"]["Min"]
 
     requests = [{"age": 11}, {"age": 12}, {"age": 23}, {"age": 14}]
     rule = {"age": [R.Max(18)]}
     result, errors = validate_many(requests, rule, True)
     assert not result
-    assert "age" in errors
-    assert "Max" in errors["age"]
-    assert "Got: 23" in errors["age"]["Max"]
+    assert {} == errors[0]
+    assert {} == errors[1]
+    assert {} == errors[3]
+    assert "age" in errors[2]
+    assert "Max" in errors[2]["age"]
+    assert "Got: 23" in errors[2]["age"]["Max"]
 
     requests = [{"name": "Jon"}, {"name": ""}, {"name": ""}, {"name": "Tom"}]
     rule = {"name": [R.Required()]}
     result, errors = validate_many(requests, rule, True)
     assert not result
-    assert "name" in errors
-    assert "Required" in errors["name"]
-    assert "Field was empty" in errors["name"]["Required"]
+    assert "name" in errors[1]
+    assert "name" in errors[2]
+    assert {} == errors[3]
+    assert "Required" in errors[1]["name"]
+    assert "Required" in errors[2]["name"]
+    assert "Field was empty" in errors[1]["name"]["Required"]
+    assert "Field was empty" in errors[2]["name"]["Required"]

@@ -101,17 +101,17 @@ def validate_many(requests, rules, return_errors=False):
            (result, error_messages): pair of the validation result and error messages object (if return_errors was True)
        """
 
-    def get_validation_result(_result, _errors, _return_errors=return_errors):
-        return _result if not _return_errors else (_result, _errors)
+    def get_validation_result(_results, _errors, _return_errors=return_errors):
+        return all(_results) if not _return_errors else (all(_results), _errors)
 
-    result, errors = False, None
+    results, errors = [], []
     for request in requests:
         if return_errors:
-            result, errors = validate(request, rules, return_errors)
+            result, _errors = validate(request, rules, return_errors)
+            errors.append(_errors)
         else:
             result = validate(request, rules)
 
-        if not result:
-            return get_validation_result(result, errors)
+        results.append(result)
 
-    return get_validation_result(result, errors)
+    return get_validation_result(results, errors)
