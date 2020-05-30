@@ -280,6 +280,7 @@ def test_validator_many_errors_msg():
     rule = {"age": [R.Min(18)]}
     result, errors = validate_many(requests, rule, True)
     assert not result
+    assert 4 == len(errors)
     assert "age" in errors[0]
     assert "age" in errors[1]
     assert "age" in errors[2]
@@ -297,6 +298,7 @@ def test_validator_many_errors_msg():
     rule = {"age": [R.Max(18)]}
     result, errors = validate_many(requests, rule, True)
     assert not result
+    assert 1 == len(errors)
     assert {} == errors[0]
     assert {} == errors[1]
     assert {} == errors[3]
