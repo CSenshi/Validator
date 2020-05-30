@@ -308,6 +308,7 @@ def test_validator_many_errors_msg():
     rule = {"name": [R.Required()]}
     result, errors = validate_many(requests, rule, True)
     assert not result
+    assert {} == errors[0]
     assert "name" in errors[1]
     assert "name" in errors[2]
     assert {} == errors[3]
