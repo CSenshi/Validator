@@ -4,23 +4,17 @@ from validator.rules_src import Rule
 
 class IPv4(Rule):
     """
-    >>> TrueIPv4 = IPv4()
-    >>> TrueIPv4('127.0.0.1')
+    >>> IPv4().check('127.0.0.1')
     True
 
-    >>> TrueIPv4 = IPv4()
-    >>> TrueIPv4('0.299.2.1')
+    >>> IPv4().check('0.299.2.1')
     False
-
-    >>> TrueIPv4 = IPv4()
-    >>> TrueIPv4('01.14.0.1')
-    True
     """
 
     def __init__(self):
         Rule.__init__(self)
 
-    def __call__(self, arg):
+    def check(self, arg):
         octets = arg.split('.')
 
         # check number of octets
