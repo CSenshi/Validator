@@ -8,8 +8,7 @@ class IP(IPv4, IPv6):
     """
     >>> IP().check('127.0.0.1')
     True
-    >>> IP().check('2001:0db8:85a3:0:0:8a2e:0370:7334')
-    True
+    
     >>> IP().check('0.299.2.1')
     False
     """

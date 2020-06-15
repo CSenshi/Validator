@@ -4,16 +4,10 @@ from validator.rules_src import Rule
 
 class IPv6(Rule):
     """
-    >>> TrueIPv6 = IPv6()
-    >>> TrueIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334')
+    >>> IPv6().check('2001:0db8:85a3:0000:0000:8a2e:0370:7334')
     True
 
-    >>> TrueIPv6 = IPv6()
-    >>> TrueIPv6('::2:3:4:5:6:7:8')
-    True
-
-    >>> TrueIPv6 = IPv6()
-    >>> TrueIPv6('2001:0db8:85a3:9876:1234:8a2e')
+    >>> IPv6().check('2001:0db8:85a3:9876:1234:8a2e')
     False
     """
 
