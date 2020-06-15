@@ -15,12 +15,11 @@ class IPv4(Rule):
         Rule.__init__(self)
 
     def check(self, arg):
-        octets = arg.split('.')
+        octets = arg.split(".")
 
         # check number of octets
         if len(octets) != 4:
-            self.set_errror_message(
-                f"Expected four octets, Got: {len(octets)}")
+            self.set_errror_message(f"Expected four octets, Got: {len(octets)}")
             return False
 
         # check if all octets are digits
@@ -30,11 +29,11 @@ class IPv4(Rule):
                 return False
             if len(octet) > 3:
                 self.set_errror_message(
-                    f"Expected less than length of three octet, Got: {len(octet)}")
+                    f"Expected less than length of three octet, Got: {len(octet)}"
+                )
                 return False
             if not 0 <= int(octet) < 256:
-                self.set_errror_message(
-                    f"Expected digit less than 256, Got: {octet}")
+                self.set_errror_message(f"Expected digit less than 256, Got: {octet}")
                 return False
 
         return True
