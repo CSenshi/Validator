@@ -62,8 +62,8 @@ class Translator:
         "required" -> R.Required()
         "between:10,20" -> R.Between(10, 20)
         """
+        # split example: required_if
         class_str = "".join(elem.lower().split("_"))
-
         args = []
         if target_char in class_str:
             # extract rule_name and arguments from string
@@ -77,7 +77,7 @@ class Translator:
 
         init_rule = R.__all__[class_str]
 
-        # Chechk for arguments count
+        # Check for arguments count
         if not self._validate_args_count(init_rule, args):
             raise exc.ArgsCountError
 
