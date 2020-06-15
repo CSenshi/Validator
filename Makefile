@@ -4,6 +4,7 @@ DOCEST_TEST=validator/
 # Rules Genarot
 RULES_IMPORT_GENERATOR_SCRIPT := utils/generate_rules_import.py
 RULES_TEMPLATE_GENERATOR_SCRIPT := utils/generate_rule_sample.py
+RULES_TEMPLATE_GENERATOR_SCRIPT := utils/readme/generate_readme.py
 GENERATED_RULES_FILE := validator/rules.py
 
 ifdef TEST
@@ -54,5 +55,9 @@ generate-rule:
 	@echo Generating rules python file...
 	chmod 755 $(RULES_TEMPLATE_GENERATOR_SCRIPT)
 	python3 $(RULES_TEMPLATE_GENERATOR_SCRIPT) $(F_NAME)
+
+readme:
+	@echo Generating rules python file...
+	python3 $(RULES_TEMPLATE_GENERATOR_SCRIPT)
 
 .PHONY: init test

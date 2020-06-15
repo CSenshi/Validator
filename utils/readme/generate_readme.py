@@ -5,14 +5,15 @@ from pathlib import Path
 import sys
 import os
 
-validator_path = os.path.abspath(Path(__file__).parent.parent)
+validator_path = os.path.abspath(Path(__file__).parent.parent.parent)
 sys.path += [validator_path]
 
-README_EXAMPLE = "utils/README_EXAMPLE.md"
-README = "README.md"
 KEY = "CD4A678E95173E4BE5E27E2C8169F"
-HTML_DIV_EXAMPLE = "utils/readme_rules_div_example.html"
-HTML_REF_EXAMPLE = "utils/readme_rule_ref_example.html"
+
+README = "README.md"
+README_EXAMPLE = "utils/readme/README_EXAMPLE.md"
+HTML_DIV_EXAMPLE = "utils/readme/readme_rules_div_example.html"
+HTML_REF_EXAMPLE = "utils/readme/readme_rule_ref_example.html"
 
 
 def writeRules():
