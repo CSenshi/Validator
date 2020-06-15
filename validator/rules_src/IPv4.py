@@ -19,19 +19,22 @@ class IPv4(Rule):
 
         # check number of octets
         if len(octets) != 4:
-            f"Expected four octets, Got: {len(octets)}"
+            self.set_errror_message(
+                f"Expected four octets, Got: {len(octets)}")
             return False
 
         # check if all octets are digits
         for octet in octets:
             if not octet.isdigit():
-                f"Expected digits, Got: {octet}"
+                self.set_errror_message(f"Expected digits, Got: {octet}")
                 return False
             if len(octet) > 3:
-                f"Expected less than length of three octet, Got: {len(octet)}"
+                self.set_errror_message(
+                    f"Expected less than length of three octet, Got: {len(octet)}")
                 return False
             if not 0 <= int(octet) < 256:
-                f"Expected digit less than 256, Got: {octet}"
+                self.set_errror_message(
+                    f"Expected digit less than 256, Got: {octet}")
                 return False
 
         return True
