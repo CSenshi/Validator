@@ -137,42 +137,42 @@ def test_translator_many():
 # Checking for NoRuleError
 def test_bad_01_string():
     # Empty string
-    with pytest.raises(exc.NoRuleError):    
-        target_str = ""  
+    with pytest.raises(exc.NoRuleError):
+        target_str = ""
         Translator(target_str).translate()
 
     # some non-exists classes.
-    with pytest.raises(exc.NoRuleError):  
+    with pytest.raises(exc.NoRuleError):
         target_str = f"min:{-10}|maximum:20"
         Translator(target_str).translate()
 
     # some non-exists classes.
-    with pytest.raises(exc.NoRuleError):  
+    with pytest.raises(exc.NoRuleError):
         target_str = f"min:{-10}|maximum:20"
         Translator(target_str).translate()
-        
+
     # some non-exists classes.
-    with pytest.raises(exc.NoRuleError):  
+    with pytest.raises(exc.NoRuleError):
         target_str = f"min:{-10}|max{20}|interval:10,20"
         Translator(target_str).translate()
 
     # some non-exists classes.
-    with pytest.raises(exc.NoRuleError):  
+    with pytest.raises(exc.NoRuleError):
         target_str = f"min:{-10}|max{20}|required_mail"
         Translator(target_str).translate()
-    
+
     # some random characters.
-    with pytest.raises(exc.NoRuleError):  
+    with pytest.raises(exc.NoRuleError):
         target_str = "./']\n"
         Translator(target_str).translate()
-    
+
     # some random characters.
-    with pytest.raises(exc.NoRuleError):  
+    with pytest.raises(exc.NoRuleError):
         target_str = "required?"
         Translator(target_str).translate()
-    
+
     # some random characters.
-    with pytest.raises(exc.NoRuleError):  
+    with pytest.raises(exc.NoRuleError):
         target_str = "min.{10}:max{20}"
         Translator(target_str).translate()
 
@@ -180,137 +180,135 @@ def test_bad_01_string():
 # Checking for NoRuleError with array
 def test_bad_01_array():
     # Empty array
-    with pytest.raises(exc.NoRuleError):    
-        target_str = [""]  
+    with pytest.raises(exc.NoRuleError):
+        target_str = [""]
         Translator(target_str).translate()
 
     # some non-exists classes.
-    with pytest.raises(exc.NoRuleError):  
+    with pytest.raises(exc.NoRuleError):
         target_str = [f"min:{-10}", f"maximum:20"]
         Translator(target_str).translate()
 
     # some non-exists classes.
-    with pytest.raises(exc.NoRuleError):  
-        target_str = [f"min:{-10}","maximum:20"]
-        Translator(target_str).translate()
-        
-    # some non-exists classes.
-    with pytest.raises(exc.NoRuleError):  
-        target_str = [f"min:{-10}","max{20}", "interval:10,20"]
+    with pytest.raises(exc.NoRuleError):
+        target_str = [f"min:{-10}", "maximum:20"]
         Translator(target_str).translate()
 
     # some non-exists classes.
-    with pytest.raises(exc.NoRuleError):  
+    with pytest.raises(exc.NoRuleError):
+        target_str = [f"min:{-10}", "max{20}", "interval:10,20"]
+        Translator(target_str).translate()
+
+    # some non-exists classes.
+    with pytest.raises(exc.NoRuleError):
         target_str = [f"min:{-10}", "max{20}", "required_mail"]
         Translator(target_str).translate()
-    
+
     # some random characters.
-    with pytest.raises(exc.NoRuleError):  
+    with pytest.raises(exc.NoRuleError):
         target_str = ["./']\n"]
         Translator(target_str).translate()
-    
+
     # some random characters.
-    with pytest.raises(exc.NoRuleError):  
+    with pytest.raises(exc.NoRuleError):
         target_str = ["required?"]
         Translator(target_str).translate()
-    
+
 
 # Checking for ArgsCountError and valueError
 # for max, min, between args
 def test_bad_02():
     # Many min arg
-    with pytest.raises(exc.ArgsCountError):    
-        target_str = f"min:{1},{2}|max{10}"  
+    with pytest.raises(exc.ArgsCountError):
+        target_str = f"min:{1},{2}|max{10}"
         Translator(target_str).translate()
 
-    with pytest.raises(exc.ArgsCountError):    
-        target_str = f"min:{1},{2}|max{10}"  
+    with pytest.raises(exc.ArgsCountError):
+        target_str = f"min:{1},{2}|max{10}"
         Translator(target_str).translate()
-    
+
     # few between arg
-    with pytest.raises(exc.ArgsCountError):    
-        target_str = f"between:|max{10}"  
+    with pytest.raises(exc.ArgsCountError):
+        target_str = f"between:|max{10}"
         Translator(target_str).translate()
-    
+
     # min zero arg
-    with pytest.raises(ValueError):    
-        target_str = f"min:|max{10}"  
+    with pytest.raises(ValueError):
+        target_str = f"min:|max{10}"
         Translator(target_str).translate()
 
     # max zero arg
-    with pytest.raises(ValueError):    
-        target_str = f"max:|min{10}"  
-        Translator(target_str).translate()
-
-    # many arg
-    with pytest.raises(exc.ArgsCountError):    
-        target_str = f"min:{10},{20},{30}|max{10}"  
+    with pytest.raises(ValueError):
+        target_str = f"max:|min{10}"
         Translator(target_str).translate()
 
     # many arg
     with pytest.raises(exc.ArgsCountError):
-        target_str = f"between:{10},{20},{30}|max{10}"  
+        target_str = f"min:{10},{20},{30}|max{10}"
         Translator(target_str).translate()
 
     # many arg
     with pytest.raises(exc.ArgsCountError):
-        target_str = f"between:{10},{20}|max:{10},{20}"  
+        target_str = f"between:{10},{20},{30}|max{10}"
         Translator(target_str).translate()
 
     # many arg
     with pytest.raises(exc.ArgsCountError):
-        target_str = "required:a"  
+        target_str = f"between:{10},{20}|max:{10},{20}"
         Translator(target_str).translate()
 
+    # many arg
+    with pytest.raises(exc.ArgsCountError):
+        target_str = "required:a"
+        Translator(target_str).translate()
 
 
 # Checking for ArgsCountError and valueError
 # for max, min, between args
 def test_bad_02_array():
     # Many min arg
-    with pytest.raises(exc.ArgsCountError):    
-        target_str = [f"min:{1},{2}", f"max{10}"]  
-        Translator(target_str).translate()
-
-    with pytest.raises(exc.ArgsCountError):    
+    with pytest.raises(exc.ArgsCountError):
         target_str = [f"min:{1},{2}", f"max{10}"]
         Translator(target_str).translate()
-    
-    # few between arg
-    with pytest.raises(exc.ArgsCountError):    
-        target_str = [f"between:", f"max{10}"]  
+
+    with pytest.raises(exc.ArgsCountError):
+        target_str = [f"min:{1},{2}", f"max{10}"]
         Translator(target_str).translate()
-    
+
+    # few between arg
+    with pytest.raises(exc.ArgsCountError):
+        target_str = [f"between:", f"max{10}"]
+        Translator(target_str).translate()
+
     # min zero arg
-    with pytest.raises(ValueError):    
-        target_str = [f"min:", f"max{10}"]  
+    with pytest.raises(ValueError):
+        target_str = [f"min:", f"max{10}"]
         Translator(target_str).translate()
 
     # max zero arg
-    with pytest.raises(ValueError):    
-        target_str = [f"max:",f"min{10}"]
+    with pytest.raises(ValueError):
+        target_str = [f"max:", f"min{10}"]
         Translator(target_str).translate()
 
     # many arg
-    with pytest.raises(exc.ArgsCountError):    
+    with pytest.raises(exc.ArgsCountError):
         target_str = [f"min:{10},{20},{30}", f"max{10}"]
         Translator(target_str).translate()
 
     # many arg
     with pytest.raises(exc.ArgsCountError):
-        target_str = [f"between:{10},{20},{30}",f"max{10}"]
+        target_str = [f"between:{10},{20},{30}", f"max{10}"]
         Translator(target_str).translate()
 
     # many arg
     with pytest.raises(exc.ArgsCountError):
-        target_str = [f"between:{10},{20}", f"max:{10},{20}"]  
+        target_str = [f"between:{10},{20}", f"max:{10},{20}"]
         Translator(target_str).translate()
 
     # many arg
     with pytest.raises(exc.ArgsCountError):
-        target_str = ["required:a"]  
+        target_str = ["required:a"]
         Translator(target_str).translate()
-
 
 
 # Checking for attribute error and UnknownTranslatorArgError
@@ -335,4 +333,3 @@ def test_bad_03():
     with pytest.raises(AttributeError):
         target_str = [R.Requireds()]
         Translator(target_str).translate()
-    
