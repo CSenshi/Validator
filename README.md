@@ -68,9 +68,10 @@ False
 
 #### IPv4
 
+The field under validation must be an IPv4 address.
+
 
 ```python
-The field under validation must be an IPv4 address.
 
 >>> IPv4().check('127.0.0.1')
 True
