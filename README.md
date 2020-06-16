@@ -35,7 +35,6 @@ Validator(request, rules).validate()   # returns True
 ```
 
 ## Rules
-<!-- CD4A678E95173E4BE5E27E2C8169F -->
 <div>
 <p>
 <a href="#Between">Between</a>

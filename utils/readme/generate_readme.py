@@ -7,19 +7,21 @@ import os
 import sys, inspect
 import pprint
 
-
+# "Hacking" to see package of validaor 
 validator_path = os.path.abspath(Path(__file__).parent.parent.parent)
 sys.path += [validator_path]
 
+# Token to find where should we place rules
 KEY = "CD4A678E95173E4BE5E27E2C8169F"
 
+# file names needed
 README = "README.md"
 README_EXAMPLE = "utils/readme/README_EXAMPLE.md"
 HTML_DIV_EXAMPLE = "utils/readme/readme_rules_div_example.html"
 HTML_REF_EXAMPLE = "utils/readme/readme_rule_ref_example.html"
 RULE_DESC_EXAMPLE = "utils/readme/readme_rules_desc_example.html"
 
-def writeRules():
+def writeRules(re):
     div_str = open(HTML_DIV_EXAMPLE).read()
     ref_str = open(HTML_REF_EXAMPLE).read()
     rule_desc = open(RULE_DESC_EXAMPLE).read()
@@ -65,6 +67,7 @@ with open(README_EXAMPLE, "r") as ex, open(README, "w") as re:
         line = ex.readline()
         if not line:
             break
-        re.write(line)
         if KEY in line:
-            writeRules()
+            writeRules(re)
+        else:
+            re.write(line)
