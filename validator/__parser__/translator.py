@@ -33,7 +33,7 @@ class Translator:
         rules_arr = []
         for elem in arr:
             if isinstance(elem, str):
-                rule = self._translate_str(elem)
+                rule = self._translate_str(elem) if elem else []
             elif isinstance(elem, R.Rule):
                 rule = elem
             elif inspect.isclass(elem) and issubclass(elem, R.Rule):
@@ -47,7 +47,7 @@ class Translator:
     def _value_to_array(self):
         # if value is string transform to string
         if isinstance(self.value, str):
-            return re.split("[" + target_regex + "]", self.value)
+            return re.split("[" + target_regex + "]", self.value) if self.value else []
 
         # if value is array return
         if isinstance(self.value, list):
