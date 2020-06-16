@@ -4,6 +4,8 @@ from validator.rules_src import Rule
 
 class Mail(Rule):
     """
+    The field under validation must be formatted as an e-mail address 
+
     >>> Mail().check('abcd@ef.gh')
     True
 
