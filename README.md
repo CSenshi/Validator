@@ -47,9 +47,11 @@ Validator(request, rules).validate()   # returns True
 </div><a name="Between"/>
 
 #### Between
-```python
 
 The field under validation must have a size between the given min and max
+
+
+```python
 
 >>> Between(2, 15).check(23)
 False
@@ -62,9 +64,11 @@ True
 <a name="Mail"/>
 
 #### Mail
-```python
 
 The field under validation must be formatted as an e-mail address
+
+
+```python
 
 >>> Mail().check('abcd@ef.gh')
 True
@@ -77,9 +81,11 @@ False
 <a name="Max"/>
 
 #### Max
-```python
 
 The field under validation must be less than or equal to a maximum value
+
+
+```python
 
 >>> Max(18).check(23)
 False
@@ -92,9 +98,11 @@ True
 <a name="Min"/>
 
 #### Min
-```python
 
 The field under validation must be greater than or equal to a minimum value
+
+
+```python
 
 >>> Min(18).check(23)
 True
@@ -107,9 +115,11 @@ False
 <a name="Required"/>
 
 #### Required
-```python
 
 The field under validation must be present in the input data and not empty
+
+
+```python
 
 >>> Required().check('Not Empty')
 True
@@ -122,6 +132,10 @@ False
 <a name="RequiredIf"/>
 
 #### RequiredIf
+
+Some Description...
+
+
 ```python
 
 >>> RequiredIf('a').check('abc')

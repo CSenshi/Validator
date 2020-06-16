@@ -6,6 +6,7 @@ class Mail(Rule):
     """
     The field under validation must be formatted as an e-mail address 
 
+    Examples:
     >>> Mail().check('abcd@ef.gh')
     True
 

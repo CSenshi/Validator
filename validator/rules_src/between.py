@@ -6,6 +6,7 @@ class Between(Max, Min):
     """
     The field under validation must have a size between the given min and max 
 
+    Examples:
     >>> Between(2, 15).check(23)
     False
 

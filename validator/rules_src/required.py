@@ -5,6 +5,7 @@ class Required(Rule):
     """
     The field under validation must be present in the input data and not empty 
 
+    Examples:
     >>> Required().check('Not Empty')
     True
 
