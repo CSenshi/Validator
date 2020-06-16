@@ -1,4 +1,5 @@
 from validator.rules import Min
+import pytest
 
 
 def test_min_01():
@@ -41,3 +42,24 @@ def test_min_03():
     rule = Min(-23)
     value_to_check = -23
     assert rule.check(value_to_check)
+
+
+# implement bad tests for min class.
+def test_min_bad():
+    # zero arg
+    with pytest.raises(TypeError):
+        rule = min()
+        value_to_check = 0
+        assert not rule.check(value_to_check)
+
+    # many arg
+    with pytest.raises(AttributeError):
+        rule = min(5, 5, 5)
+        value_to_check = 0
+        assert not rule.check(value_to_check)
+
+    # wrong type
+    with pytest.raises(AttributeError):
+        rule = min("5", "5")
+        value_to_check = 0
+        assert not rule.check(value_to_check)

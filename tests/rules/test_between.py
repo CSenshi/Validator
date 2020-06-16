@@ -1,4 +1,5 @@
 from validator.rules import Between
+import pytest
 
 
 def test_between_01():
@@ -38,3 +39,29 @@ def test_between_03():
     rule = Between(5, 5)
     value_to_check = 0
     assert not rule.check(value_to_check)
+
+
+# implement bad tests for between class
+def test_between_bad():
+    # zero arg
+    with pytest.raises(TypeError):
+        rule = Between()
+        value_to_check = 0
+        assert not rule.check(value_to_check)
+
+    # 1 arg
+    with pytest.raises(TypeError):
+        rule = Between(5)
+        value_to_check = 0
+        assert not rule.check(value_to_check)
+
+    with pytest.raises(TypeError):
+        rule = Between(5, 5, 5)
+        value_to_check = 0
+        assert not rule.check(value_to_check)
+
+    # wrong type
+    with pytest.raises(TypeError):
+        rule = Between("5", "5")
+        value_to_check = 0
+        assert not rule.check(value_to_check)
