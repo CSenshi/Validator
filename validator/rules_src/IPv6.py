@@ -4,6 +4,9 @@ from validator.rules_src import Rule
 
 class IPv6(Rule):
     """
+    The field under validation must be an IPv6 address.
+
+    Examples:
     >>> IPv6().check('2001:0db8:85a3:0000:0000:8a2e:0370:7334')
     True
 

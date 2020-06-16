@@ -6,6 +6,9 @@ from validator.rules_src.IPv6 import IPv6
 
 class IP(IPv4, IPv6):
     """
+    The field under validation must be an IP address.
+
+    Examples:
     >>> IP().check('127.0.0.1')
     True
     

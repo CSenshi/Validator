@@ -3,6 +3,9 @@ from validator.rules_src.required import Required
 
 class RequiredIf(Required):
     """
+    Some Description...
+    
+    Examples:
     >>> RequiredIf('a').check('abc')
     True
 

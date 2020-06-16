@@ -3,6 +3,9 @@ from validator.rules_src import Rule
 
 class Min(Rule):
     """
+    The field under validation must be greater than or equal to a minimum value 
+
+    Examples:
     >>> Min(18).check(23)
     True
 

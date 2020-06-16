@@ -4,6 +4,9 @@ from validator.rules_src import Rule
 
 class IPv4(Rule):
     """
+    The field under validation must be an IPv4 address.
+
+    Examples:
     >>> IPv4().check('127.0.0.1')
     True
 

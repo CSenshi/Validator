@@ -3,6 +3,9 @@ from validator.rules_src import Rule
 
 class Max(Rule):
     """
+    The field under validation must be less than or equal to a maximum value 
+
+    Examples:
     >>> Max(18).check(23)
     False
 
