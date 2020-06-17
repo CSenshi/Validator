@@ -33,7 +33,7 @@ class Translator:
         rules_arr = []
         for elem in arr:
             if isinstance(elem, str):
-                rule = self._translate_str(elem) if elem else []
+                rule = self._translate_str(elem)
             elif isinstance(elem, R.Rule):
                 rule = elem
             elif inspect.isclass(elem) and issubclass(elem, R.Rule):
@@ -47,7 +47,7 @@ class Translator:
     def _value_to_array(self):
         # if value is string transform to string
         if isinstance(self.value, str):
-            return re.split("[" + target_regex + "]", self.value) if self.value else []
+            return re.split("[" + target_regex + "]", self.value)
 
         # if value is array return
         if isinstance(self.value, list):
@@ -62,6 +62,9 @@ class Translator:
         "required" -> R.Required()
         "between:10,20" -> R.Between(10, 20)
         """
+        if not elem:
+            return []
+
         # split example: required_if
         class_str = "".join(elem.lower().split("_"))
         args = []
