@@ -124,6 +124,35 @@ def test_validator_004_error_msg():
     assert "Mail" in mail_err
 
 
+def test_validator_001_empty():
+    # Checking for empty rules to work
+    request = {
+        "age": 53,
+        "name": "Peter",
+        "surname": "Griffin",
+        "profession": "brewer",
+        "mail": "peter@griffin.com",
+    }
+    rule = {
+        "age": "",
+        "name": [""],
+        "surname": [],
+        "profession": [R.Required],
+        "mail": [R.Required(), R.Mail()],
+    }
+    val = Validator(request, rule)
+    result = val.validate()
+
+    assert result
+
+    # Testing if other rules still work with empty ones
+    request["mail"] = "pg.com"
+    val = Validator(request, rule)
+    result = val.validate()
+
+    assert not result
+
+
 # !!! TEST : Function validate !!! #
 def test_validate_001_simple():
     request = {"age": 23}
