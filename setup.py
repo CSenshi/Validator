@@ -20,7 +20,7 @@ setup(
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     license="MIT",
-    packages=["validator"],
+    packages=["validator", "validator.rules_src", "validator.__parser__"],
     classifiers=[
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
