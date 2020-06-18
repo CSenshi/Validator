@@ -7,7 +7,7 @@ Validator is a Python library for dealing with request validating.
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Validator.
 
 ```bash
-pip install ...
+pip install validator
 ```
 
 ## Usage
