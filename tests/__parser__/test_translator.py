@@ -136,11 +136,6 @@ def test_translator_many():
 # In this method we will write bad tests for our translator method.
 # Checking for NoRuleError
 def test_bad_01_string():
-    # Empty string
-    with pytest.raises(exc.NoRuleError):
-        target_str = ""
-        Translator(target_str).translate()
-
     # some non-exists classes.
     with pytest.raises(exc.NoRuleError):
         target_str = f"min:{-10}|maximum:20"
@@ -179,11 +174,6 @@ def test_bad_01_string():
 
 # Checking for NoRuleError with array
 def test_bad_01_array():
-    # Empty array
-    with pytest.raises(exc.NoRuleError):
-        target_str = [""]
-        Translator(target_str).translate()
-
     # some non-exists classes.
     with pytest.raises(exc.NoRuleError):
         target_str = [f"min:{-10}", f"maximum:20"]
@@ -313,7 +303,6 @@ def test_bad_02_array():
 
 # Checking for attribute error and UnknownTranslatorArgError
 def test_bad_03():
-
     # Bad R class
     with pytest.raises(AttributeError):
         target_str = [R.Required(), R.Min(18), R.anyclass(30)]

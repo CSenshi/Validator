@@ -62,6 +62,9 @@ class Translator:
         "required" -> R.Required()
         "between:10,20" -> R.Between(10, 20)
         """
+        if not elem:
+            return []
+
         # split example: required_if
         class_str = "".join(elem.lower().split("_"))
         args = []
