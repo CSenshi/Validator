@@ -1,23 +1,35 @@
+# python setup.py bdist_wheel
+
 import os
 from setuptools import setup
-
-# Utility function to read the README file.
-# Used for the long_description.  It's nice, because now 1) we have a top level
-# README file and 2) it's easier to type in the README file than to put a raw
-# string in below ...
 
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
+__major__ = 0
+__minor__ = 0
+__patch__ = 1
+__version__ = ".".join([str(__major__), str(__minor__), str(__patch__)])
+
 setup(
     name="validator",
-    version="0.0.1",
+    version=__version__,
     description=("Python Validator"),
-    license="MIT",
-    keywords="python validator",
-    url="https://github.com/CSenshi/Validator",
-    packages=["validator"],
     long_description=read("README.md"),
+    long_description_content_type="text/markdown",
+    license="MIT",
+    packages=["validator"],
+    classifiers=[
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    extras_require={"dev": ["pytest", "black"]},
+    url="https://github.com/CSenshi/Validator",
+    author="Saba Pockhua",
+    author_email="saba.pochkhua@gmail.com",
 )
