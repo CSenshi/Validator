@@ -3,12 +3,13 @@ from validator.rules_src import Rule
 
 class {0}(Rule):
     """
-    >>> True{0} = {0}()
-    >>> True{0}(...)
+    <Insert Rule Documentation Here>
+
+    Examples:
+    >>> {0}().check(...)
     True
 
-    >>> False{0} = {0}()
-    >>> False{0}(...)
+    >>> {0}().check(...)
     False
     """
 
