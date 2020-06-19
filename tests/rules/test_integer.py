@@ -72,6 +72,6 @@ def test_integer_05():
 
     assert not Integer().check(None)
 
-    assert not Integer().check({'a':2})
+    assert not Integer().check({"a": 2})
 
     assert not Integer().check(__file__)
