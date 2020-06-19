@@ -14,16 +14,13 @@ endif
 
 
 init:
-	@echo Generating rules python file...
 	$(RULES_IMPORT_GENERATOR_SCRIPT) $(GENERATED_RULES_FILE)
-	@echo Done!
 
 install:
 	pip3 install -r requirements.txt
 
 clean:
 ifneq ("$(wildcard $(GENERATED_RULES_FILE))","")
-	@echo removing generated rules file...
 	rm $(GENERATED_RULES_FILE)
 endif
 
@@ -48,11 +45,9 @@ fix:
 
 # Generate files
 rule:
-	@echo Generating rules python file...
 	$(RULES_TEMPLATE_GENERATOR_SCRIPT) $(F_NAME)
 
-readme:
-	@echo Generating rules python file...
+readme: init
 	$(README_TEMPLATE_GENERATOR_SCRIPT)
 
 .PHONY: init test

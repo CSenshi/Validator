@@ -9,7 +9,7 @@ At this point you are done with setting up your project and should be able to st
 
 ## Creating new Rule
 If you wish to contribute with new rule, please use our written generator to generate new rule template class and tests
-* ``` make generate-rule F_NAME=new_rule ``` Will generate new rule in rules_src/ folder. Takes in one argument F_NAME which is rule's file name and automatically generates rule's class name which will be NewRule (converted to CapWords convention)
+* ``` make rule F_NAME=new_rule ``` Will generate new rule in rules_src/ folder. Takes in one argument F_NAME which is rule's file name and automatically generates rule's class name which will be NewRule (converted to CapWords convention)
 
 ## Testing
 For testing we use pytest framework. All of the tests are located in the tests/ directory. As you can see we write speerate kind of tests in seperate functions, so please use it to make testing even better. We also support doctests and we do preffer 2 doctests for each rule(one for True evaluation and second for False), it will make easier for users to know what given rule is capable of doing. Finally, the code conduct, we test PEP standards and code formating using tools defined in Code Style.
@@ -24,8 +24,7 @@ We provide some testing with Makefile:
 Our Makefile also supports testing specifying rule. For Example, if you want to check tests only for Rule called Min just use it as follows: ```make test TEST=min```
 
 ## Code Style
-[PEP 8](https://www.python.org/dev/peps/pep-0008/) is used as coding convention for project and 
-we use tool [autopep8](https://github.com/hhatto/autopep8) for checking pep standarts. Code formatting is checked using [Black](https://github.com/psf/black). You can install those tools manually and use them as you will, but we do recommend using our make commad.
+Code formatting is checked using [Black](https://github.com/psf/black). You can install those tools manually and use them as you will, but we do recommend using our make commad.
 
 * ``` make fix ``` 
 
