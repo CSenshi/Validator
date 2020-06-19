@@ -1,10 +1,11 @@
+#!/usr/bin/env python3
 import os
 import sys
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).parent.parent.absolute()
-RULE_TEMPLATE_PATH = os.path.join(ROOT_DIR, "utils/rule_template.txt")
-TEST_TEMPLATE_PATH = os.path.join(ROOT_DIR, "utils/test_template.txt")
+ROOT_DIR = Path(__file__).parent.parent.parent.absolute()
+RULE_TEMPLATE_PATH = os.path.join(ROOT_DIR, "utils/generate_rule/rule_template.txt")
+TEST_TEMPLATE_PATH = os.path.join(ROOT_DIR, "utils/generate_rule/test_template.txt")
 
 
 def read_file(file_path):
