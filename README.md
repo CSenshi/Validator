@@ -2,7 +2,7 @@
 
 Validator is a Python library for dealing with request validating.
 
-## Installation
+## Installation (Not Released Yet)
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Validator.
 
@@ -41,11 +41,14 @@ Validator(request, rules).validate()   # returns True
 <a href="#IPv4">IPv4</a>
 <a href="#IPv6">IPv6</a>
 <a href="#Between">Between</a>
+<a href="#Integer">Integer</a>
+<a href="#List">List</a>
 <a href="#Mail">Mail</a>
 <a href="#Max">Max</a>
 <a href="#Min">Min</a>
 <a href="#Required">Required</a>
 <a href="#RequiredIf">RequiredIf</a>
+<a href="#Size">Size</a>
 </p>
 </div><a name="IP"/>
 
@@ -112,6 +115,40 @@ False
 
 >>> Between(2, 15).check(12)
 True
+
+
+```
+<a name="Integer"/>
+
+#### Integer
+
+The field under validation must be an Integer
+
+
+```python
+
+>>> Integer().check('123')
+True
+
+>>> Integer().check('string')
+False
+
+
+```
+<a name="List"/>
+
+#### List
+
+The field under validation must be a list (Python array)
+
+
+```python
+
+>>> List().check([1, 2, 3])
+True
+
+>>> List().check(123)
+False
 
 
 ```
@@ -196,6 +233,26 @@ Some Description...
 True
 
 >>> RequiredIf('z').check('abc')
+False
+
+
+```
+<a name="Size"/>
+
+#### Size
+
+The field under validation must have a size matching the given value.
+For string data, value corresponds to the number of characters.
+For numeric data, value corresponds to a given integer value (the attribute must also have the numeric or integer rule).
+For an array, size corresponds to the count of the array.
+
+
+```python
+
+>>> Size(6).check('string')
+True
+
+>>> Size(12).check('string')
 False
 
 
