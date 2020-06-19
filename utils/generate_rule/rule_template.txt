@@ -13,9 +13,9 @@ class {0}(Rule):
     """
 
     def __init__(self):
-        pass
+        Rule.__init__(self)
 
-    def __call__(self, arg):
+    def check(self, arg):
         pass
 
     def __from_str__(self):
