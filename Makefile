@@ -53,6 +53,6 @@ rule:
 
 readme:
 	@echo Generating rules python file...
-	$(README_TEMPLATE_GENERATOR_SCRIPT)
+	python3 $(README_TEMPLATE_GENERATOR_SCRIPT)
 
 .PHONY: init test
