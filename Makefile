@@ -21,7 +21,7 @@ install:
 
 clean:
 	git clean -xdf
-	
+
 # Test with pytest test/ folder and doctests 
 test: doctest pytest check
 
@@ -47,5 +47,14 @@ rule:
 
 readme: init
 	$(README_TEMPLATE_GENERATOR_SCRIPT)
+
+# Upload to pip
+pip-upload: build-dist upload-dist
+
+build-dist:
+	python3 setup.py bdist_wheel sdist
+
+upload-dist:
+	twine upload dist/*
 
 .PHONY: init test

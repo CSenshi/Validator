@@ -9,8 +9,8 @@ def read(fname):
 
 
 __major__ = 0
-__minor__ = 0
-__patch__ = 3
+__minor__ = 1
+__patch__ = 0
 __version__ = ".".join([str(__major__), str(__minor__), str(__patch__)])
 
 setup(
@@ -20,7 +20,7 @@ setup(
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     license="MIT",
-    packages=["validator", "validator.rules_src", "validator.__parser__"],
+    packages=["validator", "validator.rules_src", "validator.parser"],
     classifiers=[
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
