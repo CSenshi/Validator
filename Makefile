@@ -3,7 +3,7 @@ DOCEST_TEST=validator/
 
 # files
 RULES_IMPORT_GENERATOR_SCRIPT := utils/generate_rules_import.py
-RULES_TEMPLATE_GENERATOR_SCRIPT := utils/generate_rule_sample.py
+RULES_TEMPLATE_GENERATOR_SCRIPT := utils/generate_rule/generate_rule_sample.py
 README_TEMPLATE_GENERATOR_SCRIPT := utils/readme/generate_readme.py
 GENERATED_RULES_FILE := validator/rules.py
 
