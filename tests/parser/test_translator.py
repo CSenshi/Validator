@@ -1,4 +1,4 @@
-from validator.__parser__.translator import Translator
+from validator.parser.translator import Translator
 from validator import rules as R
 from validator import exceptions as exc
 import pytest

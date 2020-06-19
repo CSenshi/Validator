@@ -1,4 +1,4 @@
-from validator.__parser__.parser import Parser
+from validator.parser.parser import Parser
 from validator import rules as R
 
 

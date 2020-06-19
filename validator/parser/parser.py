@@ -1,4 +1,4 @@
-from validator.__parser__.translator import Translator
+from validator.parser.translator import Translator
 
 """
 Parser class implements parsing from generic type of rules to specified

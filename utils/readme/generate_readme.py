@@ -29,7 +29,9 @@ def writeRules(re):
 
     all_rules_refs = ""
     all_rules_desc = ""
-    for (_, file, _) in pkgutil.iter_modules(["validator/rules_src"]):
+    files = [file for (_, file, _) in pkgutil.iter_modules(["validator/rules_src"])]
+    files = sorted(files, key=lambda x: x.lower())
+    for file in files:
         # Get Absolute Path
         module_abs_path = f"validator.rules_src.{file}"
         pkg = importlib.import_module(module_abs_path)

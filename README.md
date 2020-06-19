@@ -2,7 +2,7 @@
 
 Validator is a Python library for dealing with request validating.
 
-## Installation
+## Installation (Not Released Yet)
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Validator.
 
@@ -37,11 +37,11 @@ Validator(request, rules).validate()   # returns True
 ## Rules
 <div>
 <p>
+<a href="#Between">Between</a>
+<a href="#Integer">Integer</a>
 <a href="#IP">IP</a>
 <a href="#IPv4">IPv4</a>
 <a href="#IPv6">IPv6</a>
-<a href="#Between">Between</a>
-<a href="#Integer">Integer</a>
 <a href="#List">List</a>
 <a href="#Mail">Mail</a>
 <a href="#Max">Max</a>
@@ -50,7 +50,41 @@ Validator(request, rules).validate()   # returns True
 <a href="#RequiredIf">RequiredIf</a>
 <a href="#Size">Size</a>
 </p>
-</div><a name="IP"/>
+</div><a name="Between"/>
+
+#### Between
+
+The field under validation must have a size between the given min and max
+
+
+```python
+
+>>> Between(2, 15).check(23)
+False
+
+>>> Between(2, 15).check(12)
+True
+
+
+```
+<a name="Integer"/>
+
+#### Integer
+
+The field under validation must be an Integer
+
+
+```python
+
+>>> Integer().check('123')
+True
+
+>>> Integer().check('string')
+False
+
+
+```
+<a name="IP"/>
 
 #### IP
 
@@ -97,40 +131,6 @@ The field under validation must be an IPv6 address.
 True
 
 >>> IPv6().check('2001:0db8:85a3:9876:1234:8a2e')
-False
-
-
-```
-<a name="Between"/>
-
-#### Between
-
-The field under validation must have a size between the given min and max
-
-
-```python
-
->>> Between(2, 15).check(23)
-False
-
->>> Between(2, 15).check(12)
-True
-
-
-```
-<a name="Integer"/>
-
-#### Integer
-
-The field under validation must be an Integer
-
-
-```python
-
->>> Integer().check('123')
-True
-
->>> Integer().check('string')
 False
 
 
