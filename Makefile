@@ -20,10 +20,8 @@ install:
 	pip3 install -r requirements.txt
 
 clean:
-ifneq ("$(wildcard $(GENERATED_RULES_FILE))","")
-	rm $(GENERATED_RULES_FILE)
-endif
-
+	git clean -xdf
+	
 # Test with pytest test/ folder and doctests 
 test: doctest pytest check
 
