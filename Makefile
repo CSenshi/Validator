@@ -1,10 +1,10 @@
 PYTEST_TEST=.
 DOCEST_TEST=validator/
 
-# Rules Genarot
+# files
 RULES_IMPORT_GENERATOR_SCRIPT := utils/generate_rules_import.py
 RULES_TEMPLATE_GENERATOR_SCRIPT := utils/generate_rule_sample.py
-RULES_TEMPLATE_GENERATOR_SCRIPT := utils/readme/generate_readme.py
+README_TEMPLATE_GENERATOR_SCRIPT := utils/readme/generate_readme.py
 GENERATED_RULES_FILE := validator/rules.py
 
 ifdef TEST
@@ -12,13 +12,9 @@ ifdef TEST
 	DOCEST_TEST=validator/rules_src/$(TEST).py
 endif
 
-ifdef PEP8
-	SHOW_PEP=--show-pep8 
-endif
 
 init:
 	@echo Generating rules python file...
-	chmod 755 $(RULES_IMPORT_GENERATOR_SCRIPT)
 	$(RULES_IMPORT_GENERATOR_SCRIPT) $(GENERATED_RULES_FILE)
 	@echo Done!
 
@@ -50,14 +46,13 @@ check:
 fix:
 	black .
 
-# Generate new rule
-generate-rule:
+# Generate files
+rule:
 	@echo Generating rules python file...
-	chmod 755 $(RULES_TEMPLATE_GENERATOR_SCRIPT)
-	python3 $(RULES_TEMPLATE_GENERATOR_SCRIPT) $(F_NAME)
+	$(RULES_TEMPLATE_GENERATOR_SCRIPT) $(F_NAME)
 
 readme:
 	@echo Generating rules python file...
-	python3 $(RULES_TEMPLATE_GENERATOR_SCRIPT)
+	$(README_TEMPLATE_GENERATOR_SCRIPT)
 
 .PHONY: init test
