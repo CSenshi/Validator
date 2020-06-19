@@ -1,0 +1,11 @@
+include *.md
+include *.txt
+include *.yml
+include LICENSE
+include Makefile
+recursive-include tests *.py
+recursive-include utils *.html
+recursive-include utils *.md
+recursive-include utils *.py
+recursive-include utils *.txt
+recursive-include validator *.py
