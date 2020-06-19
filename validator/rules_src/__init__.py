@@ -7,6 +7,7 @@ from abc import ABCMeta
 class Rule(metaclass=ABCMeta):
     def __init__(self):
         self.error_message = "error"
+        self.rpv = []
 
     def __call__(self, arg):
         return self.check(arg)
@@ -25,6 +26,9 @@ class Rule(metaclass=ABCMeta):
 
     def get_error_message(self):
         return self.error_message
+
+    def set_rpv(self, rpv):
+        self.rpv = rpv
 
 
 # Iterate each module in the given package and fill __all__ dictionary

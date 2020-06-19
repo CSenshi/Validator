@@ -1,6 +1,7 @@
 from validator.__parser__.parser import Parser
 from validator import rules as R
 from validator import exceptions as exc
+from .rule_pipe_validator import RulePipeValidator as RPV
 
 """
 Validator class takes 2 inputs:
@@ -27,16 +28,17 @@ class Validator:
 
         # at this point all rules are being correctly passed
         for key in self.rules:
-            rules_array = self.rules[key]
-            req_value = self.request[key]
-            errors_on_key = {}
+            rules = self.rules[key]
+            data = self.request[key]
 
-            for rule in rules_array:
-                if not rule(req_value):
-                    result = False
-                    errors_on_key[rule.get_class_name()] = rule.get_error_message()
+            # Interface for rules
+            rpv = RPV(data, rules)
+            rpv_result = rpv.execute()
+            errors_on_key = rpv.get_error_messages()
 
-            if errors_on_key:
+            # if current validation fails change final result
+            if not rpv_result:
+                result = rpv_result
                 self.errors[key] = errors_on_key
 
         return result
