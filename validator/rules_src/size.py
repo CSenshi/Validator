@@ -1,7 +1,9 @@
 from validator.rules_src import Rule
+from validator.rules_src.integer import Integer
+from validator.rules_src.list import List
 
 
-class Size(Rule):
+class Size(Integer, List):
     """
     The field under validation must have a size matching the given value. 
     For string data, value corresponds to the number of characters.
@@ -17,11 +19,28 @@ class Size(Rule):
     """
 
     def __init__(self, size):
-        Rule.__init__(self)
+        Integer.__init__(self)
+        List.__init__(self)
+
         self.size = size
 
     def check(self, arg):
-        #  ToDo: Check with rpv
+        if Integer in self.rpv:
+            # RPV 1: with 'integer'
+            if not Integer.check(self, arg):
+                return False
+            if int(arg) != self.size:
+                self.set_errror_message(f"Expected Size:{self.size}, Got:{arg}")
+                return False
+            return True
+        elif List in self.rpv:
+            # RPV 2: with 'list'
+            if not List.check(self, arg):
+                return False
+            if len(arg) != self.size:
+                self.set_errror_message(f"Expected Size:{self.size}, Got:{len(arg)}")
+                return False
+            return True
 
         if hasattr(arg, "__len__"):
             check_size = len(arg)
@@ -44,4 +63,4 @@ class Size(Rule):
         return False
 
     def __from_str__(self):
-        pass
+        self.size = int(self.size)

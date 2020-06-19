@@ -7,7 +7,7 @@ from abc import ABCMeta
 class Rule(metaclass=ABCMeta):
     def __init__(self):
         self.error_message = "error"
-        self.rpv = None
+        self.rpv = []
 
     def __call__(self, arg):
         return self.check(arg)

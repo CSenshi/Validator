@@ -20,3 +20,6 @@ class RulePipeValidator:
 
     def get_error_messages(self):
         return self.errors_on_key
+
+    def __contains__(self, item):
+        return any([type(rule) == item for rule in self.rules])
