@@ -15,23 +15,62 @@ pip install validator
 ```python
 from validator import Validator
 
+reqs = {"name": "Jon Doe",
+        "age": 33,
+        "mail": "jon_doe@gmail.com"}
 
-request = {
-    "firstName": "Jon",
-    "lastName": "Doe",
-    "age": 33,
-    "mail": "jon_doe@gmail.com",
-}
+rule = {"name": "required",
+         "age": "integer|min:18",
+         "mail": "required|mail"}
 
-rules = {
-    "firstName": "required",
-    "lastName": "required",
-    "age": "required|min:18",
-    "mail": "required|mail",
-}
+validate(request, rules)   # returns True
+```
+Validator can take multiple kind of rules:
 
-Validator(request, rules).validate()   # returns True
+#### * [Strings](#usage-1)
+#### * [Array of Strings](#usage-2)
+#### * [Array of Rules](#usage-3)
+#### * [Other Miscellaneous](#usage-4)
 
+<a name='usage-1'/>
+
+#### Strings
+
+```python
+rule = {"name": "required",
+        "age": "integer|min:18",
+        "mail": "required|mail"}
+```
+<a name='usage-2'/>
+
+#### Array of Strings
+```python
+rule = {"name": ["required"],
+        "age": ["integer", "min:18"],
+        "mail": ["required", "mail"]}
+```
+
+<a name='usage-3'/>
+
+#### Array of Rules
+```python
+from validator import rules as R
+
+rules = {"name": [R.Required()],
+        "age": [R.Integer(), R.Min(18)],
+        "mail": [R.Requried(), R.Mail()]}
+```
+
+<a name='usage-4'/>
+
+#### Other Miscellaneous
+```python
+from validator import rules as R
+
+rules = {"name": R.Required(),           # no need for Array Brackets if one rule
+        "age": [R.Integer, R.Min(18)],
+        "mail": [R.Requried, R.Mail]}   # no need for class initialization with brakcets () 
+                                        # if no arguments are passed to rule
 ```
 
 ## Rules
@@ -261,7 +300,7 @@ False
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
+Please see [CONTRIBUTING.md](#../../CONTRIBUTING.md) before making PR :)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
