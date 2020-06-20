@@ -12,7 +12,6 @@
 <a href="#Max">Max</a>
 <a href="#Min">Min</a>
 <a href="#Required">Required</a>
-<a href="#RequiredIf">RequiredIf</a>
 <a href="#Size">Size</a>
 </p>
 </div><a name="Between"/>
@@ -151,20 +150,6 @@ The field under validation must be present in the input data and not empty
 True
 
 >>> Required().check('')
-False
-
-
-```
-<a name="RequiredIf"/>
-
-#### RequiredIf
-Some Description..
-```python
-
->>> RequiredIf('a').check('abc')
-True
-
->>> RequiredIf('z').check('abc')
 False
 
 
