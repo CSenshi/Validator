@@ -79,7 +79,7 @@ rules = {"name": R.Required(),           # no need for Array Brackets if one rul
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please see [CONTRIBUTING.md](#../../CONTRIBUTING.md) before making PR :)
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) before making PR :)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
