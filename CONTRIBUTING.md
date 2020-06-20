@@ -75,6 +75,63 @@ class NewRule(Rule):
             return True
         return False
     ```
+    
+* Error Messages:
+
+    Each rule is child of main `Rule` Class, which has method `set_errror_message(str)`. Please use this method to set error message when validation fails.
+                
+
+    Example:
+    we will just modify already written check method to following
+    ```python
+    def check(self, arg):
+        if self.min_value <= arg <= self.max_value:
+            return True
+        self.set_errror_message(f"Expected Between: {self.min_value} and {self.min_value}, Got: {size}")
+        return False
+    ```
+     
+* Using other rules:
+
+    As you can already see generated rule is subclass of main `Rule` class. And then in the `__init__` method we initialize `Rule` class 
+    ```python
+    ...
+    class NewRule(Rule):
+        def __init__(self):
+            Rule.__init__(self)
+    ...
+    ```
+    You can use any other rule(s) instead of main `Rule` class and use their functionality. Let's use `Min` and `Max` rules 
+    
+    Example:
+    1. Import rules
+    ```python
+    from validator.rules_src.max import Max
+    from validator.rules_src.min import Min
+    ```
+    2. Change class extends
+    ```python
+    class Between(een(Max, Min):
+    ```
+    3. Change `__init__`
+    ```python
+    def __init__(self, min_value, max_value):
+        Min.__init__(self, min_value)
+        Max.__init__(self, max_value)
+    ```
+    4. Change `__from_str__`:
+    ```python
+    def __from_str__(self):
+        Min.__from_str__(self)
+        Max.__from_str__(self)
+    ```
+    5. Change `check`:
+    ```python
+    def check(self, arg):
+        if Min.check(self, arg) and Max.check(self, arg):
+            return True
+        return False
+    ```
   
 ## Testing
 For testing we use pytest framework. All of the tests are located in the tests/ directory. As you can see we write speerate kind of tests in seperate functions, so please use it to make testing even better. We also support doctests and we do preffer 2 doctests for each rule(one for True evaluation and second for False), it will make easier for users to know what given rule is capable of doing. Finally, the code conduct, we test PEP standards and code formating using tools defined in Code Style.
