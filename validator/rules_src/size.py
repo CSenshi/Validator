@@ -25,42 +25,33 @@ class Size(Integer, List):
         self.size = size
 
     def check(self, arg):
-        if Integer in self.rpv:
-            # RPV 1: with 'integer'
-            if not Integer.check(self, arg):
-                return False
-            if int(arg) != self.size:
-                self.set_errror_message(f"Expected Size:{self.size}, Got:{arg}")
-                return False
-            return True
-        elif List in self.rpv:
-            # RPV 2: with 'list'
-            if not List.check(self, arg):
-                return False
-            if len(arg) != self.size:
-                self.set_errror_message(f"Expected Size:{self.size}, Got:{len(arg)}")
-                return False
-            return True
+        converted_size = Size.size_value(arg, self.rpv)
+        if not converted_size:
+            self.set_errror_message(f"Could not get size from data. type = {type(arg)}")
+            return False
 
-        if hasattr(arg, "__len__"):
-            check_size = len(arg)
-        else:
-            # convert to string and check size
-            try:
+        if converted_size != self.size:
+            self.set_errror_message(f"Expected Size:{self.size}, Got:{converted_size}")
+            return False
+
+        return True
+
+    @staticmethod
+    def size_value(arg, rpv):
+        try:
+            if Integer in rpv:
+                return int(arg)
+            elif List in rpv:
+                return len(arg)
+
+            if hasattr(arg, "__len__"):
+                check_size = len(arg)
+            else:
                 converted = str(arg)
                 check_size = len(converted)
-            except ValueError:
-                # could not be converted to string
-                self.set_errror_message(
-                    f"Could not get size from data. type = {type(arg)}"
-                )
-                return False
-
-        if check_size == self.size:
-            return True
-
-        self.set_errror_message(f"Expected Size:{self.size}, Got:{check_size}")
-        return False
+            return check_size
+        except:
+            return None
 
     def __from_str__(self):
         self.size = int(self.size)

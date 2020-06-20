@@ -18,7 +18,7 @@ HTML_REF_EXAMPLE = "utils/readme/readme_rule_ref_example.html"
 RULE_DESC_EXAMPLE = "utils/readme/readme_rules_desc_example.html"
 
 
-with  open(RULESMD, "w") as re:
+with open(RULESMD, "w") as re:
     div_str = open(HTML_DIV_EXAMPLE).read()
     ref_str = open(HTML_REF_EXAMPLE).read()
     rule_desc = open(RULE_DESC_EXAMPLE).read()
@@ -67,4 +67,3 @@ with  open(RULESMD, "w") as re:
     all_rules_refs = div_str.format(rules_ref=all_rules_refs)
     re.write(all_rules_refs)
     re.write(all_rules_desc)
-
