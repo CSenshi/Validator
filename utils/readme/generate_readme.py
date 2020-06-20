@@ -11,18 +11,14 @@ import pprint
 validator_path = os.path.abspath(Path(__file__).parent.parent.parent)
 sys.path += [validator_path]
 
-# Token to find where should we place rules
-KEY = "CD4A678E95173E4BE5E27E2C8169F"
-
 # file names needed
-README = "README.md"
-README_EXAMPLE = "utils/readme/README_EXAMPLE.md"
+RULESMD = "RULES.md"
 HTML_DIV_EXAMPLE = "utils/readme/readme_rules_div_example.html"
 HTML_REF_EXAMPLE = "utils/readme/readme_rule_ref_example.html"
 RULE_DESC_EXAMPLE = "utils/readme/readme_rules_desc_example.html"
 
 
-def writeRules(re):
+with  open(RULESMD, "w") as re:
     div_str = open(HTML_DIV_EXAMPLE).read()
     ref_str = open(HTML_REF_EXAMPLE).read()
     rule_desc = open(RULE_DESC_EXAMPLE).read()
@@ -72,13 +68,3 @@ def writeRules(re):
     re.write(all_rules_refs)
     re.write(all_rules_desc)
 
-
-with open(README_EXAMPLE, "r") as ex, open(README, "w") as re:
-    while True:
-        line = ex.readline()
-        if not line:
-            break
-        if KEY in line:
-            writeRules(re)
-        else:
-            re.write(line)
