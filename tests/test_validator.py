@@ -3,17 +3,17 @@ from validator import Validator, validate, validate_many, rules as R
 # !!! TEST : Class Validator !!! #
 def test_validator_001_simple():
     request = {"age": 23}
-    rule = {"age": [R.Min(18)]}
+    rule = {"age": [R.Integer, R.Min(18)]}
     result = Validator(request, rule).validate()
     assert result
 
     request = {"age": 13}
-    rule = {"age": [R.Min(18)]}
+    rule = {"age": [R.Integer, R.Min(18)]}
     result = Validator(request, rule).validate()
     assert not result
 
     request = {"age": 13}
-    rule = {"age": [R.Max(18)]}
+    rule = {"age": [R.Integer, R.Max(18)]}
     result = Validator(request, rule).validate()
     assert result
 
@@ -30,29 +30,29 @@ def test_validator_001_simple():
 
 def test_validator_002_simple():
     request = {"age": 23}
-    rule = {"age": [R.Min(18), R.Max(30)]}
+    rule = {"age": [R.Integer, R.Min(18), R.Max(30)]}
     result = Validator(request, rule).validate()
     assert result
 
     request = {"age": 33}
-    rule = {"age": [R.Min(18), R.Max(30)]}
+    rule = {"age": [R.Integer, R.Min(18), R.Max(30)]}
     result = Validator(request, rule).validate()
     assert not result
 
     request = {"age": 23, "name": "Jon"}
-    rule = {"age": [R.Min(18)], "name": [R.Required()]}
+    rule = {"age": [R.Integer, R.Min(18)], "name": [R.Required()]}
     result = Validator(request, rule).validate()
     assert result
 
     request = {"age": 23, "name": ""}
-    rule = {"age": [R.Min(18), R.Max(30)], "name": [R.Required()]}
+    rule = {"age": [R.Integer, R.Min(18), R.Max(30)], "name": [R.Required()]}
     result = Validator(request, rule).validate()
     assert not result
 
 
 def test_validator_003_error_msg():
     request = {"age": 100}
-    rule = {"age": [R.Between(18, 90)]}
+    rule = {"age": [R.Integer, R.Between(18, 90)]}
     val = Validator(request, rule)
     result = val.validate()
     errors = val.get_error_messages()
@@ -62,7 +62,7 @@ def test_validator_003_error_msg():
 
     request = {"age": 28, "name": "John", "surname": "Krasinski"}
     rule = {
-        "age": [R.Between(18, 50)],
+        "age": [R.Integer, R.Between(18, 50)],
         "name": [R.Required()],
         "surname": [R.Required(), R.Mail()],
     }
@@ -90,7 +90,7 @@ def test_validator_004_error_msg():
         "mail": "petergriffin.com",
     }
     rule = {
-        "age": [R.Between(18, 50), R.Required()],
+        "age": [R.Integer, R.Between(18, 50), R.Required()],
         "name": [R.Required()],
         "surname": [R.Required()],
         "profession": [R.Required, R.Mail],
@@ -156,17 +156,17 @@ def test_validator_001_empty():
 # !!! TEST : Function validate !!! #
 def test_validate_001_simple():
     request = {"age": 23}
-    rule = {"age": [R.Min(18)]}
+    rule = {"age": [R.Integer, R.Min(18)]}
     result = validate(request, rule)
     assert result
 
     request = {"age": 13}
-    rule = {"age": [R.Min(18)]}
+    rule = {"age": [R.Integer, R.Min(18)]}
     result = validate(request, rule)
     assert not result
 
     request = {"age": 13}
-    rule = {"age": [R.Max(18)]}
+    rule = {"age": [R.Integer, R.Max(18)]}
     result = validate(request, rule)
     assert result
 
@@ -183,29 +183,29 @@ def test_validate_001_simple():
 
 def test_validate_002_simple():
     request = {"age": 23}
-    rule = {"age": [R.Min(18), R.Max(30)]}
+    rule = {"age": [R.Integer, R.Min(18), R.Max(30)]}
     result = validate(request, rule)
     assert result
 
     request = {"age": 33}
-    rule = {"age": [R.Min(18), R.Max(30)]}
+    rule = {"age": [R.Integer, R.Min(18), R.Max(30)]}
     result = validate(request, rule)
     assert not result
 
     request = {"age": 23, "name": "Jon"}
-    rule = {"age": [R.Min(18)], "name": [R.Required()]}
+    rule = {"age": [R.Integer, R.Min(18)], "name": [R.Required()]}
     result = validate(request, rule)
     assert result
 
     request = {"age": 23, "name": ""}
-    rule = {"age": [R.Min(18), R.Max(30)], "name": [R.Required()]}
+    rule = {"age": [R.Integer, R.Min(18), R.Max(30)], "name": [R.Required()]}
     result = validate(request, rule)
     assert not result
 
 
 def test_validate_003_error_msg():
     request = {"age": 100}
-    rule = {"age": [R.Between(18, 90)]}
+    rule = {"age": [R.Integer, R.Between(18, 90)]}
     result, errors = validate(request, rule, return_errors=True)
     assert not result
     assert "age" in errors.keys()
@@ -213,7 +213,7 @@ def test_validate_003_error_msg():
 
     request = {"age": 28, "name": "John", "surname": "Krasinski"}
     rule = {
-        "age": [R.Between(18, 50)],
+        "age": [R.Integer, R.Between(18, 50)],
         "name": [R.Required()],
         "surname": [R.Required(), R.Mail()],
     }
@@ -239,7 +239,7 @@ def test_validate_004_error_msg():
         "mail": "petergriffin.com",
     }
     rule = {
-        "age": [R.Between(18, 50), R.Required()],
+        "age": [R.Integer, R.Between(18, 50), R.Required()],
         "name": [R.Required()],
         "surname": [R.Required()],
         "profession": [R.Required, R.Mail],
@@ -274,22 +274,22 @@ def test_validate_004_error_msg():
 # !!! TEST : Function validate_many !!! #
 def test_validate_many_001():
     requests = [{"age": 19}, {"age": 20}, {"age": 21}, {"age": 22}]
-    rule = {"age": [R.Min(18)]}
+    rule = {"age": [R.Integer, R.Min(18)]}
     result = validate_many(requests, rule)
     assert result
 
     requests = [{"age": 11}, {"age": 12}, {"age": 13}, {"age": 14}]
-    rule = {"age": [R.Min(18)]}
+    rule = {"age": [R.Integer, R.Min(18)]}
     result = validate_many(requests, rule)
     assert not result
 
     requests = [{"age": 11}, {"age": 12}, {"age": 13}, {"age": 14}]
-    rule = {"age": [R.Max(18)]}
+    rule = {"age": [R.Integer, R.Max(18)]}
     result = validate_many(requests, rule)
     assert result
 
     requests = [{"age": 21}, {"age": 22}, {"age": 23}, {"age": 24}]
-    rule = {"age": [R.Max(18)]}
+    rule = {"age": [R.Integer, R.Max(18)]}
     result = validate_many(requests, rule)
     assert not result
 
@@ -306,7 +306,7 @@ def test_validate_many_001():
 
 def test_validate_many_002_errors_msg():
     requests = [{"age": 11}, {"age": 12}, {"age": 13}, {"age": 14}]
-    rule = {"age": [R.Min(18)]}
+    rule = {"age": [R.Integer, R.Min(18)]}
     result, errors = validate_many(requests, rule, True)
     assert not result
     assert 4 == len(errors)
@@ -324,7 +324,7 @@ def test_validate_many_002_errors_msg():
     assert "Got: 14" in errors[3]["age"]["Min"]
 
     requests = [{"age": 11}, {"age": 12}, {"age": 23}, {"age": 14}]
-    rule = {"age": [R.Max(18)]}
+    rule = {"age": [R.Integer, R.Max(18)]}
     result, errors = validate_many(requests, rule, True)
     assert not result
     assert 4 == len(errors)
@@ -358,7 +358,11 @@ def test_validate_many_003_errors_msg():
         {"first_name": "Jon", "last_name": "Doe", "age": 10},
         {"first_name": "", "last_name": "", "age": 10},
     ]
-    rule = {"first_name": R.Required, "last_name": R.Required, "age": R.Min(18)}
+    rule = {
+        "first_name": R.Required,
+        "last_name": R.Required,
+        "age": [R.Integer, R.Min(18)],
+    }
 
     result, errors = validate_many(requests, rule, True)
 

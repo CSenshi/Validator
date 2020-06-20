@@ -1,4 +1,5 @@
 from validator.rules_src import Rule
+from validator.rules_src.size import Size
 
 
 class Max(Rule):
@@ -6,11 +7,11 @@ class Max(Rule):
     The field under validation must be less than or equal to a maximum value 
 
     Examples:
-    >>> Max(18).check(23)
-    False
-
-    >>> Max(18).check(15)
+    >>> Max(23).check('max_rule')
     True
+
+    >>> Max(2).check('max_rule')
+    False
     """
 
     def __init__(self, max_value):
@@ -18,11 +19,18 @@ class Max(Rule):
         self.max_value = max_value
 
     def check(self, arg):
-        if self.max_value >= arg:
-            return True
+        converted_size = Size.size_value(arg, self.rpv)
+        if converted_size == None:
+            self.set_errror_message(f"Could not get size from data. type = {type(arg)}")
+            return False
 
-        self.set_errror_message(f"Expected Maximum: {self.max_value}, Got: {arg}")
-        return False
+        if converted_size > self.max_value:
+            self.set_errror_message(
+                f"Expected Maximum: {self.max_value}, Got: {converted_size}"
+            )
+            return False
+
+        return True
 
     def __from_str__(self):
         self.max_value = int(self.max_value)

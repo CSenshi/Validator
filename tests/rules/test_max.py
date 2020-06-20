@@ -3,44 +3,44 @@ import pytest
 
 
 def test_max_01():
-    rule = Max(18)
-    value_to_check = 23
+    rule = Max(2)
+    value_to_check = "max"
     assert not rule.check(value_to_check)
 
-    rule = Max(18)
-    value_to_check = 13
+    rule = Max(4)
+    value_to_check = "max"
     assert rule.check(value_to_check)
 
 
 def test_max_02():
     rule = Max(-18)
-    value_to_check = 0
+    value_to_check = "123456789"
     assert not rule.check(value_to_check)
 
     rule = Max(0)
-    value_to_check = 100
+    value_to_check = "123456789"
     assert not rule.check(value_to_check)
 
-    rule = Max(0)
-    value_to_check = 100
-    assert not rule.check(value_to_check)
+    rule = Max(20)
+    value_to_check = "123456789"
+    assert rule.check(value_to_check)
 
-    rule = Max(999)
-    value_to_check = -999
+    rule = Max(9)
+    value_to_check = "123456789"
     assert rule.check(value_to_check)
 
 
 def test_max_03():
     rule = Max(10)
-    value_to_check = 10
+    value_to_check = [1, 2, 3, 4]
     assert rule.check(value_to_check)
 
-    rule = Max(0)
-    value_to_check = 0
+    rule = Max(10)
+    value_to_check = "qweasdzxc"
     assert rule.check(value_to_check)
 
-    rule = Max(-23)
-    value_to_check = -23
+    rule = Max(10)
+    value_to_check = {1, 2, 3, 4, 5}
     assert rule.check(value_to_check)
 
 

@@ -24,11 +24,11 @@ The field under validation must have a size between the given min and max
 
 ```python
 
->>> Between(2, 15).check(23)
-False
-
->>> Between(2, 15).check(12)
+>>> Between(2, 15).check('between')
 True
+
+>>> Between(10, 15).check('between')
+False
 
 
 ```
@@ -143,11 +143,11 @@ The field under validation must be less than or equal to a maximum value
 
 ```python
 
->>> Max(18).check(23)
-False
-
->>> Max(18).check(15)
+>>> Max(23).check('max_rule')
 True
+
+>>> Max(2).check('max_rule')
+False
 
 
 ```
@@ -160,10 +160,10 @@ The field under validation must be greater than or equal to a minimum value
 
 ```python
 
->>> Min(18).check(23)
+>>> Min(2).check('Min')
 True
 
->>> Min(18).check(15)
+>>> Min(4).check('Min')
 False
 
 
