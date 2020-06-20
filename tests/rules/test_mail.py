@@ -2,16 +2,20 @@ from validator.rules import Mail
 
 
 def test_mail_01():
-    rule = Mail()
-    emails = ["nikalosa@gmail.com", "abgdev@aa.bl", "zz.zz@zz.zz"]
+    assert Mail().check("sdar@quecompde.ga")
 
-    for email in emails:
-        assert rule.check(email)
+    assert Mail().check("awavufo@yopmail.com")
+
+    assert Mail().check("nawuteny@gmail.com")
+
+    assert Mail().check("rapattullatta@yandex.ru")
 
 
 def test_mail_02():
-    rule = Mail()
-    emails = ["pochxu@gmail", "ankitrai326.com", "zz@.z"]
+    assert not Mail().check("sdar@quecompde")
 
-    for email in emails:
-        assert not rule.check(email)
+    assert not Mail().check("@yopmail.com")
+
+    assert not Mail().check("nawuteny-6603@com")
+
+    assert not Mail().check("rapattullatta-2328@z")

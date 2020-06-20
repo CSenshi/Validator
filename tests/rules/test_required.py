@@ -2,29 +2,24 @@ from validator.rules import Required
 
 
 def test_required_01():
-    rule = Required()
-    assert not rule([])
-    assert not rule("")
-    assert not rule(None)
-    assert not rule({})
+    assert not Required()([])
+
+    assert not Required()("")
+
+    assert not Required()(None)
+
+    assert not Required()({})
 
 
 def test_required_02():
-    rule = Required()
-    value_to_check = 0
-    assert rule.check(value_to_check)
+    assert Required().check(0)
 
-    value_to_check = False
-    assert rule.check(value_to_check)
+    assert Required().check(False)
 
-    value_to_check = "Not empty"
-    assert rule.check(value_to_check)
+    assert Required().check("Not empty")
 
-    value_to_check = "სხვა ენა ვცადოთ?"
-    assert rule.check(value_to_check)
+    assert Required().check("სხვა ენა ვცადოთ?")
 
-    value_to_check = ["Something here"]
-    assert rule.check(value_to_check)
+    assert Required().check(["Something here"])
 
-    value_to_check = {"Still not empty"}
-    assert rule.check(value_to_check)
+    assert Required().check({"Still not empty"})

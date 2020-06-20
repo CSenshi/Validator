@@ -61,7 +61,6 @@ with open(RULESMD, "w") as re:
         description, tests = doc.split(splitter_str)
 
         description = description.strip().replace("\n", ". ").replace("..", ".")
-        print(description)
         all_rules_desc += rule_desc.format(
             rule=class_name, rule_description=description, rule_tests=tests
         )
