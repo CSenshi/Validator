@@ -111,7 +111,7 @@ class NewRule(Rule):
     ```
     2. Change class extends
     ```python
-    class Between(een(Max, Min):
+    class Between(Max, Min):
     ```
     3. Change `__init__`
     ```python
@@ -125,7 +125,7 @@ class NewRule(Rule):
         Min.__from_str__(self)
         Max.__from_str__(self)
     ```
-    5. Change `check`:
+    5. Change `check`(when using parrent rule's check method it is not necessary to use `set_error_message()` as parrent rule will set it automaticaly):
     ```python
     def check(self, arg):
         if Min.check(self, arg) and Max.check(self, arg):
