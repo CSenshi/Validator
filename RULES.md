@@ -139,6 +139,7 @@ False
 #### Max
 
 The field under validation must be less than or equal to a maximum value
+Given value is evaluated according to `Size` rule
 
 
 ```python
@@ -155,7 +156,8 @@ False
 
 #### Min
 
-The field under validation must be greater than or equal to a minimum value
+The field under validation must be greater than or equal to a minimum value.
+Given value is evaluated according to `Size` rule
 
 
 ```python

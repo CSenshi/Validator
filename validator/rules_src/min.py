@@ -4,7 +4,8 @@ from validator.rules_src.size import Size
 
 class Min(Rule):
     """
-    The field under validation must be greater than or equal to a minimum value 
+    The field under validation must be greater than or equal to a minimum value.
+    Given value is evaluated according to `Size` rule
 
     Examples:
     >>> Min(2).check('Min')
@@ -16,20 +17,19 @@ class Min(Rule):
 
     def __init__(self, min_value):
         Rule.__init__(self)
-        self.min_value = min_value
+        self.min = min_value
 
     def check(self, arg):
-        converted_size = Size.size_value(arg, self.rpv)
-        if converted_size == None:
+        # Evaluate to Size rule
+        size = Size.size_value(arg, self.rpv)
+        if size == None:
             self.set_errror_message(f"Could not get size from data. type = {type(arg)}")
             return False
-        if converted_size < self.min_value:
-            self.set_errror_message(
-                f"Expected Maximum: {self.min_value}, Got: {converted_size}"
-            )
+        if size < self.min:
+            self.set_errror_message(f"Expected Maximum: {self.min}, Got: {size}")
             return False
 
         return True
 
     def __from_str__(self):
-        self.min_value = int(self.min_value)
+        self.min = int(self.min)
