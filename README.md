@@ -4,7 +4,7 @@ Validator is a Python library for dealing with request validating.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Validator.
+Use the package manager [pip](https://pypi.org/project/validator/) to install Validator.
 
 ```bash
 pip install validator
@@ -27,8 +27,7 @@ rule = {"name": "required",
         "age": "integer|min:18",
         "mail": "required|mail"}
 
-result = validate(request, rules)
-# result is True
+result = validate(request, rules) # True
 ```
 `valiadte()` returns either True or False.
 
@@ -40,8 +39,7 @@ reqs = {...}
 rule = {...}
 
 val = Validator(request, rules)
-result = val.validate()
-# result is True
+result = val.validate() # True
 ```
 
 
@@ -66,7 +64,7 @@ errors = {'name': {'Required': 'Field was empty'},
 """
 ```
 
-Or you can use `Validator` classfor error messages as well.
+Or you can use `Validator` class for error messages as well (result and errors are same).
 
 ```python
 val = Validator(request, rules)
