@@ -109,12 +109,12 @@ rules = {"name": R.Required(),           # no need for Array Brackets if one rul
                                         # if no arguments are passed to rule
 ```
 
-#### *All of rules are listed in [RULES.md](RULES.md) file*
+#### *All of rules are listed in [RULES.md](https://github.com/CSenshi/Validator/blob/master/RULES.md) file*
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) before making PR :)
+Please see [CONTRIBUTING.md](https://github.com/CSenshi/Validator/blob/master/CONTRIBUTING.md) before making PR :)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
