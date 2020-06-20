@@ -37,8 +37,8 @@ def test_parser_text_simple():
     assert len(parsed_rules[key]) == 2
     assert isinstance(parsed_rules[key][0], R.Min)
     assert isinstance(parsed_rules[key][1], R.Max)
-    assert parsed_rules[key][0].min_value == min_val
-    assert parsed_rules[key][1].max_value == max_val
+    assert parsed_rules[key][0].min == min_val
+    assert parsed_rules[key][1].max == max_val
 
 
 def test_parser_arrays_simple():
@@ -53,8 +53,8 @@ def test_parser_arrays_simple():
     assert key2 in parsed_rules.keys()
     assert isinstance(parsed_rules[key1][0], R.Between)
     assert isinstance(parsed_rules[key2][0], R.Required)
-    assert parsed_rules[key1][0].min_value == min_val
-    assert parsed_rules[key1][0].max_value == max_val
+    assert parsed_rules[key1][0].min == min_val
+    assert parsed_rules[key1][0].max == max_val
 
     rules = {key1: [R.Required, R.Mail], key2: R.Required}
     parsed_rules = Parser(rules).parse()
@@ -76,10 +76,10 @@ def test_parser_arrays_simple():
     assert isinstance(parsed_rules[key2][0], R.Mail)
     assert isinstance(parsed_rules[key2][1], R.Between)
 
-    assert parsed_rules[key1][1].max_value == max_val
-    assert parsed_rules[key1][2].min_value == min_val
-    assert parsed_rules[key2][1].min_value == min_val
-    assert parsed_rules[key2][1].max_value == max_val
+    assert parsed_rules[key1][1].max == max_val
+    assert parsed_rules[key1][2].min == min_val
+    assert parsed_rules[key2][1].min == min_val
+    assert parsed_rules[key2][1].max == max_val
 
 
 def test_parser_mixed_01():
@@ -107,12 +107,12 @@ def test_parser_mixed_01():
     parsed_rules = Parser(rules).parse()
 
     assert instances_checker(parsed_rules, parsed_rules_goal)
-    assert parsed_rules["current_semester"][1].min_value == 1
-    assert parsed_rules["credits_amount"][1].min_value == 0
-    assert parsed_rules["credits_amount"][1].max_value == 240
-    assert parsed_rules["credits_current_semester"][0].min_value == 0
-    assert parsed_rules["credits_current_semester"][1].max_value == 75
-    assert parsed_rules["debt"][0].max_value == 0
+    assert parsed_rules["current_semester"][1].min == 1
+    assert parsed_rules["credits_amount"][1].min == 0
+    assert parsed_rules["credits_amount"][1].max == 240
+    assert parsed_rules["credits_current_semester"][0].min == 0
+    assert parsed_rules["credits_current_semester"][1].max == 75
+    assert parsed_rules["debt"][0].max == 0
 
 
 def test_parser_mixed_02():
@@ -144,8 +144,8 @@ def test_parser_mixed_02():
     parsed_rules = Parser(rules).parse()
 
     assert instances_checker(parsed_rules, parsed_rules_goal)
-    assert parsed_rules["corner_kicks"][1].min_value == 1
-    assert parsed_rules["yellow_cards"][1].min_value == 0
-    assert parsed_rules["yellow_cards"][1].max_value == 240
-    assert parsed_rules["red_cards"][0].min_value == 0
-    assert parsed_rules["red_cards"][1].max_value == 75
+    assert parsed_rules["corner_kicks"][1].min == 1
+    assert parsed_rules["yellow_cards"][1].min == 0
+    assert parsed_rules["yellow_cards"][1].max == 240
+    assert parsed_rules["red_cards"][0].min == 0
+    assert parsed_rules["red_cards"][1].max == 75

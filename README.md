@@ -4,7 +4,7 @@ Validator is a Python library for dealing with request validating.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Validator.
+Use the package manager [pip](https://pypi.org/project/validator/) to install Validator.
 
 ```bash
 pip install validator
@@ -12,256 +12,109 @@ pip install validator
 
 ## Usage
 
+User should pass request dictionary and rules dictionary for validating data in the request.
+
+Please see examples below:
+
+```python
+from validator import validate
+
+reqs = {"name": "Jon Doe",
+        "age": 33,
+        "mail": "jon_doe@gmail.com"}
+
+rule = {"name": "required",
+        "age": "integer|min:18",
+        "mail": "required|mail"}
+
+result = validate(request, rules) # True
+```
+`valiadte()` returns either True or False.
+
+Another option is to use `Validator` class
 ```python
 from validator import Validator
 
+reqs = {...}
+rule = {...}
 
-request = {
-    "firstName": "Jon",
-    "lastName": "Doe",
-    "age": 33,
-    "mail": "jon_doe@gmail.com",
-}
+val = Validator(request, rules)
+result = val.validate() # True
+```
 
-rules = {
-    "firstName": "required",
-    "lastName": "required",
-    "age": "required|min:18",
-    "mail": "required|mail",
-}
 
-Validator(request, rules).validate()   # returns True
+### Error Messages
+Validator allows user to have a look at failed validations
 
+```python
+from validator import validate
+
+reqs = {"name": "",
+        "mail": "jon_doe"}
+
+rule = {"name": "required",
+        "mail": "mail"}
+
+result, errors = validate(reqs, rule, return_errors=True)
+
+"""
+result = True
+errors = {'name': {'Required': 'Field was empty'},
+          mail': {'Mail': 'Expected a Mail, Got: jon_doe'}}
+"""
+```
+
+Or you can use `Validator` class for error messages as well (result and errors are same).
+
+```python
+val = Validator(request, rules)
+result = val.validate()
+errors = val.get_error_messages()
 ```
 
 ## Rules
-<div>
-<p>
-<a href="#Between">Between</a>
-<a href="#Integer">Integer</a>
-<a href="#IP">IP</a>
-<a href="#IPv4">IPv4</a>
-<a href="#IPv6">IPv6</a>
-<a href="#List">List</a>
-<a href="#Mail">Mail</a>
-<a href="#Max">Max</a>
-<a href="#Min">Min</a>
-<a href="#Required">Required</a>
-<a href="#RequiredIf">RequiredIf</a>
-<a href="#Size">Size</a>
-</p>
-</div><a name="Between"/>
 
-#### Between
+Validator Rules can be used in different ways. Please see some examples below:
 
-The field under validation must have a size between the given min and max
-
+#### Strings
 
 ```python
-
->>> Between(2, 15).check(23)
-False
-
->>> Between(2, 15).check(12)
-True
-
-
+rule = {"name": "required",
+        "age": "integer|min:18",
+        "mail": "required|mail"}
 ```
-<a name="Integer"/>
-
-#### Integer
-
-The field under validation must be an Integer
-
-
+#### Array of Strings
 ```python
-
->>> Integer().check('123')
-True
-
->>> Integer().check('string')
-False
-
-
+rule = {"name": ["required"],
+        "age": ["integer", "min:18"],
+        "mail": ["required", "mail"]}
 ```
-<a name="IP"/>
 
-#### IP
-
-The field under validation must be an IP address.
-
-
+#### Array of Rules
 ```python
+from validator import rules as R
 
->>> IP().check('127.0.0.1')
-True
-
->>> IP().check('0.299.2.1')
-False
-
-
+rules = {"name": [R.Required()],
+        "age": [R.Integer(), R.Min(18)],
+        "mail": [R.Requried(), R.Mail()]}
 ```
-<a name="IPv4"/>
 
-#### IPv4
-
-The field under validation must be an IPv4 address.
-
-
+#### Other Miscellaneous
 ```python
+from validator import rules as R
 
->>> IPv4().check('127.0.0.1')
-True
-
->>> IPv4().check('0.299.2.1')
-False
-
-
+rules = {"name": R.Required(),           # no need for Array Brackets if one rule
+        "age": [R.Integer, R.Min(18)],
+        "mail": [R.Requried, R.Mail]}   # no need for class initialization with brakcets () 
+                                        # if no arguments are passed to rule
 ```
-<a name="IPv6"/>
 
-#### IPv6
-
-The field under validation must be an IPv6 address.
-
-
-```python
-
->>> IPv6().check('2001:0db8:85a3:0000:0000:8a2e:0370:7334')
-True
-
->>> IPv6().check('2001:0db8:85a3:9876:1234:8a2e')
-False
-
-
-```
-<a name="List"/>
-
-#### List
-
-The field under validation must be a list (Python array)
-
-
-```python
-
->>> List().check([1, 2, 3])
-True
-
->>> List().check(123)
-False
-
-
-```
-<a name="Mail"/>
-
-#### Mail
-
-The field under validation must be formatted as an e-mail address
-
-
-```python
-
->>> Mail().check('abcd@ef.gh')
-True
-
->>> Mail().check('aaa.com')
-False
-
-
-```
-<a name="Max"/>
-
-#### Max
-
-The field under validation must be less than or equal to a maximum value
-
-
-```python
-
->>> Max(18).check(23)
-False
-
->>> Max(18).check(15)
-True
-
-
-```
-<a name="Min"/>
-
-#### Min
-
-The field under validation must be greater than or equal to a minimum value
-
-
-```python
-
->>> Min(18).check(23)
-True
-
->>> Min(18).check(15)
-False
-
-
-```
-<a name="Required"/>
-
-#### Required
-
-The field under validation must be present in the input data and not empty
-
-
-```python
-
->>> Required().check('Not Empty')
-True
-
->>> Required().check('')
-False
-
-
-```
-<a name="RequiredIf"/>
-
-#### RequiredIf
-
-Some Description...
-
-
-```python
-
->>> RequiredIf('a').check('abc')
-True
-
->>> RequiredIf('z').check('abc')
-False
-
-
-```
-<a name="Size"/>
-
-#### Size
-
-The field under validation must have a size matching the given value.
-For string data, value corresponds to the number of characters.
-For numeric data, value corresponds to a given integer value (the attribute must also have the numeric or integer rule).
-For an array, size corresponds to the count of the array.
-
-
-```python
-
->>> Size(6).check('string')
-True
-
->>> Size(12).check('string')
-False
-
-
-```
+#### *All of rules are listed in [RULES.md](RULES.md) file*
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) before making PR :)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

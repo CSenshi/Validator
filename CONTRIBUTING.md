@@ -11,6 +11,128 @@ At this point you are done with setting up your project and should be able to st
 If you wish to contribute with new rule, please use our written generator to generate new rule template class and tests
 * ``` make rule F_NAME=new_rule ``` Will generate new rule in rules_src/ folder. Takes in one argument F_NAME which is rule's file name and automatically generates rule's class name which will be NewRule (converted to CapWords convention)
 
+```bash
+$ make rule F_NAME=new_rule 
+```
+Running make rule command will result in creating following file:
+```python3
+from validator.rules_src import Rule
+
+
+class NewRule(Rule):
+    """
+    <Insert Rule Documentation Here>
+
+    Examples:
+    >>> NewRule().check(...)
+    True
+
+    >>> NewRule().check(...)
+    False
+    """
+
+    def __init__(self):
+        Rule.__init__(self)
+
+    def check(self, arg):
+        pass
+
+    def __from_str__(self):
+        pass
+```
+* **`__init__`:**
+
+    This is Constructor for your rule. If your rule depends on arguments please initialize them here.
+    
+    Example:
+    `rule = {'name' : 'between:18,25'}` in this Between rule '18' and '25' are arguments that are passed in the init function.
+    ```python
+    def __init__(self, min_value, max_value):
+        Rule.__init__(self)
+        self.min_value = min_value
+        self.max_value = max_value
+    ```
+* **`__from_str__`:**
+
+    This is function that converts arguments into needed types. When rules are called as string all of the arguments are parsed and then passed to constructor as string, so if you need convert them, please use this function.
+    
+    Example:
+    As we have seen in the upper example `rule = {'name' : 'between:18,25'}`'18' and '25' are arguments that are passed in the init function, but they are passed as string values. შo we will have to convert them to integers. Conversion should happen in the given method
+    ```python
+    def __from_str__(self):
+        self.min_value = int(self.min_value)
+        self.max_value = int(self.max_value)
+    ```
+    
+* **`check`:**
+
+    This is the method that validates data. It takes only one argument, it represents data that should be validated
+    
+    Example:
+    ```python
+    def check(self, arg):
+        if self.min_value <= arg <= self.max_value:
+            return True
+        return False
+    ```
+    
+* **Error Messages:**
+
+    Each rule is child of main `Rule` Class, which has method `set_errror_message(str)`. Please use this method to set error message when validation fails.
+                
+
+    Example:
+    we will just modify already written check method to following
+    ```python
+    def check(self, arg):
+        if self.min_value <= arg <= self.max_value:
+            return True
+        self.set_errror_message(f"Expected Between: {self.min_value} and {self.min_value}, Got: {size}")
+        return False
+    ```
+     
+* **Using other rules:**
+
+    As you can already see generated rule is subclass of main `Rule` class. And then in the `__init__` method we initialize `Rule` class 
+    ```python
+    ...
+    class NewRule(Rule):
+        def __init__(self):
+            Rule.__init__(self)
+    ...
+    ```
+    You can use any other rule(s) instead of main `Rule` class and use their functionality. Let's use `Min` and `Max` rules 
+    
+    Example:
+    1. Import rules
+    ```python
+    from validator.rules_src.max import Max
+    from validator.rules_src.min import Min
+    ```
+    2. Change class extends
+    ```python
+    class Between(Max, Min):
+    ```
+    3. Change `__init__`
+    ```python
+    def __init__(self, min_value, max_value):
+        Min.__init__(self, min_value)
+        Max.__init__(self, max_value)
+    ```
+    4. Change `__from_str__`:
+    ```python
+    def __from_str__(self):
+        Min.__from_str__(self)
+        Max.__from_str__(self)
+    ```
+    5. Change `check`(when using parrent rule's check method it is not necessary to use `set_error_message()` as parrent rule will set it automaticaly):
+    ```python
+    def check(self, arg):
+        if Min.check(self, arg) and Max.check(self, arg):
+            return True
+        return False
+    ```
+  
 ## Testing
 For testing we use pytest framework. All of the tests are located in the tests/ directory. As you can see we write speerate kind of tests in seperate functions, so please use it to make testing even better. We also support doctests and we do preffer 2 doctests for each rule(one for True evaluation and second for False), it will make easier for users to know what given rule is capable of doing. Finally, the code conduct, we test PEP standards and code formating using tools defined in Code Style.
 

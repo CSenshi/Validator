@@ -3,62 +3,38 @@ import pytest
 
 
 def test_max_01():
-    rule = Max(18)
-    value_to_check = 23
-    assert not rule.check(value_to_check)
+    assert not Max(2).check("max")
 
-    rule = Max(18)
-    value_to_check = 13
-    assert rule.check(value_to_check)
+    assert Max(4).check("max")
 
 
 def test_max_02():
-    rule = Max(-18)
-    value_to_check = 0
-    assert not rule.check(value_to_check)
+    assert not Max(-18).check("123456789")
 
-    rule = Max(0)
-    value_to_check = 100
-    assert not rule.check(value_to_check)
+    assert not Max(0).check("123456789")
 
-    rule = Max(0)
-    value_to_check = 100
-    assert not rule.check(value_to_check)
+    assert Max(20).check("123456789")
 
-    rule = Max(999)
-    value_to_check = -999
-    assert rule.check(value_to_check)
+    assert Max(9).check("123456789")
 
 
 def test_max_03():
-    rule = Max(10)
-    value_to_check = 10
-    assert rule.check(value_to_check)
+    assert Max(10).check([1, 2, 3, 4])
 
-    rule = Max(0)
-    value_to_check = 0
-    assert rule.check(value_to_check)
+    assert Max(10).check("qweasdzxc")
 
-    rule = Max(-23)
-    value_to_check = -23
-    assert rule.check(value_to_check)
+    assert Max(10).check({1, 2, 3, 4, 5})
 
 
 def test_max_bad():
     # zero arg
     with pytest.raises(TypeError):
-        rule = Max()
-        value_to_check = 0
-        assert not rule.check(value_to_check)
+        assert not Max().check(0)
 
     # many arg
     with pytest.raises(TypeError):
-        rule = Max(5, 5, 5)
-        value_to_check = 0
-        assert not rule.check(value_to_check)
+        assert not Max(5, 5, 5).check(0)
 
     # wrong type
     with pytest.raises(TypeError):
-        rule = Max("5", "5")
-        value_to_check = 0
-        assert not rule.check(value_to_check)
+        assert not Max("5", "5").check(0)
