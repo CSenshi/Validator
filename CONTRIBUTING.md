@@ -40,7 +40,7 @@ class NewRule(Rule):
     def __from_str__(self):
         pass
 ```
-* `__init__`:
+* **`__init__`:**
 
     This is Constructor for your rule. If your rule depends on arguments please initialize them here.
     
@@ -52,7 +52,7 @@ class NewRule(Rule):
         self.min_value = min_value
         self.max_value = max_value
     ```
-* `__from_str__`:
+* **`__from_str__`:**
 
     This is function that converts arguments into needed types. When rules are called as string all of the arguments are parsed and then passed to constructor as string, so if you need convert them, please use this function.
     
@@ -64,7 +64,7 @@ class NewRule(Rule):
         self.max_value = int(self.max_value)
     ```
     
-* `check`:
+* **`check`:**
 
     This is the method that validates data. It takes only one argument, it represents data that should be validated
     
@@ -76,7 +76,7 @@ class NewRule(Rule):
         return False
     ```
     
-* Error Messages:
+* **Error Messages:**
 
     Each rule is child of main `Rule` Class, which has method `set_errror_message(str)`. Please use this method to set error message when validation fails.
                 
@@ -91,7 +91,7 @@ class NewRule(Rule):
         return False
     ```
      
-* Using other rules:
+* **Using other rules:**
 
     As you can already see generated rule is subclass of main `Rule` class. And then in the `__init__` method we initialize `Rule` class 
     ```python
