@@ -132,7 +132,18 @@ class NewRule(Rule):
             return True
         return False
     ```
-  
+
+* **Accessing Neighbour Rules:**
+
+    Each Rule class instance has an instance variable `self.rpv`. It is instance of class `RPV (RulePipeValidator` and is used to communicate with neighbour rules.
+    
+    Example:
+    ```python 
+    rule = {'age' : 'integer|max:18',
+            'name': 'required|min:2'}
+    ```
+    `Max` and `Integer` rules will have same variable 'self.rpv' containing two values in list `[Integer(), Max(18)]`. For 'name' rules `Required` and `Min` will also have same instance variable `self.rpv`, Which will contain two values in list `[Required(), Min(2)]`
+
 ## Testing
 For testing we use pytest framework. All of the tests are located in the tests/ directory. As you can see we write speerate kind of tests in seperate functions, so please use it to make testing even better. We also support doctests and we do preffer 2 doctests for each rule(one for True evaluation and second for False), it will make easier for users to know what given rule is capable of doing. Finally, the code conduct, we test PEP standards and code formating using tools defined in Code Style.
 
@@ -143,7 +154,7 @@ We provide some testing with Makefile:
 * ``` make doctest ``` Will check only for doctests written for each rule in rules_src
 * ``` make check ``` Will check for correct formatting of code and pep8 standards
 
-Our Makefile also supports testing specifying rule. For Example, if you want to check tests only for Rule called Min just use it as follows: ```make test TEST=min```
+Our Makefile also supports testing specifying rule. For Example, if you want to check tests only for Rule called Min just use it as follows: ```make test TEST=min```ო
 
 ## Code Style
 Code formatting is checked using [Black](https://github.com/psf/black). You can install those tools manually and use them as you will, but we do recommend using our make commad.
