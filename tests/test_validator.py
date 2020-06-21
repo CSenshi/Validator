@@ -294,7 +294,7 @@ def test_validate_many_001():
     assert not result
 
     requests = [{"name": "Jon"}, {"name": "Rob"}, {"name": "Greg"}, {"name": "Tom"}]
-    rule = {"name": [R.Required()]}
+    rule = {"name": "required|min:3"}
     result = validate_many(requests, rule)
     assert result
 

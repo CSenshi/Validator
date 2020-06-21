@@ -1,4 +1,7 @@
 from validator.rules import Size
+from validator.rules import Integer
+from validator.rules import List
+from validator.rule_pipe_validator import RulePipeValidator as RPV
 
 
 def test_size_01():
@@ -27,3 +30,31 @@ def test_size_02():
     assert not Size(0).check(0.00)
 
     assert not Size(1.23).check(1.23)
+
+
+def test_size_03_rpv():
+    rpv = RPV(18, [Integer(), Size(18)])
+    assert rpv.execute()
+
+    rpv = RPV(0, [Integer(), Size(0)])
+    assert rpv.execute()
+
+    rpv = RPV([1, 2, 3], [List(), Size(3)])
+    assert rpv.execute()
+
+    rpv = RPV([], [List(), Size(0)])
+    assert rpv.execute()
+
+
+def test_size_04_rpv():
+    rpv = RPV(100, [Integer(), Size(10)])
+    assert not rpv.execute()
+
+    rpv = RPV(100, [Integer(), Size(0)])
+    assert not rpv.execute()
+
+    rpv = RPV([1, 2, 3], [List(), Size(6)])
+    assert not rpv.execute()
+
+    rpv = RPV([], [List(), Size(-1)])
+    assert not rpv.execute()

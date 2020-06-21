@@ -1,5 +1,7 @@
 from validator.rules import Between
 from validator.rules import Integer
+from validator.rules import List
+from validator.rule_pipe_validator import RulePipeValidator as RPV
 import pytest
 
 
@@ -23,6 +25,36 @@ def test_between_03():
     assert Between(7, 7).check("Between")
 
     assert not Between(5, 5).check("asd")
+
+
+def test_between_04():
+    rpv = RPV(5, [Integer(), Between(2, 18)])
+    assert rpv.execute()
+
+    rpv = RPV(1, [Integer(), Between(2, 18)])
+    assert not rpv.execute()
+
+    rpv = RPV(19, [Integer(), Between(2, 18)])
+    assert not rpv.execute()
+
+
+def test_between_05():
+    rpv = RPV(-15, [Integer(), Between(-15, 30)])
+    assert rpv.execute()
+
+    rpv = RPV(30, [Integer(), Between(-15, 30)])
+    assert rpv.execute()
+
+    rpv = RPV(0, [Integer(), Between(-15, 30)])
+    assert rpv.execute()
+
+
+def test_between_06():
+    rpv = RPV(5, [Integer(), Between(5, 5)])
+    assert rpv.execute()
+
+    rpv = RPV(0, [Integer(), Between(5, 5)])
+    assert not rpv.execute()
 
 
 # implement bad tests for between class

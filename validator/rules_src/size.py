@@ -26,7 +26,7 @@ class Size(Integer, List):
 
     def check(self, arg):
         converted_size = Size.size_value(arg, self.rpv)
-        if not converted_size:
+        if converted_size == None:
             self.set_errror_message(f"Could not get size from data. type = {type(arg)}")
             return False
 
