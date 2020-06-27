@@ -8,6 +8,7 @@ class Rule(metaclass=ABCMeta):
     def __init__(self):
         self.error_message = "error"
         self.rpv = []
+        self.class_name = type(self).__name__
 
     def __call__(self, arg):
         return self.check(arg)
@@ -18,20 +19,34 @@ class Rule(metaclass=ABCMeta):
     def __from_str__(self, arg):
         pass
 
+    # Get/Set Class Name
     def get_class_name(self):
-        return type(self).__name__
+        return self.class_name
+
+    def set_class_name(self, name):
+        self.class_name = name
+
+    # Get/Set Error Message
+    def get_error_message(self):
+        return self.error_message
 
     def set_errror_message(self, message):
         self.error_message = message
 
-    def get_error_message(self):
-        return self.error_message
+    # Get/Set RPV
+    def get_rpv(self):
+        return self.rpv
 
     def set_rpv(self, rpv):
         self.rpv = rpv
 
     def override_check(self, new_func):
+        # Override function
         self.check = new_func
+        # Override class_name
+        self.set_class_name(new_func.__name__)
+        # Override error message
+        self.set_errror_message("Error: Custom Rule Failed")
 
 
 # Iterate each module in the given package and fill __all__ dictionary
