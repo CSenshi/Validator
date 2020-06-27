@@ -30,6 +30,9 @@ class Rule(metaclass=ABCMeta):
     def set_rpv(self, rpv):
         self.rpv = rpv
 
+    def override_check(self, new_func):
+        self.check = new_func
+
 
 # Iterate each module in the given package and fill __all__ dictionary
 __all__ = {}
