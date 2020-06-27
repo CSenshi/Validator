@@ -32,12 +32,15 @@ class Translator:
         # Second step: Loop throught array and initialize class objects.
         rules_arr = []
         for elem in arr:
+            rule = None
             if isinstance(elem, str):
                 rule = self._translate_str(elem)
             elif isinstance(elem, R.Rule):
                 rule = elem
             elif inspect.isclass(elem) and issubclass(elem, R.Rule):
                 rule = self._translate_class(elem)
+            elif callable(elem):
+                rule = self._translate_func(elem)
             else:
                 raise exc.UnknownTranslatorArgError
             if rule:
@@ -99,6 +102,21 @@ class Translator:
             raise exc.ArgsCountError
 
         return elem()
+
+    def _translate_func(self, elem):
+        """
+        Translates Function to Rule Instances
+        
+        def test_func(x):
+            ...
+            return True
+
+        For this example new rule will be created, for which
+        check() method will evaluate to test_func
+        """
+        func_rule = R.Rule()
+        func_rule.override_check(elem)
+        return func_rule
 
     def _validate_args_count(self, init_rule, args):
         a = inspect.getfullargspec(init_rule)
