@@ -64,7 +64,7 @@ def test_min_05_rpv():
 
 
 # implement bad tests for min class.
-def test_min_bad():
+def test_min_06_bad():
     # zero arg
     with pytest.raises(TypeError):
         assert not min().check(0)

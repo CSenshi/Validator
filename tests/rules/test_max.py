@@ -63,7 +63,7 @@ def test_max_05_rpv():
     assert not rpv.execute()
 
 
-def test_max_bad():
+def test_max_06_bad():
     # zero arg
     with pytest.raises(TypeError):
         assert not Max().check(0)
