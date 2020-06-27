@@ -41,10 +41,14 @@ class Rule(metaclass=ABCMeta):
         self.rpv = rpv
 
     def override_check(self, new_func):
+        print(new_func.__class__.__name__)
         # Override function
         self.check = new_func
         # Override class_name
-        self.set_class_name(new_func.__name__)
+        if hasattr(new_func, "__name__"):
+            self.set_class_name(new_func.__name__)
+        elif hasattr(new_func, "__class__") and hasattr(new_func.__class__, "__name__"):
+            self.set_class_name(new_func.__class__.__name__)
         # Override error message
         self.set_errror_message("Error: Custom Rule Failed")
 
