@@ -232,7 +232,7 @@ We give users ability to advance and use their own checkers. Write function and 
 
     validate(req, rules)
     ```
-3. Any callable class:
+3. Any callable class *(NOTE: Pass class instance and not class itself)*:
     ```python3
     from validator import validate
 
@@ -248,7 +248,24 @@ We give users ability to advance and use their own checkers. Write function and 
 
     validate(req, rules)
     ```
-  NOTE: Pass class instance and not class itself.
+4. Custom Rule:
+    ```python3
+    from validator import validate
+    from validator.rules import Rule
+
+    class AgeRule(Rule):
+        def __init__(self, min):
+            Rule.__init__(self)
+            self.min = min
+
+        def check(self, arg):
+            return self.min <= arg
+
+    req = {"age": 30}
+    rules = {"age": AgeRule(18)}
+
+    validate(req, rules)
+    ```
 
 <a name="Contributing"></a>
 ## Contributing
