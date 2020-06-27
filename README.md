@@ -10,6 +10,7 @@ Validator is a Python library for dealing with request validating.
    * **[Validating Arrays](#Validating-Arrays)**
    * **[Rules](#Rules)**
    * **[Rules Interconnection](#Rules-Interconnection)**
+   * **[Custom Rules](#Custom-Rules)**
 * **[Contributing](#Contributing)**
 * **[License](#License)**
 
@@ -206,6 +207,48 @@ rule = {'age' : 'integer|size:18'}
 
 validate(reqs, rule) # True
 ```
+
+<a name="Custom-Rules"></a>
+## Custom Rules
+We give users ability to advance and use their own checkers. Write function and use is as a rule. See examples below:
+1. Use defined functions: 
+  ```python3
+  from validator import validate
+
+  def func_age(x):
+      return x >= 18
+
+  req = {"age": 30}
+  rules = {"age": func_age}
+
+  validate(req, rules)
+  ```
+2. Use Lambda functions: 
+  ```python3
+  from validator import validate
+
+  req = {"age": 30}
+  rules = {"age": lambda x: x >= 18}
+
+  validate(req, rules)
+  ```
+3. Any callable class:
+  ```python3
+  from validator import validate
+
+  class checker:
+    def __init__(self):
+        pass
+
+    def __call__(self, x):
+        return x >= 456
+
+  req = {"age": 30}
+  rules = {"age": checker()}
+
+  validate(req, rules)
+  ```
+  NOTE: Pass class instance and not class itself.
 
 <a name="Contributing"></a>
 ## Contributing
