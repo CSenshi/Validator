@@ -156,20 +156,6 @@ rules = {"name": [R.Required()],
 ```
 
 
-#### Function as a Rules
-```python
-def func_age(x):
-  return x >= 18
-
-# Dummy Checker
-def func_mail(x):
-  return '@' in x
-  
-rules = {"name": lambda x : len(x) > 0,
-        "age": func_age,
-        "mail": func_mail}
-```
-
 #### Other Miscellaneous
 ```python
 from validator import rules as R
