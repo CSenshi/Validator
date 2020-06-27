@@ -58,7 +58,7 @@ def test_between_06():
 
 
 # implement bad tests for between class
-def test_between_bad():
+def test_between_07_bad():
     # zero arg
     with pytest.raises(TypeError):
         assert not Between().check(0)
