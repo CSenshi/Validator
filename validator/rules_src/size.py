@@ -1,6 +1,7 @@
 from validator.rules_src import Rule
 from validator.rules_src.integer import Integer
 from validator.rules_src.list import List
+from validator import utils
 
 
 class Size(Integer, List):
@@ -39,11 +40,17 @@ class Size(Integer, List):
     @staticmethod
     def size_value(arg, rpv):
         try:
+            # Check With RPV for other rules
             if Integer in rpv:
                 return int(arg)
             elif List in rpv:
                 return len(arg)
 
+            # Check for compatible comparision
+            if utils.CanBeComparedToInt(arg):
+                return arg
+
+            # Check for length, else convert to string and then check for len()
             if hasattr(arg, "__len__"):
                 check_size = len(arg)
             else:
@@ -54,4 +61,8 @@ class Size(Integer, List):
             return None
 
     def __from_str__(self):
-        self.size = int(self.size)
+        if utils.RepresentsInt(self.size):
+            self.size = int(self.size)
+        else:
+            # ToDo: Handle Error
+            pass

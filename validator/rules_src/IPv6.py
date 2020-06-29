@@ -18,7 +18,6 @@ class IPv6(Rule):
         Rule.__init__(self)
 
     def check(self, arg):
-
         if arg.count("::") > 1:
             self.set_errror_message(
                 f"Expected less than 2 consecutive colons, Got: {arg.count('::')}"

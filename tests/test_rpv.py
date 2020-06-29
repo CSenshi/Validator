@@ -40,17 +40,17 @@ def test_rpv_003_simple():
     request = {"age": 23}
     rule = {"age": "size:23"}
     result = Validator(request, rule).validate()
-    assert not result
+    assert result
 
     request = {"age": 23}
     rule = {"age": "size:2"}
     result = Validator(request, rule).validate()
-    assert result
+    assert not result
 
     request = {"age": 123456789}
     rule = {"age": "size:9"}
     result = Validator(request, rule).validate()
-    assert result
+    assert not result
 
     request = {"age": 123456789}
     rule = {"age": "integer|size:123456789"}
