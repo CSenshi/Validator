@@ -18,7 +18,7 @@ def test_min_02():
 
     assert Min(3).check(100)
 
-    assert not Min(4).check(100)
+    assert Min(4).check(100)
 
 
 def test_min_03():
@@ -30,36 +30,36 @@ def test_min_03():
 
 
 def test_min_04_rpv():
-    rpv = RPV(1000, [Integer(), Min(10)])
+    rpv = RPV(data=1000, rules=[Integer(), Min(10)])
     assert rpv.execute()
 
-    rpv = RPV(0, [Integer(), Min(-10)])
+    rpv = RPV(data=0, rules=[Integer(), Min(-10)])
     assert rpv.execute()
 
-    rpv = RPV(18, [Integer(), Min(18)])
+    rpv = RPV(data=18, rules=[Integer(), Min(18)])
     assert rpv.execute()
 
-    rpv = RPV(0, [Integer(), Min(0)])
+    rpv = RPV(data=0, rules=[Integer(), Min(0)])
     assert rpv.execute()
 
-    rpv = RPV([1, 2, 3], [List(), Min(2)])
+    rpv = RPV(data=[1, 2, 3], rules=[List(), Min(2)])
     assert rpv.execute()
 
-    rpv = RPV([], [List(), Min(-1)])
+    rpv = RPV(data=[], rules=[List(), Min(-1)])
     assert rpv.execute()
 
 
 def test_min_05_rpv():
-    rpv = RPV(0, [Integer(), Min(10)])
+    rpv = RPV(data=0, rules=[Integer(), Min(10)])
     assert not rpv.execute()
 
-    rpv = RPV([1, 2, 3], [List(), Min(4)])
+    rpv = RPV(data=[1, 2, 3], rules=[List(), Min(4)])
     assert not rpv.execute()
 
-    rpv = RPV([], [List(), Min(1)])
+    rpv = RPV(data=[], rules=[List(), Min(1)])
     assert not rpv.execute()
 
-    rpv = RPV([], [List(), Min(10)])
+    rpv = RPV(data=[], rules=[List(), Min(10)])
     assert not rpv.execute()
 
 

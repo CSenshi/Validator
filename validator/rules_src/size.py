@@ -40,11 +40,17 @@ class Size(Integer, List):
     @staticmethod
     def size_value(arg, rpv):
         try:
+            # Check With RPV for other rules
             if Integer in rpv:
                 return int(arg)
             elif List in rpv:
                 return len(arg)
 
+            # Check for compatible comparision
+            if utils.CanBeComparedToInt(arg):
+                return arg
+
+            # Check for length, else convert to string and then check for len()
             if hasattr(arg, "__len__"):
                 check_size = len(arg)
             else:

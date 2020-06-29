@@ -50,3 +50,11 @@ def RepresentsComplex(val):
         return True
     except:
         return False
+
+
+def CanBeComparedToInt(val):
+    try:
+        val > 100
+        return True
+    except:
+        return False
