@@ -1,5 +1,6 @@
 from validator.rules_src import Rule
 from validator.rules_src.size import Size
+from validator import utils
 
 
 class Max(Rule):
@@ -33,4 +34,8 @@ class Max(Rule):
         return True
 
     def __from_str__(self):
-        self.max = int(self.max)
+        if utils.RepresentsInt(self.max):
+            self.max = int(self.max)
+        else:
+            # ToDo: Handle Error
+            pass

@@ -1,6 +1,7 @@
 from validator.rules_src import Rule
 from validator.rules_src.integer import Integer
 from validator.rules_src.list import List
+from validator import utils
 
 
 class Size(Integer, List):
@@ -54,4 +55,8 @@ class Size(Integer, List):
             return None
 
     def __from_str__(self):
-        self.size = int(self.size)
+        if utils.RepresentsInt(self.size):
+            self.size = int(self.size)
+        else:
+            # ToDo: Handle Error
+            pass

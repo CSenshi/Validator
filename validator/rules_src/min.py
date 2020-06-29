@@ -1,5 +1,6 @@
 from validator.rules_src import Rule
 from validator.rules_src.size import Size
+from validator import utils
 
 
 class Min(Rule):
@@ -32,4 +33,8 @@ class Min(Rule):
         return True
 
     def __from_str__(self):
-        self.min = int(self.min)
+        if utils.RepresentsInt(self.min):
+            self.min = int(self.min)
+        else:
+            # ToDo: Handle Error
+            pass

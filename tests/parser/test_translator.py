@@ -205,7 +205,7 @@ def test_bad_01_array():
         Translator(target_str).translate()
 
 
-# Checking for ArgsCountError and valueError
+# Checking for ArgsCountError and Exception
 # for max, min, between args
 def test_bad_02():
     # Many min arg
@@ -223,12 +223,12 @@ def test_bad_02():
         Translator(target_str).translate()
 
     # min zero arg
-    with pytest.raises(ValueError):
+    with pytest.raises(Exception):
         target_str = f"min:|max{10}"
         Translator(target_str).translate()
 
     # max zero arg
-    with pytest.raises(ValueError):
+    with pytest.raises(Exception):
         target_str = f"max:|min{10}"
         Translator(target_str).translate()
 
@@ -253,7 +253,7 @@ def test_bad_02():
         Translator(target_str).translate()
 
 
-# Checking for ArgsCountError and valueError
+# Checking for ArgsCountError and Exception
 # for max, min, between args
 def test_bad_02_array():
     # Many min arg
@@ -271,12 +271,12 @@ def test_bad_02_array():
         Translator(target_str).translate()
 
     # min zero arg
-    with pytest.raises(ValueError):
+    with pytest.raises(Exception):
         target_str = [f"min:", f"max{10}"]
         Translator(target_str).translate()
 
     # max zero arg
-    with pytest.raises(ValueError):
+    with pytest.raises(Exception):
         target_str = [f"max:", f"min{10}"]
         Translator(target_str).translate()
 
