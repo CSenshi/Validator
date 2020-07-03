@@ -11,13 +11,13 @@ class IP(IPv4, IPv6):
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {'ip_addr' : '127.0.0.1' }
-    >>> rule = {'ip_addr' : 'ip'}
+    >>> reqs = {"ip_addr" : "127.0.0.1" }
+    >>> rule = {"ip_addr" : "ip"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {'ip_addr' : '0.299.2.1' }
-    >>> rule = {'ip_addr' : 'ip'}
+    >>> reqs = {"ip_addr" : "0.299.2.1" }
+    >>> rule = {"ip_addr" : "ip"}
     >>> validate(reqs, rule)
     False
     """

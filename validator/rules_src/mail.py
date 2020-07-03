@@ -9,13 +9,13 @@ class Mail(Rule):
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {'email_addr' : 'abcd@ef.gh'}
-    >>> rule = {'email_addr' : 'mail'}
+    >>> reqs = {"email_addr" : "abcd@ef.gh"}
+    >>> rule = {"email_addr" : "mail"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {'email_addr' : 'aaa.com'}
-    >>> rule = {'email_addr' : 'mail'}
+    >>> reqs = {"email_addr" : "aaa.com"}
+    >>> rule = {"email_addr" : "mail"}
     >>> validate(reqs, rule)
     False
     """

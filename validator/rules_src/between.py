@@ -9,13 +9,13 @@ class Between(Max, Min):
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {'age' : 10}
-    >>> rule = {'age' : 'between:6,18'}
+    >>> reqs = {"age" : 10}
+    >>> rule = {"age" : "between:6,18"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {'age' : 23}
-    >>> rule = {'age' : 'between:6,18'}
+    >>> reqs = {"age" : 23}
+    >>> rule = {"age" : "between:6,18"}
     >>> validate(reqs, rule)
     False
     """

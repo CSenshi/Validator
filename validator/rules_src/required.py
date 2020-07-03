@@ -8,13 +8,13 @@ class Required(Rule):
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {'value' : 'Not Empty'}
-    >>> rule = {'value' : 'required'}
+    >>> reqs = {"value" : "Not Empty"}
+    >>> rule = {"value" : "required"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {'value' : ''}
-    >>> rule = {'value' : 'required'}
+    >>> reqs = {"value" : ""}
+    >>> rule = {"value" : "required"}
     >>> validate(reqs, rule)
     False
     """

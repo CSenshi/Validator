@@ -11,13 +11,13 @@ class Max(Rule):
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {'age' : 15}
-    >>> rule = {'age' : 'max:18'}
+    >>> reqs = {"age" : 15}
+    >>> rule = {"age" : "max:18"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {'age' : 23}
-    >>> rule = {'age' : 'max:18'}
+    >>> reqs = {"age" : 23}
+    >>> rule = {"age" : "max:18"}
     >>> validate(reqs, rule)
     False
     """

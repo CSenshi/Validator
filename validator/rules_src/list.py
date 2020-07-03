@@ -8,13 +8,13 @@ class List(Rule):
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {'arr' : [1, 2, 3]}
-    >>> rule = {'arr' : 'list'}
+    >>> reqs = {"arr" : [1, 2, 3]}
+    >>> rule = {"arr" : "list"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {'arr' : 123}
-    >>> rule = {'arr' : 'list'}
+    >>> reqs = {"arr" : 123}
+    >>> rule = {"arr" : "list"}
     >>> validate(reqs, rule)
     False
     """

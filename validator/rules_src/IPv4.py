@@ -9,13 +9,13 @@ class IPv4(Rule):
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {'ipv4_addr' : '127.0.0.1'}
-    >>> rule = {'ipv4_addr' : 'ipv4'}
+    >>> reqs = {"ipv4_addr" : "127.0.0.1"}
+    >>> rule = {"ipv4_addr" : "ipv4"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {'ipv4_addr' : '0.299.2.1'}
-    >>> rule = {'ipv4_addr' : 'ipv4'}
+    >>> reqs = {"ipv4_addr" : "0.299.2.1"}
+    >>> rule = {"ipv4_addr" : "ipv4"}
     >>> validate(reqs, rule)
     False
     """

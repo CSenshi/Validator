@@ -11,13 +11,13 @@ class Min(Rule):
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {'age' : 23}
-    >>> rule = {'age' : 'min:18'}
+    >>> reqs = {"age" : 23}
+    >>> rule = {"age" : "min:18"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {'age' : 13}
-    >>> rule = {'age' : 'min:18'}
+    >>> reqs = {"age" : 13}
+    >>> rule = {"age" : "min:18"}
     >>> validate(reqs, rule)
     False
     """

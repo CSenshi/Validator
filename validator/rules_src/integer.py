@@ -8,13 +8,13 @@ class Integer(Rule):
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {'num' : '23'}
-    >>> rule = {'num' : 'integer'}
+    >>> reqs = {"num" : "23"}
+    >>> rule = {"num" : "integer"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {'num' : 'value'}
-    >>> rule = {'num' : 'integer'}
+    >>> reqs = {"num" : "value"}
+    >>> rule = {"num" : "integer"}
     >>> validate(reqs, rule)
     False
     """
