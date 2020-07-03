@@ -1,11 +1,12 @@
 class RulePipeValidator:
-    def __init__(self, data, rules):
+    def __init__(self, data, rules, rw=[]):
         # data to validate
         self.data = data
 
         # assign rules and set 'self' o each of them
         self.rules = rules
         [rule.set_rpv(self) for rule in rules]
+        [rule.set_rw(rw) for rule in rules]
 
         # if validation fails we will fill errors dictionary
         self.errors_on_key = {}

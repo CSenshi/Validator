@@ -1,7 +1,7 @@
 from validator.parser.parser import Parser
 from validator import rules as R
 from validator import exceptions as exc
-from .rule_pipe_validator import RulePipeValidator as RPV
+from .rules_wrapper import RulesWrapper as RW
 
 """
 Validator class takes 2 inputs:
@@ -16,32 +16,24 @@ class Validator:
     def __init__(self, request, rules):
         self.request = request
         self.rules = Parser(rules).parse()
+        self.errors = {}
+
+    def validate(self):
         # check for internal error (incorrect rules)
         if not self.check_rules():
             raise exc.RulesFormatError
 
-        self.errors = {}
+        # 1. Initialize Rules Wrapper
+        rw = RW(self.request, self.rules)
 
-    def validate(self):
-        # prepare variables
-        result = True
+        # 2. Run validation
+        rw.run()
 
-        # at this point all rules are being correctly passed
-        for key in self.rules:
-            rules = self.rules[key]
-            data = self.request[key]
+        # 3. get errors
+        self.errors = rw.get_errors()
 
-            # Interface for rules
-            rpv = RPV(data, rules)
-            rpv_result = rpv.execute()
-            errors_on_key = rpv.get_error_messages()
-
-            # if current validation fails change final result
-            if not rpv_result:
-                result = rpv_result
-                self.errors[key] = errors_on_key
-
-        return result
+        # 4. return result
+        return rw.get_result()
 
     def get_error_messages(self):
         # return error messages logged on validation

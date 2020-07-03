@@ -8,6 +8,7 @@ class Rule(metaclass=ABCMeta):
     def __init__(self):
         self.error_message = "error"
         self.rpv = []
+        self.rw = []
         self.class_name = type(self).__name__
 
     def __call__(self, arg):
@@ -39,6 +40,13 @@ class Rule(metaclass=ABCMeta):
 
     def set_rpv(self, rpv):
         self.rpv = rpv
+
+    # Get/Set RW
+    def get_rw(self):
+        return self.rw
+
+    def set_rw(self, rw):
+        self.rw = rw
 
     def override_check(self, new_func):
         print(new_func.__class__.__name__)
