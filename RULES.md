@@ -163,12 +163,14 @@ The given field must match the field under validation
 
 >>> from validator import validate
 
->>> reqs = {"old_pass": "password", "new_pass": "password"}
+>>> reqs = {"old_pass": "password",
+...         "new_pass": "password"}
 >>> rule = {"new_pass": "same:old_pass"}
 >>> validate(reqs, rule)
 True
 
->>> reqs = {"old_pass": "password", "new_pass": "changed_password"}
+>>> reqs = {"old_pass": "password",
+...         "new_pass": "changed_password"}
 >>> rule = {"new_pass": "same:old_pass"}
 >>> validate(reqs, rule)
 False
