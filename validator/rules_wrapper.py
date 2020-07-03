@@ -18,7 +18,7 @@ class RulesWrapper:
             data = self.request[key]
 
             # Interface for rules
-            rpv = RPV(data, rules)
+            rpv = RPV(data, rules, self)
             rpv_result = rpv.execute()
             errors_on_key = rpv.get_error_messages()
 
