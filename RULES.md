@@ -12,6 +12,7 @@
 <a href="#Max">Max</a>
 <a href="#Min">Min</a>
 <a href="#Required">Required</a>
+<a href="#Same">Same</a>
 <a href="#Size">Size</a>
 </p>
 </div><a name="Between"/>
@@ -150,6 +151,26 @@ The field under validation must be present in the input data and not empty
 True
 
 >>> Required().check('')
+False
+
+
+```
+<a name="Same"/>
+
+#### Same
+The given field must match the field under validation
+```python
+
+>>> from validator import validate
+
+>>> reqs = {"old_pass": "password", "new_pass": "password"}
+>>> rule = {"new_pass": "same:old_pass"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"old_pass": "password", "new_pass": "changed_password"}
+>>> rule = {"new_pass": "same:old_pass"}
+>>> validate(reqs, rule)
 False
 
 

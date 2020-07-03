@@ -34,3 +34,9 @@ class RulesWrapper:
 
     def get_result(self):
         return self.result
+
+    def req_contains_field(self, field_name):
+        return field_name in self.request
+
+    def get_field_data(self, field_name):
+        return self.request[field_name]

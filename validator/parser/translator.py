@@ -69,7 +69,7 @@ class Translator:
             return []
 
         # split example: required_if
-        class_str = "".join(elem.lower().split("_"))
+        class_str = elem.lower()
         args = []
         if target_char in class_str:
             # extract rule_name and arguments from string
