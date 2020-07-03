@@ -9,10 +9,16 @@ class Min(Rule):
     Given value is evaluated according to `Size` rule
 
     Examples:
-    >>> Min(2).check('Min')
+    >>> from validator import validate
+
+    >>> reqs = {'age' : 23}
+    >>> rule = {'age' : 'min:18'}
+    >>> validate(reqs, rule)
     True
 
-    >>> Min(4).check('Min')
+    >>> reqs = {'age' : 13}
+    >>> rule = {'age' : 'min:18'}
+    >>> validate(reqs, rule)
     False
     """
 

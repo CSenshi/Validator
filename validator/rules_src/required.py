@@ -6,10 +6,16 @@ class Required(Rule):
     The field under validation must be present in the input data and not empty 
 
     Examples:
-    >>> Required().check('Not Empty')
+    >>> from validator import validate
+
+    >>> reqs = {'value' : 'Not Empty'}
+    >>> rule = {'value' : 'required'}
+    >>> validate(reqs, rule)
     True
 
-    >>> Required().check('')
+    >>> reqs = {'value' : ''}
+    >>> rule = {'value' : 'required'}
+    >>> validate(reqs, rule)
     False
     """
 

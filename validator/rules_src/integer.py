@@ -6,10 +6,16 @@ class Integer(Rule):
     The field under validation must be an Integer
 
     Examples:
-    >>> Integer().check('123')
+    >>> from validator import validate
+
+    >>> reqs = {'num' : '23'}
+    >>> rule = {'num' : 'integer'}
+    >>> validate(reqs, rule)
     True
 
-    >>> Integer().check('string')
+    >>> reqs = {'num' : 'value'}
+    >>> rule = {'num' : 'integer'}
+    >>> validate(reqs, rule)
     False
     """
 

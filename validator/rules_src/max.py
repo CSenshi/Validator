@@ -9,10 +9,16 @@ class Max(Rule):
     Given value is evaluated according to `Size` rule
 
     Examples:
-    >>> Max(23).check('max_rule')
+    >>> from validator import validate
+
+    >>> reqs = {'age' : 15}
+    >>> rule = {'age' : 'max:18'}
+    >>> validate(reqs, rule)
     True
 
-    >>> Max(2).check('max_rule')
+    >>> reqs = {'age' : 23}
+    >>> rule = {'age' : 'max:18'}
+    >>> validate(reqs, rule)
     False
     """
 

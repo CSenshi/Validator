@@ -7,10 +7,16 @@ class Mail(Rule):
     The field under validation must be formatted as an e-mail address 
 
     Examples:
-    >>> Mail().check('abcd@ef.gh')
+    >>> from validator import validate
+
+    >>> reqs = {'email_addr' : 'abcd@ef.gh'}
+    >>> rule = {'email_addr' : 'mail'}
+    >>> validate(reqs, rule)
     True
 
-    >>> Mail().check('aaa.com')
+    >>> reqs = {'email_addr' : 'aaa.com'}
+    >>> rule = {'email_addr' : 'mail'}
+    >>> validate(reqs, rule)
     False
     """
 

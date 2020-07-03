@@ -6,10 +6,16 @@ class List(Rule):
     The field under validation must be a list (Python array)
 
     Examples:
-    >>> List().check([1, 2, 3])
+    >>> from validator import validate
+
+    >>> reqs = {'arr' : [1, 2, 3]}
+    >>> rule = {'arr' : 'list'}
+    >>> validate(reqs, rule)
     True
 
-    >>> List().check(123)
+    >>> reqs = {'arr' : 123}
+    >>> rule = {'arr' : 'list'}
+    >>> validate(reqs, rule)
     False
     """
 
