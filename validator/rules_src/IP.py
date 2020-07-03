@@ -9,10 +9,16 @@ class IP(IPv4, IPv6):
     The field under validation must be an IP address.
 
     Examples:
-    >>> IP().check('127.0.0.1')
+    >>> from validator import validate
+
+    >>> reqs = {'ip_addr' : '127.0.0.1' }
+    >>> rule = {'ip_addr' : 'ip'}
+    >>> validate(reqs, rule)
     True
-    
-    >>> IP().check('0.299.2.1')
+
+    >>> reqs = {'ip_addr' : '0.299.2.1' }
+    >>> rule = {'ip_addr' : 'ip'}
+    >>> validate(reqs, rule)
     False
     """
 

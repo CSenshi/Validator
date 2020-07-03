@@ -7,10 +7,16 @@ class Between(Max, Min):
     The field under validation must have a size between the given min and max 
 
     Examples:
-    >>> Between(2, 15).check('between')
+    >>> from validator import validate
+
+    >>> reqs = {'age' : 10}
+    >>> rule = {'age' : 'between:6,18'}
+    >>> validate(reqs, rule)
     True
 
-    >>> Between(10, 15).check('between')
+    >>> reqs = {'age' : 23}
+    >>> rule = {'age' : 'between:6,18'}
+    >>> validate(reqs, rule)
     False
     """
 

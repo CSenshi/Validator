@@ -7,10 +7,16 @@ class IPv6(Rule):
     The field under validation must be an IPv6 address.
 
     Examples:
-    >>> IPv6().check('2001:0db8:85a3:0000:0000:8a2e:0370:7334')
+    >>> from validator import validate
+
+    >>> reqs = {'ipv6_addr' : '2001:0db8:85a3:0000:0000:8a2e:0370:7334'}
+    >>> rule = {'ipv6_addr' : 'ipv6'}
+    >>> validate(reqs, rule)
     True
 
-    >>> IPv6().check('2001:0db8:85a3:9876:1234:8a2e')
+    >>> reqs = {'ipv6_addr' : '2001:0db8:85a3:9876:1234:8a2e'}
+    >>> rule = {'ipv6_addr' : 'ipv6'}
+    >>> validate(reqs, rule)
     False
     """
 

@@ -12,10 +12,16 @@ class Size(Integer, List):
     For an array, size corresponds to the count of the array. 
 
     Examples:
-    >>> Size(6).check('string')
+    >>> from validator import validate
+
+    >>> reqs = {'value' : 'string'}
+    >>> rule = {'value' : 'size:6'}
+    >>> validate(reqs, rule)
     True
 
-    >>> Size(12).check('string')
+    >>> reqs = {'value' : 'string'}
+    >>> rule = {'value' : 'size:12'}
+    >>> validate(reqs, rule)
     False
     """
 

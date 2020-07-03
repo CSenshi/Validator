@@ -20,147 +20,176 @@
 #### Between
 The field under validation must have a size between the given min and max
 ```python
+>>> from validator import validate
 
->>> Between(2, 15).check('between')
+>>> reqs = {'age' : 10}
+>>> rule = {'age' : 'between:6,18'}
+>>> validate(reqs, rule)
 True
 
->>> Between(10, 15).check('between')
+>>> reqs = {'age' : 23}
+>>> rule = {'age' : 'between:6,18'}
+>>> validate(reqs, rule)
 False
-
-
 ```
 <a name="Integer"/>
 
 #### Integer
 The field under validation must be an Integer
 ```python
+>>> from validator import validate
 
->>> Integer().check('123')
+>>> reqs = {'num' : '23'}
+>>> rule = {'num' : 'integer'}
+>>> validate(reqs, rule)
 True
 
->>> Integer().check('string')
+>>> reqs = {'num' : 'value'}
+>>> rule = {'num' : 'integer'}
+>>> validate(reqs, rule)
 False
-
-
 ```
 <a name="IP"/>
 
 #### IP
 The field under validation must be an IP address.
 ```python
+>>> from validator import validate
 
->>> IP().check('127.0.0.1')
+>>> reqs = {'ip_addr' : '127.0.0.1' }
+>>> rule = {'ip_addr' : 'ip'}
+>>> validate(reqs, rule)
 True
 
->>> IP().check('0.299.2.1')
+>>> reqs = {'ip_addr' : '0.299.2.1' }
+>>> rule = {'ip_addr' : 'ip'}
+>>> validate(reqs, rule)
 False
-
-
 ```
 <a name="IPv4"/>
 
 #### IPv4
 The field under validation must be an IPv4 address.
 ```python
+>>> from validator import validate
 
->>> IPv4().check('127.0.0.1')
+>>> reqs = {'ipv4_addr' : '127.0.0.1'}
+>>> rule = {'ipv4_addr' : 'ipv4'}
+>>> validate(reqs, rule)
 True
 
->>> IPv4().check('0.299.2.1')
+>>> reqs = {'ipv4_addr' : '0.299.2.1'}
+>>> rule = {'ipv4_addr' : 'ipv4'}
+>>> validate(reqs, rule)
 False
-
-
 ```
 <a name="IPv6"/>
 
 #### IPv6
 The field under validation must be an IPv6 address.
 ```python
+>>> from validator import validate
 
->>> IPv6().check('2001:0db8:85a3:0000:0000:8a2e:0370:7334')
+>>> reqs = {'ipv6_addr' : '2001:0db8:85a3:0000:0000:8a2e:0370:7334'}
+>>> rule = {'ipv6_addr' : 'ipv6'}
+>>> validate(reqs, rule)
 True
 
->>> IPv6().check('2001:0db8:85a3:9876:1234:8a2e')
+>>> reqs = {'ipv6_addr' : '2001:0db8:85a3:9876:1234:8a2e'}
+>>> rule = {'ipv6_addr' : 'ipv6'}
+>>> validate(reqs, rule)
 False
-
-
 ```
 <a name="List"/>
 
 #### List
 The field under validation must be a list (Python array)
 ```python
+>>> from validator import validate
 
->>> List().check([1, 2, 3])
+>>> reqs = {'arr' : [1, 2, 3]}
+>>> rule = {'arr' : 'list'}
+>>> validate(reqs, rule)
 True
 
->>> List().check(123)
+>>> reqs = {'arr' : 123}
+>>> rule = {'arr' : 'list'}
+>>> validate(reqs, rule)
 False
-
-
 ```
 <a name="Mail"/>
 
 #### Mail
 The field under validation must be formatted as an e-mail address
 ```python
+>>> from validator import validate
 
->>> Mail().check('abcd@ef.gh')
+>>> reqs = {'email_addr' : 'abcd@ef.gh'}
+>>> rule = {'email_addr' : 'mail'}
+>>> validate(reqs, rule)
 True
 
->>> Mail().check('aaa.com')
+>>> reqs = {'email_addr' : 'aaa.com'}
+>>> rule = {'email_addr' : 'mail'}
+>>> validate(reqs, rule)
 False
-
-
 ```
 <a name="Max"/>
 
 #### Max
 The field under validation must be less than or equal to a maximum value. Given value is evaluated according to `Size` rule
 ```python
+>>> from validator import validate
 
->>> Max(23).check('max_rule')
+>>> reqs = {'age' : 15}
+>>> rule = {'age' : 'max:18'}
+>>> validate(reqs, rule)
 True
 
->>> Max(2).check('max_rule')
+>>> reqs = {'age' : 23}
+>>> rule = {'age' : 'max:18'}
+>>> validate(reqs, rule)
 False
-
-
 ```
 <a name="Min"/>
 
 #### Min
 The field under validation must be greater than or equal to a minimum value. Given value is evaluated according to `Size` rule
 ```python
+>>> from validator import validate
 
->>> Min(2).check('Min')
+>>> reqs = {'age' : 23}
+>>> rule = {'age' : 'min:18'}
+>>> validate(reqs, rule)
 True
 
->>> Min(4).check('Min')
+>>> reqs = {'age' : 13}
+>>> rule = {'age' : 'min:18'}
+>>> validate(reqs, rule)
 False
-
-
 ```
 <a name="Required"/>
 
 #### Required
 The field under validation must be present in the input data and not empty
 ```python
+>>> from validator import validate
 
->>> Required().check('Not Empty')
+>>> reqs = {'value' : 'Not Empty'}
+>>> rule = {'value' : 'required'}
+>>> validate(reqs, rule)
 True
 
->>> Required().check('')
+>>> reqs = {'value' : ''}
+>>> rule = {'value' : 'required'}
+>>> validate(reqs, rule)
 False
-
-
 ```
 <a name="Same"/>
 
 #### Same
 The given field must match the field under validation
 ```python
-
 >>> from validator import validate
 
 >>> reqs = {"old_pass": "password",
@@ -174,20 +203,21 @@ True
 >>> rule = {"new_pass": "same:old_pass"}
 >>> validate(reqs, rule)
 False
-
-
 ```
 <a name="Size"/>
 
 #### Size
 The field under validation must have a size matching the given value. For string data, value corresponds to the number of characters. For numeric data, value corresponds to a given integer value (the attribute must also have the numeric or integer rule). For an array, size corresponds to the count of the array.
 ```python
+>>> from validator import validate
 
->>> Size(6).check('string')
+>>> reqs = {'value' : 'string'}
+>>> rule = {'value' : 'size:6'}
+>>> validate(reqs, rule)
 True
 
->>> Size(12).check('string')
+>>> reqs = {'value' : 'string'}
+>>> rule = {'value' : 'size:12'}
+>>> validate(reqs, rule)
 False
-
-
 ```
