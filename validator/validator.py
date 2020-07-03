@@ -2,6 +2,7 @@ from validator.parser.parser import Parser
 from validator import rules as R
 from validator import exceptions as exc
 from .rule_pipe_validator import RulePipeValidator as RPV
+from .rules_wrapper import RulesWrapper as RW
 
 """
 Validator class takes 2 inputs:
