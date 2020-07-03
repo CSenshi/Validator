@@ -1,15 +1,21 @@
 from validator.rules_src import Rule
 
 
-class {0}(Rule):
+class {name}(Rule):
     """
     <Insert Rule Documentation Here>
 
     Examples:
-    >>> {0}().check(...)
+    >>> from validator import validate
+
+    >>> reqs = {{'value' : ...}}
+    >>> rule = {{'value' : 'rule_name:arg1,arg2...'}}
+    >>> validate(reqs, rule)
     True
 
-    >>> {0}().check(...)
+    >>> reqs = {{'value' : ...}}
+    >>> rule = {{'value' : 'rule_name:arg1,arg2...'}}
+    >>> validate(reqs, rule)
     False
     """
 

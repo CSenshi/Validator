@@ -27,7 +27,7 @@ def create_rule_file(file_name):
     # get rule file template
     template = read_file(RULE_TEMPLATE_PATH)
     # generate file content from the template
-    file_content = template.format(class_name)
+    file_content = template.format(name=class_name)
 
     # get full path for the rule file
     rule_path = os.path.join(ROOT_DIR, "validator/rules_src", file_name.lower() + ".py")
