@@ -11,6 +11,7 @@
 <a href="#Mail">Mail</a>
 <a href="#Max">Max</a>
 <a href="#Min">Min</a>
+<a href="#Regex">Regex</a>
 <a href="#Required">Required</a>
 <a href="#Same">Same</a>
 <a href="#Size">Size</a>
@@ -167,6 +168,20 @@ True
 >>> rule = {"age" : "min:18"}
 >>> validate(reqs, rule)
 False
+```
+<a name="Regex"/>
+
+#### Regex
+The field under validation must match the given regular expression.
+```python
+
+>>> Regex("c").check("abcdef")
+True
+
+>>> Regex("^c").check("abcdef")
+False
+
+
 ```
 <a name="Required"/>
 
