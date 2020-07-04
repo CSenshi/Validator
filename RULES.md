@@ -11,6 +11,7 @@
 <a href="#Mail">Mail</a>
 <a href="#Max">Max</a>
 <a href="#Min">Min</a>
+<a href="#Regex">Regex</a>
 <a href="#Required">Required</a>
 <a href="#Size">Size</a>
 </p>
@@ -136,6 +137,20 @@ The field under validation must be greater than or equal to a minimum value. Giv
 True
 
 >>> Min(4).check('Min')
+False
+
+
+```
+<a name="Regex"/>
+
+#### Regex
+The field under validation must match the given regular expression.
+```python
+
+>>> Regex("c").check("abcdef")
+True
+
+>>> Regex("^c").check("abcdef")
 False
 
 
