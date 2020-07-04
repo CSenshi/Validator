@@ -28,7 +28,6 @@ class Translator:
     def translate(self):
         # First step. Check for types and get array ready for looping.
         arr = self._value_to_array()
-
         # Second step: Loop throught array and initialize class objects.
         rules_arr = []
         for elem in arr:
@@ -69,13 +68,16 @@ class Translator:
             return []
 
         # split example: required_if
-        class_str = elem.lower()
         args = []
-        if target_char in class_str:
+        if target_char in elem:
             # extract rule_name and arguments from string
-            class_str, args_str = class_str.split(target_char)
+            class_str, args_str = elem.split(target_char)
+
+            class_str = class_str.lower()
             # Split arguments into array
             args = args_str.split(target_args)
+        else:
+            class_str = elem.lower()
 
         # Initialize class
         if not class_str in R.__all__:

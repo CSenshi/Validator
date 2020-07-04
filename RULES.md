@@ -174,14 +174,17 @@ False
 #### Regex
 The field under validation must match the given regular expression.
 ```python
+>>> from validator import validate
 
->>> Regex("c").check("abcdef")
+>>> reqs = {"value" : "PythonValidator"}
+>>> rule = {"value" : "regex:^[0-9a-zA-Z]*$"}
+>>> validate(reqs, rule)
 True
 
->>> Regex("^c").check("abcdef")
+>>> reqs = {"value" : "Python_Validator"}
+>>> rule = {"value" : "regex:^[0-9a-zA-Z]*$"}
+>>> validate(reqs, rule)
 False
-
-
 ```
 <a name="Required"/>
 

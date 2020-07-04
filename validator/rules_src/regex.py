@@ -7,10 +7,16 @@ class Regex(Rule):
     The field under validation must match the given regular expression.
 
     Examples:
-    >>> Regex("c").check("abcdef")
+    >>> from validator import validate
+
+    >>> reqs = {"value" : "PythonValidator"}
+    >>> rule = {"value" : "regex:^[0-9a-zA-Z]*$"}
+    >>> validate(reqs, rule)
     True
 
-    >>> Regex("^c").check("abcdef")
+    >>> reqs = {"value" : "Python_Validator"}
+    >>> rule = {"value" : "regex:^[0-9a-zA-Z]*$"}
+    >>> validate(reqs, rule)
     False
     """
 
