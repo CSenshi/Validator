@@ -57,12 +57,12 @@ The field under validation must be an IP address.
 ```python
 >>> from validator import validate
 
->>> reqs = {"ip_addr" : "127.0.0.1" }
+>>> reqs = {"ip_addr" : "192.168.0.1" }
 >>> rule = {"ip_addr" : "ip"}
 >>> validate(reqs, rule)
 True
 
->>> reqs = {"ip_addr" : "0.299.2.1" }
+>>> reqs = {"ip_addr" : "0.123:2:1" }
 >>> rule = {"ip_addr" : "ip"}
 >>> validate(reqs, rule)
 False
@@ -229,13 +229,21 @@ The field under validation must have a size matching the given value. For string
 ```python
 >>> from validator import validate
 
->>> reqs = {"value" : "string"}
->>> rule = {"value" : "size:6"}
+# Checks for string length
+>>> reqs = {"value" : "something"}
+>>> rule = {"value" : "size:9"}
 >>> validate(reqs, rule)
 True
 
->>> reqs = {"value" : "string"}
->>> rule = {"value" : "size:12"}
+# Checks for Integer value
+>>> reqs = {"value" : "18"} # "18" and 18 would be same
+>>> rule = {"value" : "integer|size:18"}
 >>> validate(reqs, rule)
-False
+True
+
+# Checks for List length
+>>> reqs = {"value" : ["a", "b", "c"]}
+>>> rule = {"value" : "list|size:3"}
+>>> validate(reqs, rule)
+True
 ```

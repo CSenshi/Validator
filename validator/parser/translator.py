@@ -42,6 +42,8 @@ class Translator:
                 rule = self._translate_func(elem)
             else:
                 raise exc.UnknownTranslatorArgError
+
+            # If Rule class was created add into list
             if rule:
                 rules_arr.append(rule)
         return rules_arr
@@ -65,9 +67,9 @@ class Translator:
         "between:10,20" -> R.Between(10, 20)
         """
         if not elem:
-            return []
+            return None
 
-        # split example: required_if
+        # Divide into Rule class and arguments
         args = []
         if target_char in elem:
             # extract rule_name and arguments from string
@@ -79,7 +81,10 @@ class Translator:
         else:
             class_str = elem.lower()
 
-        # Initialize class
+        # Remove underscore from class string ('ip_v4' will be same as 'ipv4')
+        class_str = class_str.replace("_", "")
+
+        # Check if class string is in the list
         if not class_str in R.__all__:
             raise exc.NoRuleError
 
@@ -89,6 +94,7 @@ class Translator:
         if not self._validate_args_count(init_rule, args):
             raise exc.ArgsCountError
 
+        # Initialize Rule class
         rule_instance = init_rule(*args)
         rule_instance.__from_str__()
 

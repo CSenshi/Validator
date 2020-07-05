@@ -13,16 +13,24 @@ class Size(Integer, List):
 
     Examples:
     >>> from validator import validate
-
-    >>> reqs = {"value" : "string"}
-    >>> rule = {"value" : "size:6"}
+    
+    # Checks for string length
+    >>> reqs = {"value" : "something"}
+    >>> rule = {"value" : "size:9"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {"value" : "string"}
-    >>> rule = {"value" : "size:12"}
+    # Checks for Integer value
+    >>> reqs = {"value" : "18"} # "18" and 18 would be same
+    >>> rule = {"value" : "integer|size:18"}
     >>> validate(reqs, rule)
-    False
+    True
+
+    # Checks for List length
+    >>> reqs = {"value" : ["a", "b", "c"]}
+    >>> rule = {"value" : "list|size:3"}
+    >>> validate(reqs, rule)
+    True
     """
 
     def __init__(self, size):

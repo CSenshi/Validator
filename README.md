@@ -8,6 +8,7 @@ Validator is a Python library for dealing with request validating.
    * **[Usage](#Usage)**
    * **[Error Messages](#Error-Messages)**
    * **[Validating Arrays](#Validating-Arrays)**
+   * **[Available Validation Rules](#Available-Validation-Rules)**
    * **[Rules](#Rules)**
    * **[Rules Interconnection](#Rules-Interconnection)**
    * **[Custom Rules](#Custom-Rules)**
@@ -59,7 +60,7 @@ result = val.validate() # True
 ```
 
 <a name="Error-Messages"></a>
-### Error Messages
+## Error Messages
 Validator allows user to have a look at failed validations
 
 ```python
@@ -90,7 +91,7 @@ errors = val.get_error_messages()
 
 
 <a name="Validating-Arrays"></a>
-### Validating Arrays
+## Validating Arrays
 Validator comes with `validate_many()` function, which validates multiple requests. Function takes list of requests and one rule. This rule is checked for all the requests. If one or more requests fail validation function returns False, otherwise (if all pass) True. For more details see example below:
 
 Validation Passes:
@@ -126,6 +127,12 @@ errors = [{},
           {}]
 """
 ```
+
+
+<a name="Rules"></a>
+## Available Validation Rules
+
+#### Validator comes with pre initialized rules. *All of rules are listed in [RULES.md](https://github.com/CSenshi/Validator/blob/master/RULES.md) file*
 
 <a name="Rules"></a>
 ## Rules
@@ -166,7 +173,6 @@ rules = {"name": R.Required(),           # no need for Array Brackets if one rul
                                         # if no arguments are passed to rule
 ```
 
-#### *All of rules are listed in [RULES.md](https://github.com/CSenshi/Validator/blob/master/RULES.md) file*
 
 
 <a name="Rules-Interconnection"></a>
@@ -193,6 +199,8 @@ rule = {'age' : 'integer|size:18'}
 
 validate(reqs, rule) # True
 ```
+
+*For more details please view [Size](https://github.com/CSenshi/Validator/blob/master/RULES.md#size) Rule*
 
 <a name="Custom-Rules"></a>
 ## Custom Rules
