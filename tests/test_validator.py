@@ -307,7 +307,7 @@ def test_10_validate_many():
 def test_11_validate_many_errors_msg():
     requests = [{"age": 11}, {"age": 12}, {"age": 13}, {"age": 14}]
     rule = {"age": [R.Integer, R.Min(18)]}
-    result, validated_datas, errors = validate_many(requests, rule, True)
+    result, _, errors = validate_many(requests, rule, True)
     assert not result
     assert 4 == len(errors)
     assert "age" in errors[0]
@@ -325,7 +325,7 @@ def test_11_validate_many_errors_msg():
 
     requests = [{"age": 11}, {"age": 12}, {"age": 23}, {"age": 14}]
     rule = {"age": [R.Integer, R.Max(18)]}
-    result, validated_datas, errors = validate_many(requests, rule, True)
+    result, _, errors = validate_many(requests, rule, True)
     assert not result
     assert 4 == len(errors)
     assert {} == errors[0]
@@ -337,7 +337,7 @@ def test_11_validate_many_errors_msg():
 
     requests = [{"name": "Jon"}, {"name": ""}, {"name": ""}, {"name": "Tom"}]
     rule = {"name": [R.Required()]}
-    result, validated_datas, errors = validate_many(requests, rule, True)
+    result, _, errors = validate_many(requests, rule, True)
     assert not result
     assert 4 == len(errors)
     assert {} == errors[0]
@@ -364,7 +364,7 @@ def test_12_validate_many_errors_msg():
         "age": [R.Integer, R.Min(18)],
     }
 
-    result, validated_datas, errors = validate_many(requests, rule, True)
+    result, _, errors = validate_many(requests, rule, True)
 
     assert not result
     assert len(errors) == 5
@@ -430,3 +430,39 @@ def test_13_validated_data():
     assert "_token" not in validated_data
     assert "_cookie_data" not in validated_data
     assert "_session_id" not in validated_data
+
+
+def test_14_validated_data_many():
+    reqs = [
+        {"first_name": "Jon", "last_name": "Doe", "age": 33},
+        {
+            "first_name": "Nick",
+            "last_name": "Bush",
+            "age": 23,
+            "_token": "Ou1WQdWbyTuy4y8jazwA",
+        },
+        {
+            "first_name": "John",
+            "last_name": "Watson",
+            "age": 30,
+            "_token": "Ou1WQdWbyTuy4y8jazwA",
+        },
+        {
+            "first_name": "May",
+            "last_name": "Afferson",
+            "age": 40,
+            "_cookie": "7Juhm38k8eBgo3HVDFKC",
+        },
+    ]
+
+    rule = {"first_name": "required", "last_name": "required", "age": "min:18"}
+
+    result, validated_datas, _ = validate_many(reqs, rule, return_info=True)
+
+    # result should be True
+    assert result
+
+    # all of validated data should contain only first_name, last_name and age
+    for data in validated_datas:
+        assert ("first_name" in data) and ("last_name" in data) and ("age" in data)
+        assert ("_token" not in data) and ("_cookie" not in data)
