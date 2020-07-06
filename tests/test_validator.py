@@ -206,7 +206,7 @@ def test_07_validate_simple():
 def test_08_validate_error_msg():
     request = {"age": 100}
     rule = {"age": [R.Integer, R.Between(18, 90)]}
-    result, errors = validate(request, rule, return_errors=True)
+    result, errors = validate(request, rule, return_info=True)
     assert not result
     assert "age" in errors.keys()
     assert "Between" in errors["age"].keys()
@@ -217,7 +217,7 @@ def test_08_validate_error_msg():
         "name": [R.Required()],
         "surname": [R.Required(), R.Mail()],
     }
-    result, errors = validate(request, rule, return_errors=True)
+    result, errors = validate(request, rule, return_info=True)
 
     # Test General
     assert not result
@@ -245,7 +245,7 @@ def test_09_validate_error_msg():
         "profession": [R.Required, R.Mail],
         "mail": [R.Required(), R.Mail()],
     }
-    result, errors = validate(request, rule, return_errors=True)
+    result, errors = validate(request, rule, return_info=True)
 
     # Test General
     assert not result

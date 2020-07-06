@@ -64,52 +64,52 @@ class Validator:
         return True
 
 
-def validate(req, rules, return_errors=False):
+def validate(req, rules, return_info=False):
     """ 
     Validates request with given rules
   
     Parameters: 
         req (dict): request
         rules (dict): rules
-        return_errors (bool): True/False according the necessity of returning error messages (False by default)
+        return_info (bool): True/False according the necessity of returning error messages (False by default)
   
     Returns: 
-        result (bool): the result of the validation (if return_errors parameter was False)
+        result (bool): the result of the validation (if return_info parameter was False)
         OR
-        (result, error_messages): pair of the validation result and error messages object (if return_errors was True)
+        (result, error_messages): pair of the validation result and error messages object (if return_info was True)
     """
     val = Validator(req, rules)
     result = val.validate()
-    if return_errors:
+    if return_info:
         errors = val.get_error_messages()
-        # if return_errors was True return pair as a tuple
+        # if return_info was True return pair as a tuple
         return result, errors
     # return validation result
     return result
 
 
-def validate_many(requests, rules, return_errors=False):
+def validate_many(requests, rules, return_info=False):
     """
        Validates many requests with given rules
 
        Parameters:
            requests (list): requests
            rules (dict): rules
-           return_errors (bool): True/False according the necessity of returning error messages (False by default)
+           return_info (bool): True/False according the necessity of returning error messages (False by default)
 
        Returns:
-           result (bool): the result of the validation (if return_errors parameter was False)
+           result (bool): the result of the validation (if return_info parameter was False)
            OR
-           (result, error_messages): pair of the validation result and error messages object (if return_errors was True)
+           (result, error_messages): pair of the validation result and error messages object (if return_info was True)
        """
 
-    def get_validation_result(_results, _errors, _return_errors=return_errors):
-        return all(_results) if not _return_errors else (all(_results), _errors)
+    def get_validation_result(_results, _errors, _return_info=return_info):
+        return all(_results) if not _return_info else (all(_results), _errors)
 
     results, errors = [], []
     for request in requests:
-        if return_errors:
-            result, _errors = validate(request, rules, return_errors)
+        if return_info:
+            result, _errors = validate(request, rules, return_info)
             errors.append(_errors)
         else:
             result = validate(request, rules)

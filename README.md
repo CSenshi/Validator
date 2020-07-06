@@ -81,7 +81,7 @@ Validator allows user to have a look at failed validations and passed validation
             "age": "required|min:18",
             "mail": "required|mail"}
 
-    result, validated_data, _ = validate(reqs, rule, return_errors=True)
+    result, validated_data, _ = validate(reqs, rule, return_info=True)
     """
     result = True
     validated_data = {"first_name": "Jon",
@@ -100,7 +100,7 @@ Validator allows user to have a look at failed validations and passed validation
     rule = {"name": "required",
             "mail": "mail"}
 
-    result, _, errors = validate(reqs, rule, return_errors=True)
+    result, _, errors = validate(reqs, rule, return_info=True)
 
     """
     result = True
@@ -147,7 +147,7 @@ requests = [{"name": "Jon"},
             {"name": "Greg"}]
 rule = {"name": 'required|min:3'}
 
-result, errors = validate_many(requests, rule, return_errors=True)
+result, errors = validate_many(requests, rule, return_info=True)
 """
 result = False
 errors = [{},
