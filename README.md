@@ -59,45 +59,6 @@ val = Validator(request, rules)
 result = val.validate() # True
 ```
 
-<a name="Validating-Arrays"></a>
-## Validating Arrays
-Validator comes with `validate_many()` function, which validates multiple requests. Function takes list of requests and one rule. This rule is checked for all the requests. If one or more requests fail validation function returns False, otherwise (if all pass) True. For more details see example below:
-
-Validation Passes:
-```python
-from validator import validate_many
-
-requests = [{"name": "Jon"},
-            {"name": "Rob"},
-            {"name": "Tom"},
-            {"name": "Greg"}]
-rule = {"name": 'required|min:3'}
-
-result = validate_many(requests, rule) # True
-```
-We can also ahve a look at failde validations and error messages. `validate_many()` takes third argument as boolean, indicating return of error messages.
-
-Validation Fails:
-```python
-from validator import validate_many
-
-requests = [{"name": "Jon"},
-            {"name": ""},
-            {"name": "Yo"},
-            {"name": "Greg"}]
-rule = {"name": 'required|min:3'}
-
-result, errors = validate_many(requests, rule, return_info=True)
-"""
-result = False
-errors = [{},
-          {'name': {'Min': 'Expected Maximum: 3, Got: 0', 'Required': 'Field was empty'}},
-          {'name': {'Min': 'Expected Maximum: 3, Got: 2'}},
-          {}]
-"""
-```
-
-
 <a name="Messages"></a>
 ## Validated Data/Error Messages
 Validator allows user to have a look at failed validations and passed validations. `validated_data` is extremly useful when request contains data that is not needed for initialization of model, you can get rid of them and validate at the same time. See examples below:
@@ -155,6 +116,45 @@ val = Validator(request, rules)
 result = val.validate()
 validated_data = val.get_validated_data()
 errors = val.get_error_messages()
+```
+
+
+<a name="Validating-Arrays"></a>
+## Validating Arrays
+Validator comes with `validate_many()` function, which validates multiple requests. Function takes list of requests and one rule. This rule is checked for all the requests. If one or more requests fail validation function returns False, otherwise (if all pass) True. For more details see example below:
+
+Validation Passes:
+```python
+from validator import validate_many
+
+requests = [{"name": "Jon"},
+            {"name": "Rob"},
+            {"name": "Tom"},
+            {"name": "Greg"}]
+rule = {"name": 'required|min:3'}
+
+result = validate_many(requests, rule) # True
+```
+We can also ahve a look at failde validations and error messages. `validate_many()` takes third argument as boolean, indicating return of error messages.
+
+Validation Fails:
+```python
+from validator import validate_many
+
+requests = [{"name": "Jon"},
+            {"name": ""},
+            {"name": "Yo"},
+            {"name": "Greg"}]
+rule = {"name": 'required|min:3'}
+
+result, errors = validate_many(requests, rule, return_info=True)
+"""
+result = False
+errors = [{},
+          {'name': {'Min': 'Expected Maximum: 3, Got: 0', 'Required': 'Field was empty'}},
+          {'name': {'Min': 'Expected Maximum: 3, Got: 2'}},
+          {}]
+"""
 ```
 
 
