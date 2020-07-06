@@ -20,7 +20,7 @@ install:
 	pip3 install -r requirements.txt
 
 clean:
-	git clean -xdf
+	git clean -Xdf
 
 # Test with pytest test/ folder and doctests 
 test: doctest pytest check

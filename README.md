@@ -6,7 +6,7 @@ Validator is a Python library for dealing with request validating.
 * **[Installation](#Installation)**
 * **[Overview](#Overview)**
    * **[Usage](#Usage)**
-   * **[Error Messages](#Error-Messages)**
+   * **[Validated Data/Error Messages](#Messages)**
    * **[Validating Arrays](#Validating-Arrays)**
    * **[Available Validation Rules](#Available-Validation-Rules)**
    * **[Rules](#Rules)**
@@ -59,33 +59,62 @@ val = Validator(request, rules)
 result = val.validate() # True
 ```
 
-<a name="Error-Messages"></a>
-## Error Messages
-Validator allows user to have a look at failed validations
+<a name="Messages"></a>
+## Validated Data/Error Messages
+Validator allows user to have a look at failed validations and passed validations. `validated_data` is extremly useful when request contains data that is not needed for initialization of model, you can get rid of them and validate at the same time. See examples below:
 
-```python
-from validator import validate
+* Validated Data
 
-reqs = {"name": "",
-        "mail": "jon_doe"}
+    ```python
+    from validator import validate
 
-rule = {"name": "required",
-        "mail": "mail"}
+    req = {"first_name": "Jon",
+            "last_name": "Doe",
+            "age": 33,
+            "mail": "jondoe@gmail.com",
+            "_token": "WpH0UPfy0AXzMtK2UWtJ",
+            "_cookie_data": "e9Uixp8hzUySy6bw3MuZ",
+            "_session_id": "ZB7q7uIVdWBKgSCSSWAa"}
 
-result, errors = validate(reqs, rule, return_errors=True)
+    rule = {"first_name": "required",
+            "last_name": "required",
+            "age": "required|min:18",
+            "mail": "required|mail"}
 
-"""
-result = True
-errors = {'name': {'Required': 'Field was empty'},
-          mail': {'Mail': 'Expected a Mail, Got: jon_doe'}}
-"""
-```
+    result, validated_data, _ = validate(reqs, rule, return_info=True)
+    """
+    result = True
+    validated_data = {"first_name": "Jon",
+                    "last_name": "Doe",
+                    "age": 33,
+                    "mail": "jondoe@gmail.com"}
+    """
+    ```
+* Error Messages
+    ```python
+    from validator import validate
 
-Or you can use `Validator` class for error messages as well (result and errors are same).
+    reqs = {"name": "",
+            "mail": "jon_doe"}
+
+    rule = {"name": "required",
+            "mail": "mail"}
+
+    result, _, errors = validate(reqs, rule, return_info=True)
+
+    """
+    result = True
+    errors = {'name': {'Required': 'Field was empty'},
+            mail': {'Mail': 'Expected a Mail, Got: jon_doe'}}
+    """
+    ```
+
+Or you can use `Validator` class for error messages as well as for validated data.
 
 ```python
 val = Validator(request, rules)
 result = val.validate()
+validated_data = val.get_validated_data()
 errors = val.get_error_messages()
 ```
 
@@ -118,7 +147,7 @@ requests = [{"name": "Jon"},
             {"name": "Greg"}]
 rule = {"name": 'required|min:3'}
 
-result, errors = validate_many(requests, rule, return_errors=True)
+result, errors = validate_many(requests, rule, return_info=True)
 """
 result = False
 errors = [{},
@@ -129,7 +158,7 @@ errors = [{},
 ```
 
 
-<a name="Rules"></a>
+<a name="Available-Validation-Rules"></a>
 ## Available Validation Rules
 
 #### Validator comes with pre initialized rules. *All of rules are listed in [RULES.md](https://github.com/CSenshi/Validator/blob/master/RULES.md) file*
