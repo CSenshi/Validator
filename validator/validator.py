@@ -32,6 +32,8 @@ class Validator:
         # 3. get errors
         self.errors = rw.get_errors()
 
+        # 4. get validated data
+
         # 4. return result
         return rw.get_result()
 
