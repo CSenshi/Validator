@@ -17,6 +17,7 @@ class Validator:
         self.request = request
         self.rules = Parser(rules).parse()
         self.errors = {}
+        self.validated_data = {}
 
     def validate(self):
         # check for internal error (incorrect rules)
@@ -33,13 +34,18 @@ class Validator:
         self.errors = rw.get_errors()
 
         # 4. get validated data
+        self.validated_data = rw.get_validated_data()
 
-        # 4. return result
+        # 5. return result
         return rw.get_result()
 
     def get_error_messages(self):
         # return error messages logged on validation
         return self.errors
+
+    def get_validated_data(self):
+        # return data that has been validated
+        return self.validated_data
 
     def check_rules(self):
         # check for rules' type (should be dictionary)

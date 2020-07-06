@@ -1,7 +1,7 @@
 from validator import Validator, validate, validate_many, rules as R
 
 # !!! TEST : Class Validator !!! #
-def test_validator_001_simple():
+def test_01_validator_simple():
     request = {"age": 23}
     rule = {"age": [R.Integer, R.Min(18)]}
     result = Validator(request, rule).validate()
@@ -28,7 +28,7 @@ def test_validator_001_simple():
     assert not result
 
 
-def test_validator_002_simple():
+def test_02_validator_simple():
     request = {"age": 23}
     rule = {"age": [R.Integer, R.Min(18), R.Max(30)]}
     result = Validator(request, rule).validate()
@@ -50,7 +50,7 @@ def test_validator_002_simple():
     assert not result
 
 
-def test_validator_003_error_msg():
+def test_03_validator_error_msg():
     request = {"age": 100}
     rule = {"age": [R.Integer, R.Between(18, 90)]}
     val = Validator(request, rule)
@@ -81,7 +81,7 @@ def test_validator_003_error_msg():
     assert "Mail" in mail_err.keys()
 
 
-def test_validator_004_error_msg():
+def test_04_validator_error_msg():
     request = {
         "age": 53,
         "name": "Peter",
@@ -124,7 +124,7 @@ def test_validator_004_error_msg():
     assert "Mail" in mail_err
 
 
-def test_validator_001_empty():
+def test_05_validator_empty():
     # Checking for empty rules to work
     request = {
         "age": 53,
@@ -154,7 +154,7 @@ def test_validator_001_empty():
 
 
 # !!! TEST : Function validate !!! #
-def test_validate_001_simple():
+def test_06_validate_simple():
     request = {"age": 23}
     rule = {"age": [R.Integer, R.Min(18)]}
     result = validate(request, rule)
@@ -181,7 +181,7 @@ def test_validate_001_simple():
     assert not result
 
 
-def test_validate_002_simple():
+def test_07_validate_simple():
     request = {"age": 23}
     rule = {"age": [R.Integer, R.Min(18), R.Max(30)]}
     result = validate(request, rule)
@@ -203,7 +203,7 @@ def test_validate_002_simple():
     assert not result
 
 
-def test_validate_003_error_msg():
+def test_08_validate_error_msg():
     request = {"age": 100}
     rule = {"age": [R.Integer, R.Between(18, 90)]}
     result, errors = validate(request, rule, return_errors=True)
@@ -230,7 +230,7 @@ def test_validate_003_error_msg():
     assert "Mail" in mail_err.keys()
 
 
-def test_validate_004_error_msg():
+def test_09_validate_error_msg():
     request = {
         "age": 53,
         "name": "Peter",
@@ -272,7 +272,7 @@ def test_validate_004_error_msg():
 
 
 # !!! TEST : Function validate_many !!! #
-def test_validate_many_001():
+def test_10_validate_many():
     requests = [{"age": 19}, {"age": 20}, {"age": 21}, {"age": 22}]
     rule = {"age": [R.Integer, R.Min(18)]}
     result = validate_many(requests, rule)
@@ -304,7 +304,7 @@ def test_validate_many_001():
     assert not result
 
 
-def test_validate_many_002_errors_msg():
+def test_11_validate_many_errors_msg():
     requests = [{"age": 11}, {"age": 12}, {"age": 13}, {"age": 14}]
     rule = {"age": [R.Integer, R.Min(18)]}
     result, errors = validate_many(requests, rule, True)
@@ -350,7 +350,7 @@ def test_validate_many_002_errors_msg():
     assert "Field was empty" in errors[2]["name"]["Required"]
 
 
-def test_validate_many_003_errors_msg():
+def test_12_validate_many_errors_msg():
     requests = [
         {"first_name": "Jon", "last_name": "Doe", "age": 40},
         {"first_name": "", "last_name": "Doe", "age": 40},
@@ -384,3 +384,49 @@ def test_validate_many_003_errors_msg():
     assert "first_name" in errors[4]
     assert "last_name" in errors[4]
     assert "age" in errors[4]
+
+
+#  !!! TEST: validated data !!! #
+
+
+def test_13_validated_data():
+    req = {"a": 1, "b": 2, "c": 3}
+    rules = {"a": "required"}
+
+    val = Validator(req, rules)
+    result = val.validate()
+    validated_data = val.get_validated_data()
+
+    assert result
+    assert validated_data == {"a": 1}
+
+    reqs = {
+        "first_name": "Jon",
+        "last_name": "Doe",
+        "age": 33,
+        "mail": "jondoe@gmail.com",
+        "_token": "WpH0UPfy0AXzMtK2UWtJ",
+        "_cookie_data": "e9Uixp8hzUySy6bw3MuZ",
+        "_session_id": "ZB7q7uIVdWBKgSCSSWAa",
+    }
+    rule = {
+        "first_name": "required",
+        "last_name": "required",
+        "age": "required|min:18",
+        "mail": "required|mail",
+    }
+
+    val = Validator(reqs, rule)
+    result = val.validate()
+    validated_data = val.get_validated_data()
+
+    assert result
+    assert len(validated_data) == 4
+
+    assert "first_name" in validated_data
+    assert "last_name" in validated_data
+    assert "age" in validated_data
+    assert "mail" in validated_data
+    assert "_token" not in validated_data
+    assert "_cookie_data" not in validated_data
+    assert "_session_id" not in validated_data

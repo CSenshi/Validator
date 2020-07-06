@@ -6,6 +6,7 @@ class RulesWrapper:
         self.request = request
         self.rules = rules
         self.errors = {}
+        self.validated_data = {}
         self.result = False
 
     def run(self):
@@ -23,7 +24,9 @@ class RulesWrapper:
             errors_on_key = rpv.get_error_messages()
 
             # if current validation fails change final result
-            if not rpv_result:
+            if rpv_result:
+                self.validated_data[key] = data
+            else:
                 result = rpv_result
                 self.errors[key] = errors_on_key
 
@@ -40,3 +43,6 @@ class RulesWrapper:
 
     def get_field_data(self, field_name):
         return self.request[field_name]
+
+    def get_validated_data(self):
+        return self.validated_data
