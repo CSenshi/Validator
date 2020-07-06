@@ -206,7 +206,7 @@ def test_07_validate_simple():
 def test_08_validate_error_msg():
     request = {"age": 100}
     rule = {"age": [R.Integer, R.Between(18, 90)]}
-    result, errors = validate(request, rule, return_info=True)
+    result, validated_data, errors = validate(request, rule, return_info=True)
     assert not result
     assert "age" in errors.keys()
     assert "Between" in errors["age"].keys()
@@ -217,7 +217,7 @@ def test_08_validate_error_msg():
         "name": [R.Required()],
         "surname": [R.Required(), R.Mail()],
     }
-    result, errors = validate(request, rule, return_info=True)
+    result, validated_data, errors = validate(request, rule, return_info=True)
 
     # Test General
     assert not result
@@ -245,7 +245,7 @@ def test_09_validate_error_msg():
         "profession": [R.Required, R.Mail],
         "mail": [R.Required(), R.Mail()],
     }
-    result, errors = validate(request, rule, return_info=True)
+    result, validated_data, errors = validate(request, rule, return_info=True)
 
     # Test General
     assert not result
@@ -307,7 +307,7 @@ def test_10_validate_many():
 def test_11_validate_many_errors_msg():
     requests = [{"age": 11}, {"age": 12}, {"age": 13}, {"age": 14}]
     rule = {"age": [R.Integer, R.Min(18)]}
-    result, errors = validate_many(requests, rule, True)
+    result, validated_datas, errors = validate_many(requests, rule, True)
     assert not result
     assert 4 == len(errors)
     assert "age" in errors[0]
@@ -325,7 +325,7 @@ def test_11_validate_many_errors_msg():
 
     requests = [{"age": 11}, {"age": 12}, {"age": 23}, {"age": 14}]
     rule = {"age": [R.Integer, R.Max(18)]}
-    result, errors = validate_many(requests, rule, True)
+    result, validated_datas, errors = validate_many(requests, rule, True)
     assert not result
     assert 4 == len(errors)
     assert {} == errors[0]
@@ -337,7 +337,7 @@ def test_11_validate_many_errors_msg():
 
     requests = [{"name": "Jon"}, {"name": ""}, {"name": ""}, {"name": "Tom"}]
     rule = {"name": [R.Required()]}
-    result, errors = validate_many(requests, rule, True)
+    result, validated_datas, errors = validate_many(requests, rule, True)
     assert not result
     assert 4 == len(errors)
     assert {} == errors[0]
@@ -364,7 +364,7 @@ def test_12_validate_many_errors_msg():
         "age": [R.Integer, R.Min(18)],
     }
 
-    result, errors = validate_many(requests, rule, True)
+    result, validated_datas, errors = validate_many(requests, rule, True)
 
     assert not result
     assert len(errors) == 5

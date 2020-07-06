@@ -70,10 +70,13 @@ def test_rule_func_06():
 
     rules = {"name": lambda x: len(x) > 0, "ages": fun_ages, "mail": fun_mail}
 
-    result, errors = validate(req, rules, True)
+    result, validated_data, errors = validate(req, rules, True)
 
     # Result Should be False
     assert not result
+
+    # Validated data should be length of 0
+    assert len(validated_data) == 0
 
     # Check for all rules' errors
     assert len(errors) == 3
@@ -112,9 +115,13 @@ def test_rule_func_07():
     assert validate(req, rule)
 
     req = {"name": "", "ages": 10, "mail": "Jon.Doe"}
-    result, errors = validate(req, rule, True)
+    result, validated_data, errors = validate(req, rule, True)
+
     # Result Should be False
     assert not result
+
+    # Validated data should be length of 0
+    assert len(validated_data) == 0
 
     # Check for all rules' errors
     assert len(errors) == 3
@@ -166,9 +173,13 @@ def test_rule_func_08():
     assert validate(req, rule)
 
     req = {"name": "", "ages": 10, "mail": "Jon.Doe"}
-    result, errors = validate(req, rule, True)
+    result, validated_data, errors = validate(req, rule, True)
+
     # Result Should be False
     assert not result
+
+    # Validated data should be length of 0
+    assert len(validated_data) == 0
 
     # Check for all rules' errors
     assert len(errors) == 3
