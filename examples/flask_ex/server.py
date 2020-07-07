@@ -14,7 +14,7 @@ import json
 app = Flask(__name__)
 
 
-@app.route("/register-1", methods=["GET"])
+@app.route("/register-1", methods=["GET", "POST"])
 def register_1():
     rules = {
         "first_name": "required",
@@ -22,9 +22,7 @@ def register_1():
         "age": "required|integer|between:18,30",
         "mail": "mail",
     }
-
-    result = validate(request.args, rules, True)
-
+    result = validate(request.values, rules, True)
     return json.dumps(result)
 
 
