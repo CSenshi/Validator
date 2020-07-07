@@ -1,7 +1,32 @@
 import requests as req
+from pprint import pprint
+import json
 
-URL = "http://127.0.0.1:5000/register/?first_name=Jon&last_name=Doe&age=100&mail=jon.doe@g"
+FLASK_SERVER_URL = "http://127.0.0.1:5000"
 
-resp = req.get(URL)
 
-print(resp.text)
+def register_1_pass():
+    # Data to validate
+    data = {
+        "age": "23",
+        "first_name": "Jon",
+        "last_name": "Doe",
+        "mail": "jon.doe@gmail.com",
+    }
+
+    # Create URL on specific route
+    URL = FLASK_SERVER_URL + "/register-1?"
+    # Create Parameters string
+    params = "&".join(f"{key}={data[key]}" for key in data)
+    # Append URL and parameters
+    URL += params
+
+    # Do GET request
+    print("Sent GET Request to :")
+    print(URL)
+    resp = req.get(URL)
+    print("\nReceived Response:")
+    pprint(json.loads(resp.text))
+
+
+register_1_pass()
