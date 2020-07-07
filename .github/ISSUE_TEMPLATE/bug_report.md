@@ -7,18 +7,18 @@ assignees: ''
 
 ---
 
-**Describe the bug**
+**Bug Description:**
 *{A clear and concise description of what the bug is}*
 
-**Expected behavior**
+**Expected Behavior:**
 *{A clear and concise description of what you expected to happen}*
 
-**Code Fragment**
+**Code Fragment:**
 *{If possible, copy code fragment that caused a bug}*
 ```python
 # Code...
 ```
-**Error Fragment**
+**Error Fragment:**
 *{If possible and if error occurred copy error message}*
 ```python
 # Error Message...
