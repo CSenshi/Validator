@@ -1,14 +1,22 @@
+# "Hacking" to see package of validaor (Not needed when pip installed)
+from pathlib import Path
+import sys, os
+
+# add ../../ to path
+validator_path = os.path.abspath(Path(os.path.abspath(__file__)).parent.parent.parent)
+print(validator_path)
+sys.path += [validator_path]
+
+# real imports
 from validator import Validator, validate, rules as R
 from flask import Flask, url_for, request
 
-import json
 
 app = Flask(__name__)
 
 
 @app.route("/register/", methods=["GET"])
 def register():
-    # print(request)
     val_request, rules = {}, {}
 
     val_request["first_name"] = request.args.get("first_name")
