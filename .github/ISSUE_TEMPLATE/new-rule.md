@@ -13,7 +13,14 @@ assignees: ''
 *{A clear and concise description of new rule}*
 
 **Rule Usage Example:**
-*{If possible, write small code fragment of using new rule}*
+```python
+reqs = {'data' : '...'}
+rule = {'data' : '{new_rule}:{arg1},{arg2}...'}
+validate(reqs, rule) # True
 
+reqs = {'data' : '...'}
+rule = {'data' : '{new_rule}:{arg1},{arg2}...'}
+validate(reqs, rule) # False, It fails because...
+```
 ----------------------------------------------------
 **Before contributing please review [RULES.md](https://github.com/CSenshi/Validator/blob/master/RULES.md) (check for duplication), also check [CONTRIBUTING.md](https://github.com/CSenshi/Validator/blob/master/CONTRIBUTING.md) for more details :100:**
