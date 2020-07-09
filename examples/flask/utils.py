@@ -29,4 +29,3 @@ def _log_pass(data):
 
 def _log(string, clr):
     print(f"{clr} {string} {CLRS.ENDC}")
-
