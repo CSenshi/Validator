@@ -14,16 +14,26 @@ import json
 app = Flask(__name__)
 
 
-@app.route("/register-1", methods=["GET", "POST"])
-def register_1():
+@app.route("/register", methods=["GET", "POST"])
+def register():
     rules = {
         "first_name": "required",
         "last_name": "required",
         "age": "required|integer|between:18,30",
         "mail": "mail",
     }
-    result = validate(request.values, rules, True)
-    return json.dumps(result)
+    # validation
+    result, validated_data, errors = validate(request.values, rules, True)
+
+    # Result
+    if result:
+        MSG = "Data Validation Pass!"
+        DATA = validated_data
+    else:
+        MSG = "Data Validation Fail!"
+        DATA = errors
+
+    return json.dumps([MSG, DATA])
 
 
 if __name__ == "__main__":
