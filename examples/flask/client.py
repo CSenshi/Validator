@@ -8,7 +8,7 @@ FLASK_SERVER_URL = "http://127.0.0.1:5000"
 
 # Main Client Functions
 def register_1_pass():
-    U._log_prompt("GET Request With Valid Data")
+    U._log_prompt("1. GET Request With Valid Data")
     # Data to validate
     data = {
         "age": "23",
@@ -32,7 +32,7 @@ def register_1_pass():
 
 
 def register_2_pass():
-    U._log_prompt("POST Request With Valid Data")
+    U._log_prompt("2. POST Request With Valid Data")
     # Data to validate
     data = {
         "age": "23",
@@ -55,7 +55,7 @@ def register_2_pass():
 
 
 def register_3_fail():
-    U._log_prompt("GET Request With Invalid Data")
+    U._log_prompt("3. GET Request With Invalid Data")
     # Data to validate
     data = {
         "age": "23",
@@ -79,7 +79,7 @@ def register_3_fail():
 
 
 def register_4_fail():
-    U._log_prompt("POST Request With Invalid Data")
+    U._log_prompt("4. POST Request With Invalid Data")
     # Data to validate
     data = {
         "age": "13",
