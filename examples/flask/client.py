@@ -1,17 +1,14 @@
 import requests as req
 from pprint import pprint
+import utils as U
 import json
 
 FLASK_SERVER_URL = "http://127.0.0.1:5000"
 
 
-def _log(string):
-    prompt = "#" * 10
-    print(f"\n{prompt} {string} {prompt}")
-
-
+# Main Client Functions
 def register_1_pass():
-    _log("GET Request With Valid Data")
+    U._log_prompt("GET Request With Valid Data")
     # Data to validate
     data = {
         "age": "23",
@@ -27,15 +24,15 @@ def register_1_pass():
     URL += params
 
     # Do GET request
-    print("Sent GET Request to :")
+    U._log_paragraph("Sent GET Request to:")
     print(URL)
     resp = req.get(URL)
-    print("\nReceived Response:")
+    U._log_pass("\nReceived Response:")
     pprint(json.loads(resp.text))
 
 
 def register_2_pass():
-    _log("POST Request With Valid Data")
+    U._log_prompt("POST Request With Valid Data")
     # Data to validate
     data = {
         "age": "23",
@@ -48,18 +45,20 @@ def register_2_pass():
     URL = FLASK_SERVER_URL + "/register"
 
     # Do POST request
-    print("Sent GET Request to :")
+    U._log_paragraph("Sent GET Request to:")
     print(URL)
+    U._log_paragraph("Sent Data: ")
+    pprint(data)
     resp = req.post(URL, data=data)
-    print("\nReceived Response:")
+    U._log_pass("\nReceived Response:")
     pprint(json.loads(resp.text))
 
 
 def register_3_fail():
-    _log("GET Request With Invalid Data")
+    U._log_prompt("GET Request With Invalid Data")
     # Data to validate
     data = {
-        "age": "15",
+        "age": "23",
         "first_name": "",
         "last_name": "Doe",
         "mail": "",
@@ -72,18 +71,18 @@ def register_3_fail():
     URL += params
 
     # Do GET request
-    print("Sent GET Request to :")
+    U._log_paragraph("Sent GET Request to:")
     print(URL)
     resp = req.get(URL)
-    print("\nReceived Response:")
+    U._log_fail("\nReceived Response:")
     pprint(json.loads(resp.text))
 
 
 def register_4_fail():
-    _log("POST Request With Invalid Data")
+    U._log_prompt("POST Request With Invalid Data")
     # Data to validate
     data = {
-        "age": "23",
+        "age": "13",
         "first_name": "Jon",
         "last_name": "Doe",
         "mail": "jon.doe",
@@ -93,10 +92,12 @@ def register_4_fail():
     URL = FLASK_SERVER_URL + "/register"
 
     # Do POST request
-    print("Sent GET Request to :")
+    U._log_paragraph("Sent POST Request to:")
     print(URL)
+    U._log_paragraph("Sent Data: ")
+    pprint(data)
     resp = req.post(URL, data=data)
-    print("\nReceived Response:")
+    U._log_fail("\nReceived Response:")
     pprint(json.loads(resp.text))
 
 
