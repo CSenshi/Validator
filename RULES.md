@@ -1,24 +1,49 @@
-# Rules
+<table>
+    <tr>
+        <td>
+            <a href="#Between">Between</a>
+        </td><td>
+            <a href="#Integer">Integer</a>
+        </td><td>
+            <a href="#IP">IP</a>
+        </td><td>
+            <a href="#IPv4">IPv4</a>
+        </td><td>
+            <a href="#IPv6">IPv6</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#List">List</a>
+        </td><td>
+            <a href="#Mail">Mail</a>
+        </td><td>
+            <a href="#Max">Max</a>
+        </td><td>
+            <a href="#Min">Min</a>
+        </td><td>
+            <a href="#Regex">Regex</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#Required">Required</a>
+        </td><td>
+            <a href="#Same">Same</a>
+        </td><td>
+            <a href="#Size">Size</a>
+        </td>
+    </tr>
+    
+</table>
 
-<div>
-<p>
-<a href="#Between">Between</a>
-<a href="#Integer">Integer</a>
-<a href="#IP">IP</a>
-<a href="#IPv4">IPv4</a>
-<a href="#IPv6">IPv6</a>
-<a href="#List">List</a>
-<a href="#Mail">Mail</a>
-<a href="#Max">Max</a>
-<a href="#Min">Min</a>
-<a href="#Regex">Regex</a>
-<a href="#Required">Required</a>
-<a href="#Same">Same</a>
-<a href="#Size">Size</a>
-</p>
-</div><a name="Between"/>
+
+
+
+<a name="Between" />
 
 #### Between
+
 The field under validation must have a size between the given min and max
 ```python
 >>> from validator import validate
@@ -33,9 +58,11 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="Integer"/>
+
+<a name="Integer" />
 
 #### Integer
+
 The field under validation must be an Integer
 ```python
 >>> from validator import validate
@@ -50,9 +77,11 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="IP"/>
+
+<a name="IP" />
 
 #### IP
+
 The field under validation must be an IP address.
 ```python
 >>> from validator import validate
@@ -67,9 +96,11 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="IPv4"/>
+
+<a name="IPv4" />
 
 #### IPv4
+
 The field under validation must be an IPv4 address.
 ```python
 >>> from validator import validate
@@ -84,9 +115,11 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="IPv6"/>
+
+<a name="IPv6" />
 
 #### IPv6
+
 The field under validation must be an IPv6 address.
 ```python
 >>> from validator import validate
@@ -101,9 +134,13 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="List"/>
+
+
+
+<a name="List" />
 
 #### List
+
 The field under validation must be a list (Python array)
 ```python
 >>> from validator import validate
@@ -118,9 +155,11 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="Mail"/>
+
+<a name="Mail" />
 
 #### Mail
+
 The field under validation must be formatted as an e-mail address
 ```python
 >>> from validator import validate
@@ -135,9 +174,11 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="Max"/>
+
+<a name="Max" />
 
 #### Max
+
 The field under validation must be less than or equal to a maximum value. Given value is evaluated according to `Size` rule
 ```python
 >>> from validator import validate
@@ -152,9 +193,11 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="Min"/>
+
+<a name="Min" />
 
 #### Min
+
 The field under validation must be greater than or equal to a minimum value. Given value is evaluated according to `Size` rule
 ```python
 >>> from validator import validate
@@ -169,9 +212,11 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="Regex"/>
+
+<a name="Regex" />
 
 #### Regex
+
 The field under validation must match the given regular expression.
 ```python
 >>> from validator import validate
@@ -186,9 +231,13 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="Required"/>
+
+
+
+<a name="Required" />
 
 #### Required
+
 The field under validation must be present in the input data and not empty
 ```python
 >>> from validator import validate
@@ -203,9 +252,11 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="Same"/>
+
+<a name="Same" />
 
 #### Same
+
 The given field must match the field under validation
 ```python
 >>> from validator import validate
@@ -222,9 +273,11 @@ True
 >>> validate(reqs, rule)
 False
 ```
-<a name="Size"/>
+
+<a name="Size" />
 
 #### Size
+
 The field under validation must have a size matching the given value. For string data, value corresponds to the number of characters. For numeric data, value corresponds to a given integer value (the attribute must also have the numeric or integer rule). For an array, size corresponds to the count of the array.
 ```python
 >>> from validator import validate
@@ -247,3 +300,4 @@ True
 >>> validate(reqs, rule)
 True
 ```
+

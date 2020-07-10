@@ -1,0 +1,9 @@
+from validator.rules import {{name}}
+
+
+def test_{{file_name}}_01():
+    pass
+
+
+def test_{{file_name}}_02():
+    pass

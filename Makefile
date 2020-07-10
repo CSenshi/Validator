@@ -44,6 +44,7 @@ fix:
 # Generate files
 rule:
 	$(RULES_TEMPLATE_GENERATOR_SCRIPT) $(F_NAME)
+	make
 
 readme: init
 	$(README_TEMPLATE_GENERATOR_SCRIPT)
