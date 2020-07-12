@@ -2,6 +2,7 @@ from validator.rules import Between
 from validator.rules import Integer
 from validator.rules import List
 from validator.rule_pipe_validator import RulePipeValidator as RPV
+from validator import validate
 import pytest
 
 
@@ -73,3 +74,25 @@ def test_between_07_bad():
     # wrong type
     with pytest.raises(TypeError):
         assert Between("5", "5").check(0)
+
+
+def test_between_08_strings():
+    assert validate({"val": "15"}, {"val": "between:1,20"})
+
+    assert validate({"val": -173}, {"val": "between:-400,0"})
+
+    assert validate({"val": [15, "3", {}]}, {"val": "between:2,4"})
+
+    assert not validate({"val": "MACS"}, {"val": "between:12,300"})
+
+    assert not validate({"val": []}, {"val": "between:14,31"})
+
+
+def test_between_09_strings():
+    assert validate({"val": "9"}, {"val": "integer|between:2,17"})
+
+    assert validate({"val": [1, 2, 3]}, {"val": "list|between:2,17"})
+
+    assert not validate({"val": "9"}, {"val": "integer|between:2,7"})
+
+    assert not validate({"val": [5, 2]}, {"val": "list|between:1,1"})
