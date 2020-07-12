@@ -1,4 +1,5 @@
 from validator.rules import IPv6
+from validator import validate
 
 
 def test_IPv6_01():
@@ -21,3 +22,13 @@ def test_IPv6_02():
     assert not IPv6().check("234::123::23")
 
     assert not IPv6().check("0001.253.254.255")
+
+
+def test_IPv6_03_string():
+    assert validate({"val": "2001:0db8:85a3:0:0:8a2e:0370:7334"}, {"val": "ipv6"})
+
+    assert validate({"val": "::2:3:4:5:6:7:8"}, {"val": "ipv6"})
+
+    assert not validate({"val": "1:2:3:4:5::6:7:8"}, {"val": "ipv6"})
+
+    assert not validate({"val": "234::123::23"}, {"val": "ipv6"})
