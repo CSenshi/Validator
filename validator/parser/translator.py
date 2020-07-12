@@ -73,7 +73,7 @@ class Translator:
         args = []
         if target_char in elem:
             # extract rule_name and arguments from string
-            class_str, args_str = elem.split(target_char)
+            class_str, args_str = elem.split(target_char, 1)
 
             class_str = class_str.lower()
             # Split arguments into array
