@@ -76,7 +76,7 @@ def test_between_07_bad():
         assert Between("5", "5").check(0)
 
 
-def test_between_08_strings():
+def test_between_08_string():
     assert validate({"val": "15"}, {"val": "between:1,20"})
 
     assert validate({"val": -173}, {"val": "between:-400,0"})
@@ -88,7 +88,7 @@ def test_between_08_strings():
     assert not validate({"val": []}, {"val": "between:14,31"})
 
 
-def test_between_09_strings():
+def test_between_09_string():
     assert validate({"val": "9"}, {"val": "integer|between:2,17"})
 
     assert validate({"val": [1, 2, 3]}, {"val": "list|between:2,17"})

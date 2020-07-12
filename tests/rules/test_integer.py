@@ -1,4 +1,5 @@
 from validator.rules import Integer
+from validator import validate
 
 
 def test_integer_01():
@@ -75,3 +76,19 @@ def test_integer_05():
     assert not Integer().check({"a": 2})
 
     assert not Integer().check(__file__)
+
+
+def test_integer_06_string():
+    assert validate({"val": -63}, {"val": "integer"})
+
+    assert validate({"val": 0}, {"val": "integer"})
+
+    assert validate({"val": 5}, {"val": "integer"})
+
+    assert validate({"val": "42"}, {"val": "integer"})
+
+    assert not validate({"val": {}}, {"val": "integer"})
+
+    assert not validate({"val": [123, 5]}, {"val": "integer"})
+
+    assert not validate({"val": 2.3}, {"val": "integer"})
