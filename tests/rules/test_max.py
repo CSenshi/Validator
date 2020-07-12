@@ -2,6 +2,7 @@ from validator.rules import Max
 from validator.rules import Integer
 from validator.rules import List
 from validator.rule_pipe_validator import RulePipeValidator as RPV
+from validator import validate
 import pytest
 
 
@@ -75,3 +76,23 @@ def test_max_06_bad():
     # wrong type
     with pytest.raises(TypeError):
         assert not Max("5", "5").check(0)
+
+
+def test_max_07_string():
+    assert validate({"val": "51"}, {"val": "max:3"})
+
+    assert validate({"val": 77}, {"val": "max:100"})
+
+    assert not validate({"val": "51"}, {"val": "max:1"})
+
+    assert not validate({"val": 64}, {"val": "max:50"})
+
+
+def test_max_08_string():
+    assert validate({"val": "5"}, {"val": "integer|max:10"})
+
+    assert validate({"val": ["2", [], {}]}, {"val": "list|max:10"})
+
+    assert not validate({"val": "51"}, {"val": "integer|max:3"})
+
+    assert not validate({"val": ["2", [], {}]}, {"val": "list|max:2"})
