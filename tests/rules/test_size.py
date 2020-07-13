@@ -2,6 +2,7 @@ from validator.rules import Size
 from validator.rules import Integer
 from validator.rules import List
 from validator.rule_pipe_validator import RulePipeValidator as RPV
+from validator import validate
 
 
 def test_size_01():
@@ -56,3 +57,19 @@ def test_size_04_rpv():
 
     rpv = RPV([], rules=[List(), Size(-1)])
     assert not rpv.execute()
+
+
+def test_size_05_string():
+    assert validate({"val": "fghij"}, {"val": "size:5"})
+
+    assert validate({"val": 10}, {"val": "size:10"})
+
+    assert validate({"val": "15"}, {"val": "integer|size:15"})
+
+    assert validate({"val": [-124, True]}, {"val": "size:2"})
+
+    assert not validate({"val": [-124, True]}, {"val": "list|size:3"})
+
+    assert not validate({"val": ["Name", "Surname"]}, {"val": "size:0"})
+
+    assert not validate({"val": 8}, {"val": "size:7"})

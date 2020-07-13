@@ -1,5 +1,6 @@
 from validator.rules import Same
 from validator.rules_wrapper import RulesWrapper as RW
+from validator import validate
 
 
 def test_same_01():
@@ -40,3 +41,23 @@ def test_same_02():
     rw = RW(req, rule)
     rw.run()
     assert not rw.get_result()
+
+
+def test_same_03_string():
+    assert validate({"val1": "", "val2": ""}, {"val1": "same:val2"})
+
+    assert validate({"val1": -123, "val2": -123}, {"val1": "same:val2"})
+
+    assert validate(
+        {"val1": {"key": "value"}, "val2": {"key": "value"}}, {"val1": "same:val2"}
+    )
+
+    assert validate({"val1": False, "val2": False}, {"val1": "same:val2"})
+
+    assert not validate({"val1": False, "val2": True}, {"val1": "same:val2"})
+
+    assert not validate({"val1": 52, "val2": 51}, {"val1": "same:val2"})
+
+    assert not validate({"val1": [], "val2": {}}, {"val1": "same:val2"})
+
+    assert not validate({"val1": "turtle", "val2": "tortoise"}, {"val1": "same:val2"})

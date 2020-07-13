@@ -1,4 +1,5 @@
 from validator.rules import Regex
+from validator import validate
 
 
 def test_regex_01():
@@ -29,3 +30,13 @@ def test_regex_02():
     assert not Regex("z{3,6}").check("xyzzxy")
 
     assert not Regex("xyz$").check("xyzabc")
+
+
+def test_regex_03_string():
+    assert validate({"val": "abcdef"}, {"val": "regex:a"})
+
+    assert validate({"val": "dcdcdc"}, {"val": "regex:(dc)*"})
+
+    assert not validate({"val": "groy"}, {"val": "regex:gr[ae]y"})
+
+    assert not validate({"val": "xyzabc"}, {"val": "regex:xyz$"})
