@@ -8,13 +8,13 @@ class String(Rule):
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {'value' : 'some string'}
-    >>> rule = {'value' : 'string'}
+    >>> reqs = {"value" : "some string"}
+    >>> rule = {"value" : "string"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {'value' : 17}
-    >>> rule = {'value' : 'string'}
+    >>> reqs = {"value" : 17}
+    >>> rule = {"value" : "string"}
     >>> validate(reqs, rule)
     False
     """
