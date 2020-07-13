@@ -38,8 +38,8 @@ Please see examples below:
 from validator import validate
 
 request = {"name": "Jon Doe",
-            "age": 33,
-            "mail": "jon_doe@gmail.com"}
+           "age": 33,
+           "mail": "jon_doe@gmail.com"}
 
 rules = {"name": "required",
          "age": "integer|min:18",
@@ -105,8 +105,8 @@ Validator allows user to have a look at failed validations and passed validation
 
     """
     result = True
-    errors = {'name': {'Required': 'Field was empty'},
-              'mail': {'Mail': 'Expected a Mail, Got: jon_doe'}}
+    errors = {"name": {"Required': "Field was empty"},
+              "mail": {"Mail': "Expected a Mail, Got: jon_doe"}}
     """
     ```
 
@@ -132,7 +132,7 @@ requests = [{"name": "Jon"},
             {"name": "Rob"},
             {"name": "Tom"},
             {"name": "Greg"}]
-rule = {"name": 'required|min:3'}
+rule = {"name": "required|min:3"}
 
 result = validate_many(requests, rule) # True
 ```
@@ -146,14 +146,14 @@ requests = [{"name": "Jon"},
             {"name": ""},
             {"name": "Yo"},
             {"name": "Greg"}]
-rule = {"name": 'required|min:3'}
+rule = {"name": "required|min:3"}
 
 result, errors = validate_many(requests, rule, return_info=True)
 """
 result = False
 errors = [{},
-          {'name': {'Min': 'Expected Maximum: 3, Got: 0', 'Required': 'Field was empty'}},
-          {'name': {'Min': 'Expected Maximum: 3, Got: 2'}},
+          {"name": {"Min": "Expected Maximum: 3, Got: 0", "Required": "Field was empty"}},
+          {"name": {"Min": "Expected Maximum: 3, Got: 2"}},
           {}]
 """
 ```
@@ -212,20 +212,20 @@ Rules can affect each other. Let's take a look at `Size` rule. It takes 1 argume
 
 * Case 1: checks for length of '18' to be 18. len('18') is 2, therefore it is False.
 ```python
-request = {'age' : '18'}
-rule = {'age' : 'size:18'}
+request = {"age" : "18"}
+rule = {"age" : "size:18"}
 
 validate(request, rule)
 """
 result = False
-errors = {'age': {'Size': 'Expected Size:18, Got:2'}}
+errors = {"age": {"Size": "Expected Size:18, Got:2"}}
 """
 ```
 
 * Case 2: checks if int representation of '18' is equal to 18. (int('18') = 18), therefore it is True.
 ```python
-request = {'age' : '18'}
-rule = {'age' : 'integer|size:18'}
+request = {"age" : "18"}
+rule = {"age" : "integer|size:18"}
 
 validate(request, rule) # True
 ```
