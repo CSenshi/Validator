@@ -32,6 +32,8 @@
             <a href="#Same">Same</a>
         </td><td>
             <a href="#Size">Size</a>
+        </td><td>
+            <a href="#String">String</a>
         </td>
     </tr>
     
@@ -299,5 +301,24 @@ True
 >>> rule = {"value" : "list|size:3"}
 >>> validate(reqs, rule)
 True
+```
+
+<a name="String" />
+
+#### String
+
+The field under validation must be a String
+```python
+>>> from validator import validate
+
+>>> reqs = {'value' : 'some string'}
+>>> rule = {'value' : 'string'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'value' : 17}
+>>> rule = {'value' : 'string'}
+>>> validate(reqs, rule)
+False
 ```
 

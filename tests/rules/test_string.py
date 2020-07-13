@@ -25,6 +25,8 @@ def test_string_02():
 
     assert not String().check(int("17"))
 
+    assert not String().check(None)
+
 
 def test_string_03():
     assert validate({"val": "some string value"}, {"val": "string"})
