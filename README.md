@@ -38,12 +38,12 @@ Please see examples below:
 from validator import validate
 
 request = {"name": "Jon Doe",
-        "age": 33,
-        "mail": "jon_doe@gmail.com"}
+            "age": 33,
+            "mail": "jon_doe@gmail.com"}
 
 rules = {"name": "required",
-        "age": "integer|min:18",
-        "mail": "required|mail"}
+         "age": "integer|min:18",
+         "mail": "required|mail"}
 
 result = validate(request, rules) # True
 ```
@@ -70,12 +70,12 @@ Validator allows user to have a look at failed validations and passed validation
     from validator import validate
 
     request = {"first_name": "Jon",
-            "last_name": "Doe",
-            "age": 33,
-            "mail": "jondoe@gmail.com",
-            "_token": "WpH0UPfy0AXzMtK2UWtJ",
-            "_cookie_data": "e9Uixp8hzUySy6bw3MuZ",
-            "_session_id": "ZB7q7uIVdWBKgSCSSWAa"}
+               "last_name": "Doe",
+               "age": 33,
+               "mail": "jondoe@gmail.com",
+               "_token": "WpH0UPfy0AXzMtK2UWtJ",
+               "_cookie_data": "e9Uixp8hzUySy6bw3MuZ",
+               "_session_id": "ZB7q7uIVdWBKgSCSSWAa"}
 
     rule = {"first_name": "required",
             "last_name": "required",
@@ -86,9 +86,9 @@ Validator allows user to have a look at failed validations and passed validation
     """
     result = True
     validated_data = {"first_name": "Jon",
-                    "last_name": "Doe",
-                    "age": 33,
-                    "mail": "jondoe@gmail.com"}
+                      "last_name": "Doe",
+                      "age": 33,
+                      "mail": "jondoe@gmail.com"}
     """
     ```
 * Error Messages
@@ -96,7 +96,7 @@ Validator allows user to have a look at failed validations and passed validation
     from validator import validate
 
     request = {"name": "",
-            "mail": "jon_doe"}
+               "mail": "jon_doe"}
 
     rule = {"name": "required",
             "mail": "mail"}
@@ -188,8 +188,8 @@ rule = {"name": ["required"],
 from validator import rules as R
 
 rules = {"name": [R.Required()],
-        "age": [R.Integer(), R.Min(18)],
-        "mail": [R.Requried(), R.Mail()]}
+         "age": [R.Integer(), R.Min(18)],
+         "mail": [R.Requried(), R.Mail()]}
 ```
 
 
@@ -198,8 +198,8 @@ rules = {"name": [R.Required()],
 from validator import rules as R
 
 rules = {"name": R.Required(),           # no need for Array Brackets if one rule
-        "age": [R.Integer, R.Min(18)],
-        "mail": [R.Requried, R.Mail]}   # no need for class initialization with brakcets () 
+         "age": [R.Integer, R.Min(18)],
+         "mail": [R.Requried, R.Mail]}   # no need for class initialization with brakcets () 
                                         # if no arguments are passed to rule
 ```
 
