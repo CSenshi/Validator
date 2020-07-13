@@ -2,3 +2,4 @@ black
 pytest
 flask
 pprint
+jinja2
