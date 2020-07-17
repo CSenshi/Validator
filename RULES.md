@@ -7,6 +7,7 @@
 <a href="#IP">IP</a>
 <a href="#IPv4">IPv4</a>
 <a href="#IPv6">IPv6</a>
+<a href="#JSON">JSON</a>
 <a href="#List">List</a>
 <a href="#Mail">Mail</a>
 <a href="#Max">Max</a>
@@ -98,6 +99,23 @@ True
 
 >>> reqs = {"ipv6_addr" : "2001:0db8:85a3:9876:1234:8a2e"}
 >>> rule = {"ipv6_addr" : "ipv6"}
+>>> validate(reqs, rule)
+False
+```
+<a name="JSON"/>
+
+#### JSON
+The field under validation must be formatted as an JSON
+```python
+>>> from validator import validate
+
+>>> reqs = {"value" : '{ "age":100}'}
+>>> rule = {"value" : "json"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"value" : "aaa.com"}
+>>> rule = {"value" : "json"}
 >>> validate(reqs, rule)
 False
 ```
