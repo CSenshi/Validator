@@ -3,36 +3,43 @@
         <td>
             <a href="#Between">Between</a>
         </td><td>
+            <a href="#Date">Date</a>
+        </td><td>
             <a href="#Integer">Integer</a>
         </td><td>
             <a href="#IP">IP</a>
         </td><td>
             <a href="#IPv4">IPv4</a>
-        </td><td>
-            <a href="#IPv6">IPv6</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#IPv6">IPv6</a>
+        </td><td>
+            <a href="#JSON">JSON</a>
+        </td><td>
             <a href="#List">List</a>
         </td><td>
             <a href="#Mail">Mail</a>
         </td><td>
             <a href="#Max">Max</a>
-        </td><td>
-            <a href="#Min">Min</a>
-        </td><td>
-            <a href="#Regex">Regex</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Min">Min</a>
+        </td><td>
+            <a href="#Regex">Regex</a>
+        </td><td>
             <a href="#Required">Required</a>
         </td><td>
             <a href="#Same">Same</a>
         </td><td>
             <a href="#Size">Size</a>
-        </td><td>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <a href="#String">String</a>
         </td>
     </tr>
@@ -57,6 +64,25 @@ True
 
 >>> reqs = {"age" : 23}
 >>> rule = {"age" : "between:6,18"}
+>>> validate(reqs, rule)
+False
+```
+
+<a name="Date" />
+
+#### Date
+
+The field under validation must be an Integer
+```python
+>>> from validator import validate
+
+>>> reqs = {"date" : "25-08-1900"}
+>>> rule = {"date" : "date"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "32-12-2020"}
+>>> rule = {"date" : "date"}
 >>> validate(reqs, rule)
 False
 ```
@@ -118,6 +144,8 @@ True
 False
 ```
 
+
+
 <a name="IPv6" />
 
 #### IPv6
@@ -137,7 +165,24 @@ True
 False
 ```
 
+<a name="JSON" />
 
+#### JSON
+
+The field under validation must be formatted as an JSON
+```python
+>>> from validator import validate
+
+>>> reqs = {"value" : '{ "age":100}'}
+>>> rule = {"value" : "json"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"value" : "aaa.com"}
+>>> rule = {"value" : "json"}
+>>> validate(reqs, rule)
+False
+```
 
 <a name="List" />
 
@@ -196,6 +241,8 @@ True
 False
 ```
 
+
+
 <a name="Min" />
 
 #### Min
@@ -233,8 +280,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="Required" />
 
@@ -302,6 +347,8 @@ True
 >>> validate(reqs, rule)
 True
 ```
+
+
 
 <a name="String" />
 
