@@ -1,4 +1,3 @@
-import re
 from validator.rules_src import Rule
 import json
 
@@ -10,13 +9,13 @@ class JSON(Rule):
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {"json_" : '{ "age":100}'}
-    >>> rule = {"json_" : "json"}
+    >>> reqs = {"value" : '{ "age":100}'}
+    >>> rule = {"value" : "json"}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {"json_" : "aaa.com"}
-    >>> rule = {"json_" : "json"}
+    >>> reqs = {"value" : "aaa.com"}
+    >>> rule = {"value" : "json"}
     >>> validate(reqs, rule)
     False
     """
