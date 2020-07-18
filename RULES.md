@@ -51,6 +51,11 @@
             <a href="#String">String</a>
         </td>
     </tr>
+    <tr>
+        <td>
+            <a href="#UUIDv4">UUIDv4</a>
+        </td>
+    </tr>
     
 </table>
 
@@ -490,6 +495,26 @@ True
 >>> reqs = {"value" : 17}
 >>> rule = {"value" : "string"}
 >>> validate(reqs, rule)
+False
+```
+
+
+
+<a name="UUIDv4" />
+
+#### UUIDv4
+
+The field under validation must be formatted as an uuidv4
+```python
+>>> from validator import validate
+>>> reqs = {'val' : '81368b76-31e9-41db-b28c-8c029cb435f0'}
+>>> rule = {'val' : 'uuidv4'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'val' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
+>>> rule = {'val' : 'uuidv4'}
+>>> validate(reqs, rule) #It fails because data is uuidv3
 False
 ```
 
