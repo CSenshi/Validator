@@ -320,7 +320,7 @@ False
 
 #### Octal
 
-The field under validation must be a octal number
+The field under validation must be an octal number
 ```python
 >>> from validator import validate
 
