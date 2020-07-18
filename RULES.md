@@ -303,7 +303,8 @@ False
 
 #### Max
 
-The field under validation must be less than or equal to a maximum value. Given value is evaluated according to `Size` rule
+The field under validation must be less than or equal to a maximum value
+Given value is evaluated according to `Size` rule
 ```python
 >>> from validator import validate
 
@@ -322,7 +323,8 @@ False
 
 #### Min
 
-The field under validation must be greater than or equal to a minimum value. Given value is evaluated according to `Size` rule
+The field under validation must be greater than or equal to a minimum value.
+Given value is evaluated according to `Size` rule
 ```python
 >>> from validator import validate
 
@@ -426,13 +428,21 @@ False
 
 #### Size
 
-The field under validation must have a size matching the given value. For string data, value corresponds to the number of characters. For numeric data, value corresponds to a given integer value (the attribute must also have the numeric or integer rule). For an array, size corresponds to the count of the array.
+The field under validation must have a size matching the given value.
+
+
+* For string data, value corresponds to the number of characters.
+
+* For numeric data, value corresponds to a given integer value. The attribute must also have any of the number rules: decimal, binary, octal, hex.
+If Integer rule is given it checks for all four systems with given order
+
+* For an array, size corresponds to the count of the array.
 ```python
 >>> from validator import validate
 
 # Checks for given number system
 >>> reqs = {"value" : "42"} # Checks for Decimal Integer value
->>> rule = {"value" : "integer|size:42"}
+>>> rule = {"value" : "decimal|size:42"}
 >>> validate(reqs, rule)
 True
 

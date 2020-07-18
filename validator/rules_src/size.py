@@ -2,6 +2,7 @@ from validator.rules_src import Rule
 from validator.rules_src.integer import Integer
 from validator.rules_src.binary import Binary
 from validator.rules_src.octal import Octal
+from validator.rules_src.decimal import Decimal
 from validator.rules_src.hex import Hex
 from validator.rules_src.list import List
 from validator import utils
@@ -10,16 +11,21 @@ from validator import utils
 class Size(Integer, List):
     """
     The field under validation must have a size matching the given value. 
-    For string data, value corresponds to the number of characters.
-    For numeric data, value corresponds to a given integer value (the attribute must also have the numeric or integer rule). 
-    For an array, size corresponds to the count of the array. 
+    
+    
+    * For string data, value corresponds to the number of characters.
+    
+    * For numeric data, value corresponds to a given integer value. The attribute must also have any of the number rules: decimal, binary, octal, hex.
+      If Integer rule is given it checks for all four systems with given order
+    
+    * For an array, size corresponds to the count of the array. 
 
     Examples:
     >>> from validator import validate
     
     # Checks for given number system
     >>> reqs = {"value" : "42"} # Checks for Decimal Integer value
-    >>> rule = {"value" : "integer|size:42"}
+    >>> rule = {"value" : "decimal|size:42"}
     >>> validate(reqs, rule)
     True
 
@@ -72,13 +78,15 @@ class Size(Integer, List):
         try:
             # Check With RPV for other rules
             if Integer in rpv:
-                return int(arg)
+                return Integer.convert(arg)
             elif Binary in rpv:
-                return int(arg, 2)
+                return Binary.convert(arg)
             elif Octal in rpv:
-                return int(arg, 8)
+                return Octal.convert(arg)
+            elif Decimal in rpv:
+                return Decimal.convert(arg)
             elif Hex in rpv:
-                return int(arg, 16)
+                return Hex.convert(arg)
             elif List in rpv:
                 return len(arg)
 

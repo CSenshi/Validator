@@ -30,7 +30,7 @@ class Binary(Rule):
     def check(self, arg):
         # Try to convert it to the binary.
         try:
-            _ = int(arg, 2)
+            _ = Binary.convert(arg)
             return True
         except:
             # if transfered to exception we know its not binary.
@@ -38,6 +38,12 @@ class Binary(Rule):
                 f"Expected String to be in Binary format, Got: {arg}"
             )
             return False
+
+    @staticmethod
+    def convert(val):
+        if isinstance(val, int):
+            return val
+        return int(val, 2)
 
     def __from_str__(self):
         pass

@@ -30,7 +30,7 @@ class Hex(Rule):
     def check(self, arg):
         # Try to convert it to the hex.
         try:
-            _ = int(arg, 16)
+            _ = Hex.convert(arg)
             return True
         except:
             # if transfered to exception we know its not hex.
@@ -38,6 +38,12 @@ class Hex(Rule):
                 f"Expected String to be in Hexadecimal format, Got: {arg}"
             )
             return False
+
+    @staticmethod
+    def convert(val):
+        if isinstance(val, int):
+            return val
+        return int(val, 16)
 
     def __from_str__(self):
         pass

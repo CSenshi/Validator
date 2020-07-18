@@ -25,7 +25,7 @@ class Decimal(Rule):
     def check(self, arg):
         # Try to convert it to the octal.
         try:
-            _ = int(arg, 10)
+            _ = Decimal.convert(arg)
             return True
         except:
             # if transfered to exception we know its not octal.
@@ -33,6 +33,12 @@ class Decimal(Rule):
                 f"Expected String to be in Octal format, Got: {arg}"
             )
             return False
+
+    @staticmethod
+    def convert(val):
+        if isinstance(val, int):
+            return val
+        return int(val, 10)
 
     def __from_str__(self):
         pass

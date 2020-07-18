@@ -54,7 +54,7 @@ with open(RULES_MD, "w") as re:
         description, tests = doc.split(splitter_str)
         rule["code"] = tests.strip()
 
-        description = description.strip().replace("\n", ". ").replace("..", ".")
+        description = description.strip()
         rule["description"] = description
 
         RULES_ALL.append(rule)

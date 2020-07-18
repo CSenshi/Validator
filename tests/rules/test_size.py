@@ -32,10 +32,16 @@ def test_size_02():
 
 
 def test_size_03_rpv():
-    rpv = RPV(data=18, rules=[Integer(), Size(18)])
+    rpv = RPV(data="0b01011001", rules=[Integer(), Size(89)])
     assert rpv.execute()
 
-    rpv = RPV(data=0, rules=[Integer(), Size(0)])
+    rpv = RPV(data="0o113356", rules=[Integer(), Size(38638)])
+    assert rpv.execute()
+
+    rpv = RPV(data="12313", rules=[Integer(), Size(12313)])
+    assert rpv.execute()
+
+    rpv = RPV(data="0x1f", rules=[Integer(), Size(31)])
     assert rpv.execute()
 
     rpv = RPV(data=[1, 2, 3], rules=[List(), Size(3)])
