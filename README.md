@@ -12,7 +12,6 @@ Validator is a Python library for dealing with request validating.
    * **[Rules](#Rules)**
    * **[Rules Interconnection](#Rules-Interconnection)**
    * **[Custom Rules](#Custom-Rules)**
-* **[Examples](#Examples)**
 * **[Contributing](#Contributing)**
 * **[License](#License)**
 
@@ -106,7 +105,7 @@ Validator allows user to have a look at failed validations and passed validation
     """
     result = True
     errors = {'name': {'Required': 'Field was empty'},
-              'mail': {'Mail': 'Expected a Mail, Got: jon_doe'}}
+            mail': {'Mail': 'Expected a Mail, Got: jon_doe'}}
     """
     ```
 
@@ -290,11 +289,6 @@ We give users ability to advance and use their own checkers. Write function and 
 
     validate(req, rules)
     ```
-
-<a name="Examples"></a>
-## Examples
-We have written some examples for you to get started easier. Please view [Examples](examples) folder, where you can find validator usages with frameworks like Flask, Django and etc.
-
 
 <a name="Contributing"></a>
 ## Contributing
