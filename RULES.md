@@ -33,13 +33,15 @@
         </td><td>
             <a href="#Min">Min</a>
         </td><td>
-            <a href="#Regex">Regex</a>
+            <a href="#Octal">Octal</a>
         </td><td>
-            <a href="#Required">Required</a>
+            <a href="#Regex">Regex</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Required">Required</a>
+        </td><td>
             <a href="#Same">Same</a>
         </td><td>
             <a href="#Size">Size</a>
@@ -314,6 +316,30 @@ True
 False
 ```
 
+<a name="Octal" />
+
+#### Octal
+
+The field under validation must be an octal number
+```python
+>>> from validator import validate
+
+>>> reqs = {"date" : "73021"}
+>>> rule = {"date" : "octal"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "0o73021"}
+>>> rule = {"date" : "octal"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "23489"}
+>>> rule = {"date" : "octal"}
+>>> validate(reqs, rule)
+False
+```
+
 <a name="Regex" />
 
 #### Regex
@@ -333,6 +359,8 @@ True
 False
 ```
 
+
+
 <a name="Required" />
 
 #### Required
@@ -351,8 +379,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="Same" />
 
