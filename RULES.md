@@ -7,13 +7,15 @@
         </td><td>
             <a href="#Date">Date</a>
         </td><td>
-            <a href="#Hex">Hex</a>
+            <a href="#Decimal">Decimal</a>
         </td><td>
-            <a href="#Integer">Integer</a>
+            <a href="#Hex">Hex</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Integer">Integer</a>
+        </td><td>
             <a href="#IP">IP</a>
         </td><td>
             <a href="#IPv4">IPv4</a>
@@ -21,12 +23,12 @@
             <a href="#IPv6">IPv6</a>
         </td><td>
             <a href="#JSON">JSON</a>
-        </td><td>
-            <a href="#List">List</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#List">List</a>
+        </td><td>
             <a href="#Mail">Mail</a>
         </td><td>
             <a href="#Max">Max</a>
@@ -34,12 +36,12 @@
             <a href="#Min">Min</a>
         </td><td>
             <a href="#Octal">Octal</a>
-        </td><td>
-            <a href="#Regex">Regex</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Regex">Regex</a>
+        </td><td>
             <a href="#Required">Required</a>
         </td><td>
             <a href="#Same">Same</a>
@@ -117,6 +119,25 @@ True
 False
 ```
 
+<a name="Decimal" />
+
+#### Decimal
+
+The field under validation must be a decimal number
+```python
+>>> from validator import validate
+
+>>> reqs = {'value' : '23'}
+>>> rule = {'value' : 'decimal'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'value' : '2F'}
+>>> rule = {'value' : 'decimal'}
+>>> validate(reqs, rule)
+False
+```
+
 <a name="Hex" />
 
 #### Hex
@@ -141,6 +162,8 @@ True
 False
 ```
 
+
+
 <a name="Integer" />
 
 #### Integer
@@ -159,8 +182,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="IP" />
 
@@ -238,6 +259,8 @@ True
 False
 ```
 
+
+
 <a name="List" />
 
 #### List
@@ -256,8 +279,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="Mail" />
 
@@ -340,6 +361,8 @@ True
 False
 ```
 
+
+
 <a name="Regex" />
 
 #### Regex
@@ -358,8 +381,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="Required" />
 
