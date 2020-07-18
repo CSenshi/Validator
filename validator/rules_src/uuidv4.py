@@ -24,7 +24,11 @@ class UUIDv4(Rule):
     def check(self, arg):
         try:
             uuid = UUID(arg)
-            return uuid.version == 4
+            if uuid.version == 4:
+                return True
+            else:
+                self.set_errror_message(f"Expected a uuid of version 4, Got uuid of version {uuid.version}")
+            return False
         except Exception as e:
             self.set_errror_message(f"Expected a UUIDv4, Got: {e}")
             return False
