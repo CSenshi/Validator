@@ -74,7 +74,7 @@ False
 
 #### Binary
 
-The field under validation must be an String
+The field under validation must be a binary number
 ```python
 >>> from validator import validate
 
