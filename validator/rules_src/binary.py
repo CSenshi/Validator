@@ -35,6 +35,7 @@ class Binary(Rule):
             return True
         except:
             # if transfered to exception we know its not binary.
+            self.set_errror_message("Specified String is not binary format!")
             return False
 
     def __from_str__(self):
