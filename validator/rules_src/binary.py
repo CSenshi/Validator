@@ -30,12 +30,13 @@ class Binary(Rule):
     def check(self, arg):
         # Try to convert it to the binary.
         try:
-            result = int(arg, 2)
-            # if not error then given string is really binary.
+            _ = int(arg, 2)
             return True
         except:
             # if transfered to exception we know its not binary.
-            self.set_errror_message("Specified String is not binary format!")
+            self.set_errror_message(
+                f"Expected String to be in Binary format, Got: {arg}"
+            )
             return False
 
     def __from_str__(self):

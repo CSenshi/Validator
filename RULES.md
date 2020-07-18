@@ -409,15 +409,30 @@ The field under validation must have a size matching the given value. For string
 ```python
 >>> from validator import validate
 
-# Checks for string length
->>> reqs = {"value" : "something"}
->>> rule = {"value" : "size:9"}
+# Checks for given number system
+>>> reqs = {"value" : "42"} # Checks for Decimal Integer value
+>>> rule = {"value" : "integer|size:42"}
 >>> validate(reqs, rule)
 True
 
-# Checks for Integer value
->>> reqs = {"value" : "18"} # "18" and 18 would be same
->>> rule = {"value" : "integer|size:18"}
+>>> reqs = {"value" : "0b101010"} # Checks for Binary Integer value
+>>> rule = {"value" : "binary|size:42"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"value" : "0o52"} # Checks for Octal Integer value
+>>> rule = {"value" : "octal|size:42"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"value" : "0x2a"} # Checks for Hex Integer value
+>>> rule = {"value" : "hex|size:42"}
+>>> validate(reqs, rule)
+True
+
+# Checks for string length
+>>> reqs = {"value" : "something"}
+>>> rule = {"value" : "string|size:9"}
 >>> validate(reqs, rule)
 True
 

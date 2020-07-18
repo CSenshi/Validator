@@ -30,12 +30,13 @@ class Octal(Rule):
     def check(self, arg):
         # Try to convert it to the octal.
         try:
-            result = int(arg, 8)
-            # if not error then given string is really octal.
+            _ = int(arg, 8)
             return True
         except:
             # if transfered to exception we know its not octal.
-            self.set_errror_message("Specified String is not Octal format!")
+            self.set_errror_message(
+                f"Expected String to be in Octal format, Got: {arg}"
+            )
             return False
 
     def __from_str__(self):

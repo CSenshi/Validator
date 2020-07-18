@@ -30,12 +30,13 @@ class Hex(Rule):
     def check(self, arg):
         # Try to convert it to the hex.
         try:
-            result = int(arg, 16)
-            # if not error then given string is really hex.
+            _ = int(arg, 16)
             return True
         except:
             # if transfered to exception we know its not hex.
-            self.set_errror_message("Specified String is not Hex format!")
+            self.set_errror_message(
+                f"Expected String to be in Hexadecimal format, Got: {arg}"
+            )
             return False
 
     def __from_str__(self):
