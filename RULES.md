@@ -10,12 +10,12 @@
             <a href="#Hex">Hex</a>
         </td><td>
             <a href="#Integer">Integer</a>
-        </td><td>
-            <a href="#IP">IP</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#IP">IP</a>
+        </td><td>
             <a href="#IPv4">IPv4</a>
         </td><td>
             <a href="#IPv6">IPv6</a>
@@ -23,12 +23,12 @@
             <a href="#JSON">JSON</a>
         </td><td>
             <a href="#List">List</a>
-        </td><td>
-            <a href="#Mail">Mail</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Mail">Mail</a>
+        </td><td>
             <a href="#Max">Max</a>
         </td><td>
             <a href="#Min">Min</a>
@@ -36,12 +36,12 @@
             <a href="#Regex">Regex</a>
         </td><td>
             <a href="#Required">Required</a>
-        </td><td>
-            <a href="#Same">Same</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Same">Same</a>
+        </td><td>
             <a href="#Size">Size</a>
         </td><td>
             <a href="#String">String</a>
@@ -119,7 +119,7 @@ False
 
 #### Hex
 
-The field under validation must be an String
+The field under validation must be a hexadecimal number
 ```python
 >>> from validator import validate
 
@@ -158,6 +158,8 @@ True
 False
 ```
 
+
+
 <a name="IP" />
 
 #### IP
@@ -176,8 +178,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="IPv4" />
 
@@ -255,6 +255,8 @@ True
 False
 ```
 
+
+
 <a name="Mail" />
 
 #### Mail
@@ -273,8 +275,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="Max" />
 
@@ -352,6 +352,8 @@ True
 False
 ```
 
+
+
 <a name="Same" />
 
 #### Same
@@ -372,8 +374,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="Size" />
 

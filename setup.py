@@ -10,7 +10,7 @@ def read(fname):
 
 __major__ = 0
 __minor__ = 3
-__patch__ = 2
+__patch__ = 3
 __version__ = ".".join([str(__major__), str(__minor__), str(__patch__)])
 
 setup(
