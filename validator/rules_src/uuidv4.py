@@ -7,13 +7,13 @@ class UUIDv4(Rule):
     The field under validation must be formatted as an uuidv4
     Examples:
     >>> from validator import validate
-    >>> reqs = {'data' : '81368b76-31e9-41db-b28c-8c029cb435f0'}
-    >>> rule = {'data' : 'uuidv4'}
+    >>> reqs = {'val' : '81368b76-31e9-41db-b28c-8c029cb435f0'}
+    >>> rule = {'val' : 'uuidv4'}
     >>> validate(reqs, rule) 
     True
 
-    >>> reqs = {'data' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
-    >>> rule = {'data' : 'uuidv4'}
+    >>> reqs = {'val' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
+    >>> rule = {'val' : 'uuidv4'}
     >>> validate(reqs, rule) #It fails because data is uuidv3
     False
     """

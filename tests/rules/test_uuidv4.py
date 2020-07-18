@@ -24,13 +24,11 @@ def test_uuid4_02():
     assert not UUIDv4().check("b3bf2958-c941-11ea-9e44-2fd4f688a758")
 
 
-def test_uuid4_03_string():
-    assert validate({"data": "0d713a92-8406-489e-b0bd-24af3d1da2fa"}, {"data": "uuidv4"})
+def test_uuid4_03():
+    assert validate({"val": "0d713a92-8406-489e-b0bd-24af3d1da2fa"}, {"val": "uuidv4"})
 
-    assert validate({"data": "e96e74e2-f106-4ad7-9467-322ba6cb3c78"}, {"data": "uuidv4"})
+    assert validate({"val": "e96e74e2-f106-4ad7-9467-322ba6cb3c78"}, {"val": "uuidv4"})
 
-    assert not validate({"data": {}}, {"data": "uuidv4"})
+    assert not validate({"val":  ["0d713a92-8406-489e-b0bd-24af3d1da2fa", "e96e74e2-f106-4ad7-9467-322ba6cb3c78"]}, {"val": "uuidv4"})
 
-    assert not validate({"data": "addee3a2-c941-11ea-bbd4-ab0012dacf6c"}, {"data": "uuidv4"})
-
-    assert not validate({"val": None}, {"val": "uuidv4"})
+    assert not validate({"val": "addee3a2-c941-11ea-bbd4-ab0012dacf6c"}, {"val": "uuidv4"})
