@@ -29,6 +29,16 @@ def test_uuidv4_03():
 
     assert validate({"val": "e96e74e2-f106-4ad7-9467-322ba6cb3c78"}, {"val": "uuidv4"})
 
-    assert not validate({"val":  ["0d713a92-8406-489e-b0bd-24af3d1da2fa", "e96e74e2-f106-4ad7-9467-322ba6cb3c78"]}, {"val": "uuidv4"})
+    assert not validate(
+        {
+            "val": [
+                "0d713a92-8406-489e-b0bd-24af3d1da2fa",
+                "e96e74e2-f106-4ad7-9467-322ba6cb3c78",
+            ]
+        },
+        {"val": "uuidv4"},
+    )
 
-    assert not validate({"val": "addee3a2-c941-11ea-bbd4-ab0012dacf6c"}, {"val": "uuidv4"})
+    assert not validate(
+        {"val": "addee3a2-c941-11ea-bbd4-ab0012dacf6c"}, {"val": "uuidv4"}
+    )
