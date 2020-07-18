@@ -7,19 +7,19 @@ assignees: ''
 
 ---
 
-**Rule Name:** {New_Rule_Name}
+**Rule Name:** {NewRuleName}
 
 **Rule Description:**
 *{A clear and concise description of new rule}*
 
 **Rule Usage Example:**
 ```python
-reqs = {'data' : '...'}
-rule = {'data' : '{new_rule}:{arg1},{arg2}...'}
+reqs = {"data" : "..."}
+rule = {"data" : "{new_rule}:{arg1},{arg2}..."}
 validate(reqs, rule) # True
 
-reqs = {'data' : '...'}
-rule = {'data' : '{new_rule}:{arg1},{arg2}...'}
+reqs = {"data" : "..."}
+rule = {"data" : "{new_rule}:{arg1},{arg2}..."}
 validate(reqs, rule) # False, It fails because...
 ```
 ----------------------------------------------------

@@ -2,6 +2,7 @@ from validator.rules import Min
 from validator.rules import Integer
 from validator.rules import List
 from validator.rule_pipe_validator import RulePipeValidator as RPV
+from validator import validate
 import pytest
 
 
@@ -76,3 +77,23 @@ def test_min_06_bad():
     # wrong type
     with pytest.raises(AttributeError):
         assert not min("5", "5").check(0)
+
+
+def test_min_07_string():
+    assert validate({"val": "51"}, {"val": "min:1"})
+
+    assert validate({"val": 64}, {"val": "min:50"})
+
+    assert not validate({"val": "51"}, {"val": "min:3"})
+
+    assert not validate({"val": 77}, {"val": "min:100"})
+
+
+def test_min_08_string():
+    assert validate({"val": "51"}, {"val": "integer|min:3"})
+
+    assert validate({"val": ["2", [], {}]}, {"val": "list|min:2"})
+
+    assert not validate({"val": "5"}, {"val": "integer|min:10"})
+
+    assert not validate({"val": ["2", [], {}]}, {"val": "list|min:10"})

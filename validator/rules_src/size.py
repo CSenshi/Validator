@@ -1,5 +1,8 @@
 from validator.rules_src import Rule
 from validator.rules_src.integer import Integer
+from validator.rules_src.binary import Binary
+from validator.rules_src.octal import Octal
+from validator.rules_src.hex import Hex
 from validator.rules_src.list import List
 from validator import utils
 
@@ -14,15 +17,30 @@ class Size(Integer, List):
     Examples:
     >>> from validator import validate
     
-    # Checks for string length
-    >>> reqs = {"value" : "something"}
-    >>> rule = {"value" : "size:9"}
+    # Checks for given number system
+    >>> reqs = {"value" : "42"} # Checks for Decimal Integer value
+    >>> rule = {"value" : "integer|size:42"}
     >>> validate(reqs, rule)
     True
 
-    # Checks for Integer value
-    >>> reqs = {"value" : "18"} # "18" and 18 would be same
-    >>> rule = {"value" : "integer|size:18"}
+    >>> reqs = {"value" : "0b101010"} # Checks for Binary Integer value
+    >>> rule = {"value" : "binary|size:42"}
+    >>> validate(reqs, rule)
+    True
+    
+    >>> reqs = {"value" : "0o52"} # Checks for Octal Integer value
+    >>> rule = {"value" : "octal|size:42"}
+    >>> validate(reqs, rule)
+    True
+
+    >>> reqs = {"value" : "0x2a"} # Checks for Hex Integer value
+    >>> rule = {"value" : "hex|size:42"}
+    >>> validate(reqs, rule)
+    True
+
+    # Checks for string length
+    >>> reqs = {"value" : "something"}
+    >>> rule = {"value" : "string|size:9"}
     >>> validate(reqs, rule)
     True
 
@@ -34,9 +52,7 @@ class Size(Integer, List):
     """
 
     def __init__(self, size):
-        Integer.__init__(self)
-        List.__init__(self)
-
+        Rule.__init__(self)
         self.size = size
 
     def check(self, arg):
@@ -57,6 +73,12 @@ class Size(Integer, List):
             # Check With RPV for other rules
             if Integer in rpv:
                 return int(arg)
+            elif Binary in rpv:
+                return int(arg, 2)
+            elif Octal in rpv:
+                return int(arg, 8)
+            elif Hex in rpv:
+                return int(arg, 16)
             elif List in rpv:
                 return len(arg)
 

@@ -2,3 +2,6 @@ black
 pytest
 flask
 pprint
+jinja2
+python-dateutil
+requests

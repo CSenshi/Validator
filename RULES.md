@@ -3,24 +3,37 @@
         <td>
             <a href="#Between">Between</a>
         </td><td>
-            <a href="#Integer">Integer</a>
+            <a href="#Binary">Binary</a>
         </td><td>
+            <a href="#Date">Date</a>
+        </td><td>
+            <a href="#Hex">Hex</a>
+        </td><td>
+            <a href="#Integer">Integer</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <a href="#IP">IP</a>
         </td><td>
             <a href="#IPv4">IPv4</a>
         </td><td>
             <a href="#IPv6">IPv6</a>
+        </td><td>
+            <a href="#JSON">JSON</a>
+        </td><td>
+            <a href="#List">List</a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="#List">List</a>
-        </td><td>
             <a href="#Mail">Mail</a>
         </td><td>
             <a href="#Max">Max</a>
         </td><td>
             <a href="#Min">Min</a>
+        </td><td>
+            <a href="#Octal">Octal</a>
         </td><td>
             <a href="#Regex">Regex</a>
         </td>
@@ -32,6 +45,8 @@
             <a href="#Same">Same</a>
         </td><td>
             <a href="#Size">Size</a>
+        </td><td>
+            <a href="#String">String</a>
         </td>
     </tr>
     
@@ -59,6 +74,73 @@ True
 False
 ```
 
+<a name="Binary" />
+
+#### Binary
+
+The field under validation must be a binary number
+```python
+>>> from validator import validate
+
+>>> reqs = {"date" : "010101010010"}
+>>> rule = {"date" : "binary"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "0b010101010010"}
+>>> rule = {"date" : "binary"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "0123012"}
+>>> rule = {"date" : "binary"}
+>>> validate(reqs, rule)
+False
+```
+
+<a name="Date" />
+
+#### Date
+
+The field under validation must be an Integer
+```python
+>>> from validator import validate
+
+>>> reqs = {"date" : "25-08-1900"}
+>>> rule = {"date" : "date"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "32-12-2020"}
+>>> rule = {"date" : "date"}
+>>> validate(reqs, rule)
+False
+```
+
+<a name="Hex" />
+
+#### Hex
+
+The field under validation must be a hexadecimal number
+```python
+>>> from validator import validate
+
+>>> reqs = {"date" : "A1B2c3"}
+>>> rule = {"date" : "hex"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "0xA1b2C3"}
+>>> rule = {"date" : "hex"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "abcdefgh"}
+>>> rule = {"date" : "hex"}
+>>> validate(reqs, rule)
+False
+```
+
 <a name="Integer" />
 
 #### Integer
@@ -77,6 +159,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+
+
 
 <a name="IP" />
 
@@ -135,7 +219,24 @@ True
 False
 ```
 
+<a name="JSON" />
 
+#### JSON
+
+The field under validation must be formatted as an JSON
+```python
+>>> from validator import validate
+
+>>> reqs = {"value" : '{ "age":100}'}
+>>> rule = {"value" : "json"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"value" : "aaa.com"}
+>>> rule = {"value" : "json"}
+>>> validate(reqs, rule)
+False
+```
 
 <a name="List" />
 
@@ -155,6 +256,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+
+
 
 <a name="Mail" />
 
@@ -209,6 +312,30 @@ True
 
 >>> reqs = {"age" : 13}
 >>> rule = {"age" : "min:18"}
+>>> validate(reqs, rule)
+False
+```
+
+<a name="Octal" />
+
+#### Octal
+
+The field under validation must be an octal number
+```python
+>>> from validator import validate
+
+>>> reqs = {"date" : "73021"}
+>>> rule = {"date" : "octal"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "0o73021"}
+>>> rule = {"date" : "octal"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "23489"}
+>>> rule = {"date" : "octal"}
 >>> validate(reqs, rule)
 False
 ```
@@ -282,15 +409,30 @@ The field under validation must have a size matching the given value. For string
 ```python
 >>> from validator import validate
 
-# Checks for string length
->>> reqs = {"value" : "something"}
->>> rule = {"value" : "size:9"}
+# Checks for given number system
+>>> reqs = {"value" : "42"} # Checks for Decimal Integer value
+>>> rule = {"value" : "integer|size:42"}
 >>> validate(reqs, rule)
 True
 
-# Checks for Integer value
->>> reqs = {"value" : "18"} # "18" and 18 would be same
->>> rule = {"value" : "integer|size:18"}
+>>> reqs = {"value" : "0b101010"} # Checks for Binary Integer value
+>>> rule = {"value" : "binary|size:42"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"value" : "0o52"} # Checks for Octal Integer value
+>>> rule = {"value" : "octal|size:42"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"value" : "0x2a"} # Checks for Hex Integer value
+>>> rule = {"value" : "hex|size:42"}
+>>> validate(reqs, rule)
+True
+
+# Checks for string length
+>>> reqs = {"value" : "something"}
+>>> rule = {"value" : "string|size:9"}
 >>> validate(reqs, rule)
 True
 
@@ -299,5 +441,24 @@ True
 >>> rule = {"value" : "list|size:3"}
 >>> validate(reqs, rule)
 True
+```
+
+<a name="String" />
+
+#### String
+
+The field under validation must be a String
+```python
+>>> from validator import validate
+
+>>> reqs = {"value" : "some string"}
+>>> rule = {"value" : "string"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"value" : 17}
+>>> rule = {"value" : "string"}
+>>> validate(reqs, rule)
+False
 ```
 

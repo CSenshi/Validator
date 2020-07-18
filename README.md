@@ -36,24 +36,24 @@ Please see examples below:
 ```python
 from validator import validate
 
-reqs = {"name": "Jon Doe",
-        "age": 33,
-        "mail": "jon_doe@gmail.com"}
+request = {"name": "Jon Doe",
+           "age": 33,
+           "mail": "jon_doe@gmail.com"}
 
-rule = {"name": "required",
-        "age": "integer|min:18",
-        "mail": "required|mail"}
+rules = {"name": "required",
+         "age": "integer|min:18",
+         "mail": "required|mail"}
 
 result = validate(request, rules) # True
 ```
-`valiadte()` returns either True or False.
+`validate()` returns either True or False.
 
 Another option is to use `Validator` class
 ```python
 from validator import Validator
 
-reqs = {...}
-rule = {...}
+request = {...}
+rules = {...}
 
 val = Validator(request, rules)
 result = val.validate() # True
@@ -68,44 +68,44 @@ Validator allows user to have a look at failed validations and passed validation
     ```python
     from validator import validate
 
-    req = {"first_name": "Jon",
-            "last_name": "Doe",
-            "age": 33,
-            "mail": "jondoe@gmail.com",
-            "_token": "WpH0UPfy0AXzMtK2UWtJ",
-            "_cookie_data": "e9Uixp8hzUySy6bw3MuZ",
-            "_session_id": "ZB7q7uIVdWBKgSCSSWAa"}
+    request = {"first_name": "Jon",
+               "last_name": "Doe",
+               "age": 33,
+               "mail": "jondoe@gmail.com",
+               "_token": "WpH0UPfy0AXzMtK2UWtJ",
+               "_cookie_data": "e9Uixp8hzUySy6bw3MuZ",
+               "_session_id": "ZB7q7uIVdWBKgSCSSWAa"}
 
     rule = {"first_name": "required",
             "last_name": "required",
             "age": "required|min:18",
             "mail": "required|mail"}
 
-    result, validated_data, _ = validate(reqs, rule, return_info=True)
+    result, validated_data, _ = validate(request, rule, return_info=True)
     """
     result = True
     validated_data = {"first_name": "Jon",
-                    "last_name": "Doe",
-                    "age": 33,
-                    "mail": "jondoe@gmail.com"}
+                      "last_name": "Doe",
+                      "age": 33,
+                      "mail": "jondoe@gmail.com"}
     """
     ```
 * Error Messages
     ```python
     from validator import validate
 
-    reqs = {"name": "",
-            "mail": "jon_doe"}
+    request = {"name": "",
+               "mail": "jon_doe"}
 
     rule = {"name": "required",
             "mail": "mail"}
 
-    result, _, errors = validate(reqs, rule, return_info=True)
+    result, _, errors = validate(request, rule, return_info=True)
 
     """
     result = True
-    errors = {'name': {'Required': 'Field was empty'},
-            mail': {'Mail': 'Expected a Mail, Got: jon_doe'}}
+    errors = {"name": {"Required': "Field was empty"},
+              "mail": {"Mail': "Expected a Mail, Got: jon_doe"}}
     """
     ```
 
@@ -131,11 +131,11 @@ requests = [{"name": "Jon"},
             {"name": "Rob"},
             {"name": "Tom"},
             {"name": "Greg"}]
-rule = {"name": 'required|min:3'}
+rule = {"name": "required|min:3"}
 
 result = validate_many(requests, rule) # True
 ```
-We can also ahve a look at failde validations and error messages. `validate_many()` takes third argument as boolean, indicating return of error messages.
+We can also have a look at failed validations and error messages. `validate_many()` takes third argument as boolean, indicating return of error messages.
 
 Validation Fails:
 ```python
@@ -145,14 +145,14 @@ requests = [{"name": "Jon"},
             {"name": ""},
             {"name": "Yo"},
             {"name": "Greg"}]
-rule = {"name": 'required|min:3'}
+rule = {"name": "required|min:3"}
 
 result, errors = validate_many(requests, rule, return_info=True)
 """
 result = False
 errors = [{},
-          {'name': {'Min': 'Expected Maximum: 3, Got: 0', 'Required': 'Field was empty'}},
-          {'name': {'Min': 'Expected Maximum: 3, Got: 2'}},
+          {"name": {"Min": "Expected Maximum: 3, Got: 0", "Required": "Field was empty"}},
+          {"name": {"Min": "Expected Maximum: 3, Got: 2"}},
           {}]
 """
 ```
@@ -187,8 +187,8 @@ rule = {"name": ["required"],
 from validator import rules as R
 
 rules = {"name": [R.Required()],
-        "age": [R.Integer(), R.Min(18)],
-        "mail": [R.Requried(), R.Mail()]}
+         "age": [R.Integer(), R.Min(18)],
+         "mail": [R.Requried(), R.Mail()]}
 ```
 
 
@@ -197,8 +197,8 @@ rules = {"name": [R.Required()],
 from validator import rules as R
 
 rules = {"name": R.Required(),           # no need for Array Brackets if one rule
-        "age": [R.Integer, R.Min(18)],
-        "mail": [R.Requried, R.Mail]}   # no need for class initialization with brakcets () 
+         "age": [R.Integer, R.Min(18)],
+         "mail": [R.Requried, R.Mail]}   # no need for class initialization with brakcets () 
                                         # if no arguments are passed to rule
 ```
 
@@ -211,22 +211,22 @@ Rules can affect each other. Let's take a look at `Size` rule. It takes 1 argume
 
 * Case 1: checks for length of '18' to be 18. len('18') is 2, therefore it is False.
 ```python
-reqs = {'age' : '18'}
-rule = {'age' : 'size:18'}
+request = {"age" : "18"}
+rule = {"age" : "size:18"}
 
-validate(reqs, rule)
+validate(request, rule)
 """
 result = False
-errors = {'age': {'Size': 'Expected Size:18, Got:2'}}
+errors = {"age": {"Size": "Expected Size:18, Got:2"}}
 """
 ```
 
 * Case 2: checks if int representation of '18' is equal to 18. (int('18') = 18), therefore it is True.
 ```python
-reqs = {'age' : '18'}
-rule = {'age' : 'integer|size:18'}
+request = {"age" : "18"}
+rule = {"age" : "integer|size:18"}
 
-validate(reqs, rule) # True
+validate(request, rule) # True
 ```
 
 *For more details please view [Size](https://github.com/CSenshi/Validator/blob/master/RULES.md#size) Rule*

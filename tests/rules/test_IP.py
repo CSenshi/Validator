@@ -1,4 +1,5 @@
 from validator.rules import IP
+from validator import validate
 
 
 def test_IP_01():
@@ -27,3 +28,13 @@ def test_IP_02():
     assert not IP().check("0001.253.254.255")
 
     assert not IP().check("01.9.9.256")
+
+
+def test_IP_03_string():
+    assert validate({"val": "2001:0db8:85a3:0:0:8a2e:0370:7334"}, {"val": "ip"})
+
+    assert validate({"val": "127.0.0.1"}, {"val": "ip"})
+
+    assert not validate({"val": "234::123::23"}, {"val": "ip"})
+
+    assert not validate({"val": "01.9.9.256"}, {"val": "ip"})
