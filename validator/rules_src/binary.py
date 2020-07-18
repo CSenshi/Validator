@@ -3,7 +3,7 @@ from validator.rules_src import Rule
 
 class Binary(Rule):
     """
-    The field under validation must be an String
+    The field under validation must be a binary number
 
     Examples:
     >>> from validator import validate
