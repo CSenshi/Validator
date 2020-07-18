@@ -1,4 +1,5 @@
 from validator.rules import Binary
+from validator import validate
 
 # True test
 def test_binary_01():
@@ -35,3 +36,13 @@ def test_binary_02():
     assert not Binary().check("2")
 
     assert not Binary().check("0b111112000")
+
+
+def test_binary_03():
+    assert validate({"val": "0101000001111"}, {"val": "binary"})
+
+    assert validate({"val": "0b1010101010101"}, {"val": "binary"})
+
+    assert not validate({"val": "b111111"}, {"val": "binary"})
+
+    assert not validate({"val": "0b1111112"}, {"val": "binary"})
