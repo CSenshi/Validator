@@ -3,7 +3,7 @@ from validator.rules_src import Rule
 
 class Octal(Rule):
     """
-    The field under validation must be a octal number
+    The field under validation must be an octal number
 
     Examples:
     >>> from validator import validate
