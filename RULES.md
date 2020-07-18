@@ -3,17 +3,19 @@
         <td>
             <a href="#Between">Between</a>
         </td><td>
+            <a href="#Binary">Binary</a>
+        </td><td>
             <a href="#Date">Date</a>
         </td><td>
             <a href="#Integer">Integer</a>
         </td><td>
             <a href="#IP">IP</a>
-        </td><td>
-            <a href="#IPv4">IPv4</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#IPv4">IPv4</a>
+        </td><td>
             <a href="#IPv6">IPv6</a>
         </td><td>
             <a href="#JSON">JSON</a>
@@ -21,12 +23,12 @@
             <a href="#List">List</a>
         </td><td>
             <a href="#Mail">Mail</a>
-        </td><td>
-            <a href="#Max">Max</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Max">Max</a>
+        </td><td>
             <a href="#Min">Min</a>
         </td><td>
             <a href="#Regex">Regex</a>
@@ -34,12 +36,12 @@
             <a href="#Required">Required</a>
         </td><td>
             <a href="#Same">Same</a>
-        </td><td>
-            <a href="#Size">Size</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Size">Size</a>
+        </td><td>
             <a href="#String">String</a>
         </td>
     </tr>
@@ -64,6 +66,30 @@ True
 
 >>> reqs = {"age" : 23}
 >>> rule = {"age" : "between:6,18"}
+>>> validate(reqs, rule)
+False
+```
+
+<a name="Binary" />
+
+#### Binary
+
+The field under validation must be a binary number
+```python
+>>> from validator import validate
+
+>>> reqs = {"date" : "010101010010"}
+>>> rule = {"date" : "binary"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "0b010101010010"}
+>>> rule = {"date" : "binary"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "0123012"}
+>>> rule = {"date" : "binary"}
 >>> validate(reqs, rule)
 False
 ```
@@ -125,6 +151,8 @@ True
 False
 ```
 
+
+
 <a name="IPv4" />
 
 #### IPv4
@@ -143,8 +171,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="IPv6" />
 
@@ -222,6 +248,8 @@ True
 False
 ```
 
+
+
 <a name="Max" />
 
 #### Max
@@ -240,8 +268,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="Min" />
 
@@ -321,6 +347,8 @@ True
 False
 ```
 
+
+
 <a name="Size" />
 
 #### Size
@@ -347,8 +375,6 @@ True
 >>> validate(reqs, rule)
 True
 ```
-
-
 
 <a name="String" />
 
