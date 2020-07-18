@@ -5,15 +5,17 @@
         </td><td>
             <a href="#Date">Date</a>
         </td><td>
+            <a href="#Hex">Hex</a>
+        </td><td>
             <a href="#Integer">Integer</a>
         </td><td>
             <a href="#IP">IP</a>
-        </td><td>
-            <a href="#IPv4">IPv4</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#IPv4">IPv4</a>
+        </td><td>
             <a href="#IPv6">IPv6</a>
         </td><td>
             <a href="#JSON">JSON</a>
@@ -21,12 +23,12 @@
             <a href="#List">List</a>
         </td><td>
             <a href="#Mail">Mail</a>
-        </td><td>
-            <a href="#Max">Max</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Max">Max</a>
+        </td><td>
             <a href="#Min">Min</a>
         </td><td>
             <a href="#Regex">Regex</a>
@@ -34,12 +36,12 @@
             <a href="#Required">Required</a>
         </td><td>
             <a href="#Same">Same</a>
-        </td><td>
-            <a href="#Size">Size</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Size">Size</a>
+        </td><td>
             <a href="#String">String</a>
         </td>
     </tr>
@@ -87,6 +89,30 @@ True
 False
 ```
 
+<a name="Hex" />
+
+#### Hex
+
+The field under validation must be an String
+```python
+>>> from validator import validate
+
+>>> reqs = {"date" : "A1B2c3"}
+>>> rule = {"date" : "hex"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "0xA1b2C3"}
+>>> rule = {"date" : "hex"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "abcdefgh"}
+>>> rule = {"date" : "hex"}
+>>> validate(reqs, rule)
+False
+```
+
 <a name="Integer" />
 
 #### Integer
@@ -125,6 +151,8 @@ True
 False
 ```
 
+
+
 <a name="IPv4" />
 
 #### IPv4
@@ -143,8 +171,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="IPv6" />
 
@@ -222,6 +248,8 @@ True
 False
 ```
 
+
+
 <a name="Max" />
 
 #### Max
@@ -240,8 +268,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="Min" />
 
@@ -321,6 +347,8 @@ True
 False
 ```
 
+
+
 <a name="Size" />
 
 #### Size
@@ -347,8 +375,6 @@ True
 >>> validate(reqs, rule)
 True
 ```
-
-
 
 <a name="String" />
 

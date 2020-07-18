@@ -3,7 +3,7 @@ from validator.rules_src import Rule
 
 class Hex(Rule):
     """
-    The field under validation must be an String
+    The field under validation must be a Number in Hexadecimal format
 
     Examples:
     >>> from validator import validate
