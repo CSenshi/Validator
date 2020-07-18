@@ -7,6 +7,8 @@
         </td><td>
             <a href="#Date">Date</a>
         </td><td>
+            <a href="#Hex">Hex</a>
+        </td><td>
             <a href="#Integer">Integer</a>
         </td><td>
             <a href="#IP">IP</a>
@@ -109,6 +111,30 @@ True
 
 >>> reqs = {"date" : "32-12-2020"}
 >>> rule = {"date" : "date"}
+>>> validate(reqs, rule)
+False
+```
+
+<a name="Hex" />
+
+#### Hex
+
+The field under validation must be an String
+```python
+>>> from validator import validate
+
+>>> reqs = {"date" : "A1B2c3"}
+>>> rule = {"date" : "hex"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "0xA1b2C3"}
+>>> rule = {"date" : "hex"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"date" : "abcdefgh"}
+>>> rule = {"date" : "hex"}
 >>> validate(reqs, rule)
 False
 ```
