@@ -104,7 +104,7 @@ Validator allows user to have a look at failed validations and passed validation
     result, _, errors = validate(request, rule, return_info=True)
 
     """
-    result = True
+    result = False
     errors = {"name": {"Required': "Field was empty"},
               "mail": {"Mail': "Expected a Mail, Got: jon_doe"}}
     """
