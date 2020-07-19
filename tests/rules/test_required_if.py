@@ -10,7 +10,7 @@ def test_required_if_01():
     rw.run()
     assert rw.get_result()
 
-    req = {"under_age": "yes", "parrent": "Jon Doe"}
+    req = {"under_age": "yes", "parrent": "John Doe"}
     rule = {"parrent": [RequiredIf("uner_age", "yes")]}
     rw = RW(req, rule)
     rw.run()

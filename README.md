@@ -37,7 +37,7 @@ Please see examples below:
 ```python
 from validator import validate
 
-request = {"name": "Jon Doe",
+request = {"name": "John Doe",
            "age": 33,
            "mail": "jon_doe@gmail.com"}
 
@@ -69,7 +69,7 @@ Validator allows user to have a look at failed validations and passed validation
     ```python
     from validator import validate
 
-    request = {"first_name": "Jon",
+    request = {"first_name": "John",
                "last_name": "Doe",
                "age": 33,
                "mail": "jondoe@gmail.com",
@@ -85,7 +85,7 @@ Validator allows user to have a look at failed validations and passed validation
     result, validated_data, _ = validate(request, rule, return_info=True)
     """
     result = True
-    validated_data = {"first_name": "Jon",
+    validated_data = {"first_name": "John",
                       "last_name": "Doe",
                       "age": 33,
                       "mail": "jondoe@gmail.com"}
@@ -128,7 +128,7 @@ Validation Passes:
 ```python
 from validator import validate_many
 
-requests = [{"name": "Jon"},
+requests = [{"name": "John"},
             {"name": "Rob"},
             {"name": "Tom"},
             {"name": "Greg"}]
@@ -142,7 +142,7 @@ Validation Fails:
 ```python
 from validator import validate_many
 
-requests = [{"name": "Jon"},
+requests = [{"name": "John"},
             {"name": ""},
             {"name": "Yo"},
             {"name": "Greg"}]

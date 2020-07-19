@@ -17,7 +17,7 @@ def test_01_validator_simple():
     result = Validator(request, rule).validate()
     assert result
 
-    request = {"name": "Jon"}
+    request = {"name": "John"}
     rule = {"name": [R.Required()]}
     result = Validator(request, rule).validate()
     assert result
@@ -39,7 +39,7 @@ def test_02_validator_simple():
     result = Validator(request, rule).validate()
     assert not result
 
-    request = {"age": 23, "name": "Jon"}
+    request = {"age": 23, "name": "John"}
     rule = {"age": [R.Integer, R.Min(18)], "name": [R.Required()]}
     result = Validator(request, rule).validate()
     assert result
@@ -170,7 +170,7 @@ def test_06_validate_simple():
     result = validate(request, rule)
     assert result
 
-    request = {"name": "Jon"}
+    request = {"name": "John"}
     rule = {"name": [R.Required()]}
     result = validate(request, rule)
     assert result
@@ -192,7 +192,7 @@ def test_07_validate_simple():
     result = validate(request, rule)
     assert not result
 
-    request = {"age": 23, "name": "Jon"}
+    request = {"age": 23, "name": "John"}
     rule = {"age": [R.Integer, R.Min(18)], "name": [R.Required()]}
     result = validate(request, rule)
     assert result
@@ -293,12 +293,12 @@ def test_10_validate_many():
     result = validate_many(requests, rule)
     assert not result
 
-    requests = [{"name": "Jon"}, {"name": "Rob"}, {"name": "Greg"}, {"name": "Tom"}]
+    requests = [{"name": "John"}, {"name": "Rob"}, {"name": "Greg"}, {"name": "Tom"}]
     rule = {"name": "required|min:3"}
     result = validate_many(requests, rule)
     assert result
 
-    requests = [{"name": "Jon"}, {"name": ""}, {"name": ""}, {"name": "Tom"}]
+    requests = [{"name": "John"}, {"name": ""}, {"name": ""}, {"name": "Tom"}]
     rule = {"name": [R.Required()]}
     result = validate_many(requests, rule)
     assert not result
@@ -335,7 +335,7 @@ def test_11_validate_many_errors_msg():
     assert "Max" in errors[2]["age"]
     assert "Got: 23" in errors[2]["age"]["Max"]
 
-    requests = [{"name": "Jon"}, {"name": ""}, {"name": ""}, {"name": "Tom"}]
+    requests = [{"name": "John"}, {"name": ""}, {"name": ""}, {"name": "Tom"}]
     rule = {"name": [R.Required()]}
     result, _, errors = validate_many(requests, rule, True)
     assert not result
@@ -352,10 +352,10 @@ def test_11_validate_many_errors_msg():
 
 def test_12_validate_many_errors_msg():
     requests = [
-        {"first_name": "Jon", "last_name": "Doe", "age": 40},
+        {"first_name": "John", "last_name": "Doe", "age": 40},
         {"first_name": "", "last_name": "Doe", "age": 40},
-        {"first_name": "Jon", "last_name": "", "age": 40},
-        {"first_name": "Jon", "last_name": "Doe", "age": 10},
+        {"first_name": "John", "last_name": "", "age": 40},
+        {"first_name": "John", "last_name": "Doe", "age": 10},
         {"first_name": "", "last_name": "", "age": 10},
     ]
     rule = {
@@ -401,7 +401,7 @@ def test_13_validated_data():
     assert validated_data == {"a": 1}
 
     reqs = {
-        "first_name": "Jon",
+        "first_name": "John",
         "last_name": "Doe",
         "age": 33,
         "mail": "jondoe@gmail.com",
@@ -434,7 +434,7 @@ def test_13_validated_data():
 
 def test_14_validated_data_many():
     reqs = [
-        {"first_name": "Jon", "last_name": "Doe", "age": 33},
+        {"first_name": "John", "last_name": "Doe", "age": 33},
         {
             "first_name": "Nick",
             "last_name": "Bush",

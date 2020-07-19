@@ -9,13 +9,13 @@ def test_rule_func_01():
     def func_true(x):
         return True
 
-    assert validate({"name": "Jon"}, {"name": func_true})
+    assert validate({"name": "John"}, {"name": func_true})
 
     # False Rule
     def func_false(x):
         return False
 
-    assert not validate({"name": "Jon"}, {"name": func_false})
+    assert not validate({"name": "John"}, {"name": func_false})
 
 
 def test_rule_func_02():
@@ -30,7 +30,7 @@ def test_rule_func_02():
 
 def test_rule_func_03():
     rule = {"age": lambda x: True}
-    assert validate({"age": "Jon"}, rule)
+    assert validate({"age": "John"}, rule)
     assert validate({"age": "Doe"}, rule)
 
     rule = {"age": lambda x: False}
@@ -111,10 +111,10 @@ def test_rule_func_07():
             return "@" in arg
 
     rule = {"name": NameChecker(), "ages": AgesChecker(), "mail": MailChecker()}
-    req = {"name": "Jon Doe", "ages": 33, "mail": "Jon.Doe@gmail.com"}
+    req = {"name": "John Doe", "ages": 33, "mail": "John.Doe@gmail.com"}
     assert validate(req, rule)
 
-    req = {"name": "", "ages": 10, "mail": "Jon.Doe"}
+    req = {"name": "", "ages": 10, "mail": "John.Doe"}
     result, validated_data, errors = validate(req, rule, True)
 
     # Result Should be False
@@ -168,11 +168,11 @@ def test_rule_func_08():
                 return True
             self.set_errror_message("Mail Rule Failed")
 
-    rule = {"name": NameRule("Jon Doe"), "ages": AgesRule(18), "mail": MailRule()}
-    req = {"name": "Jon Doe", "ages": 33, "mail": "Jon.Doe@gmail.com"}
+    rule = {"name": NameRule("John Doe"), "ages": AgesRule(18), "mail": MailRule()}
+    req = {"name": "John Doe", "ages": 33, "mail": "John.Doe@gmail.com"}
     assert validate(req, rule)
 
-    req = {"name": "", "ages": 10, "mail": "Jon.Doe"}
+    req = {"name": "", "ages": 10, "mail": "John.Doe"}
     result, validated_data, errors = validate(req, rule, True)
 
     # Result Should be False

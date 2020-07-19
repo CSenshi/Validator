@@ -494,7 +494,7 @@ The field under validation must be present and not empty if the anotherfield fie
 True
 
 >>> reqs = {'under_age' : 'yes',
-...         'parent': 'Jon Doe'}
+...         'parent': 'John Doe'}
 >>> rule = {'parent' : 'required_if:under_age,yes'}
 >>> validate(reqs, rule)
 True
