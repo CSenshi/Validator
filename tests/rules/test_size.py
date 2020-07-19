@@ -79,3 +79,75 @@ def test_size_05_string():
     assert not validate({"val": ["Name", "Surname"]}, {"val": "size:0"})
 
     assert not validate({"val": 8}, {"val": "size:7"})
+
+
+def test_size_06_integer():
+    assert validate({"val": "23"}, {"val": "integer|size:23"})
+    # ToDo : More True Tests with integer
+
+    assert not validate({"val": "23"}, {"val": "integer|size:35"})
+    # ToDo : More False Tests with integer
+
+
+def test_size_07_decimal():
+    assert validate({"val": "23"}, {"val": "decimal|size:23"})
+    # ToDo : More True Tests with decimal
+
+    assert not validate({"val": "23"}, {"val": "decimal|size:35"})
+    # ToDo : More False Tests with decimal
+
+
+def test_size_08_binary():
+    assert validate({"val": "0b10111"}, {"val": "binary|size:23"})
+    # ToDo : More True Tests with binary
+
+    assert not validate({"val": "0b10111"}, {"val": "binary|size:35"})
+    # ToDo : More False Tests with binary
+
+
+def test_size_09_octal():
+    assert validate({"val": "0o27"}, {"val": "octal|size:23"})
+    # ToDo : More True Tests with octal
+
+    assert not validate({"val": "0o27"}, {"val": "octal|size:35"})
+    # ToDo : More False Tests with octal
+
+
+def test_size_10_hex():
+    assert validate({"val": "0x17"}, {"val": "hex|size:23"})
+    # ToDo : More True Tests with hex
+
+    assert not validate({"val": "0x17"}, {"val": "hex|size:35"})
+    # ToDo : More False Tests with hex
+
+
+def test_size_11_list():
+    assert validate({"val": [1, 2, 3, 4, 5]}, {"val": "list|size:5"})
+    # ToDo : More True Tests with list
+
+    assert not validate({"val": [1, 2, 3, 4, 5]}, {"val": "list|size:25"})
+    # ToDo : More False Tests with list
+
+
+def test_size_12_dict():
+    assert validate(
+        {"val": {"k1": "v1", "k2": "v2", "k3": "v3"}}, {"val": "dict|size:3"},
+    )
+    # ToDo : More True Tests with dict
+
+    assert not validate(
+        {"val": {"k1": "v1", "k2": "v2", "k3": "v3"}}, {"val": "dict|size:25"},
+    )
+    # ToDo : More False Tests with dict
+
+
+def test_size_13_json():
+    assert validate(
+        {"val": '{"name":"John", "age":31, "city":"New York"}'}, {"val": "json|size:3"}
+    )
+    # ToDo : More True Tests with json
+
+    assert not validate(
+        {"val": '{"name":"John", "age":31, "city":"New York"}'}, {"val": "json|size:25"}
+    )
+    # ToDo : More False Tests with json

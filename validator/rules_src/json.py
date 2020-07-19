@@ -25,12 +25,16 @@ class JSON(Rule):
 
     def check(self, arg):
         try:
-            _ = json.loads(arg)
+            _ = JSON.convert(arg)
         except Exception as e:
             self.set_errror_message(f"Incorrect JSON: {e}")
             return False
 
         return True
+
+    @staticmethod
+    def convert(val):
+        return json.loads(val)
 
     def __from_str__(self):
         pass

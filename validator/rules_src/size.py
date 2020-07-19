@@ -4,7 +4,10 @@ from validator.rules_src.binary import Binary
 from validator.rules_src.octal import Octal
 from validator.rules_src.decimal import Decimal
 from validator.rules_src.hex import Hex
+from validator.rules_src.string import String
 from validator.rules_src.list import List
+from validator.rules_src.dict import Dict
+from validator.rules_src.json import JSON
 from validator import utils
 
 
@@ -24,36 +27,45 @@ class Size(Integer, List):
     >>> from validator import validate
     
     # Checks for given number system
-    >>> reqs = {"value" : "42"} # Checks for Decimal Integer value
+    >>> reqs = {"value" : "42"} 
     >>> rule = {"value" : "decimal|size:42"}
-    >>> validate(reqs, rule)
+    >>> validate(reqs, rule) # Checks for Decimal Integer value
     True
 
-    >>> reqs = {"value" : "0b101010"} # Checks for Binary Integer value
+    >>> reqs = {"value" : "0b101010"} 
     >>> rule = {"value" : "binary|size:42"}
-    >>> validate(reqs, rule)
+    >>> validate(reqs, rule) # Checks for Binary Integer value
     True
     
-    >>> reqs = {"value" : "0o52"} # Checks for Octal Integer value
+    >>> reqs = {"value" : "0o52"} 
     >>> rule = {"value" : "octal|size:42"}
-    >>> validate(reqs, rule)
+    >>> validate(reqs, rule) # Checks for Octal Integer value
     True
 
-    >>> reqs = {"value" : "0x2a"} # Checks for Hex Integer value
+    >>> reqs = {"value" : "0x2a"} 
     >>> rule = {"value" : "hex|size:42"}
-    >>> validate(reqs, rule)
+    >>> validate(reqs, rule) # Checks for Hex Integer value
     True
 
-    # Checks for string length
+    # Checks len() for given collections
     >>> reqs = {"value" : "something"}
     >>> rule = {"value" : "string|size:9"}
-    >>> validate(reqs, rule)
+    >>> validate(reqs, rule) # Checks for string length
     True
 
-    # Checks for List length
     >>> reqs = {"value" : ["a", "b", "c"]}
     >>> rule = {"value" : "list|size:3"}
-    >>> validate(reqs, rule)
+    >>> validate(reqs, rule) # Checks for List length
+    True
+
+    >>> reqs = {"value" : {"k1":"v1", "k2":"v2", "k3":"v3", "k4":"v4"}} 
+    >>> rule = {"value" : "dict|size:4"}
+    >>> validate(reqs, rule) # Checks for Dictionary length
+    True
+
+    >>> reqs = {"value" : '{"name":"John", "age":31, "city":"New York"}'}
+    >>> rule = {"value" : "json|size:3"}
+    >>> validate(reqs, rule) # Checks for JSON length
     True
     """
 
@@ -87,8 +99,14 @@ class Size(Integer, List):
                 return Decimal.convert(arg)
             elif Hex in rpv:
                 return Hex.convert(arg)
+            elif String in rpv:
+                return len(arg)
             elif List in rpv:
                 return len(arg)
+            elif Dict in rpv:
+                return len(arg)
+            elif JSON in rpv:
+                return len(JSON.convert(arg))
 
             # Check for compatible comparision
             if utils.CanBeComparedToInt(arg):
