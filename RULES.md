@@ -1,54 +1,67 @@
 <table>
     <tr>
         <td>
+            <a href="#Accepted">Accepted</a>
+        </td><td>
+            <a href="#Alpha">Alpha</a>
+        </td><td>
             <a href="#Between">Between</a>
         </td><td>
             <a href="#Binary">Binary</a>
         </td><td>
             <a href="#Date">Date</a>
-        </td><td>
-            <a href="#Decimal">Decimal</a>
-        </td><td>
-            <a href="#Hex">Hex</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Decimal">Decimal</a>
+        </td><td>
+            <a href="#Dict">Dict</a>
+        </td><td>
+            <a href="#Hex">Hex</a>
+        </td><td>
             <a href="#Integer">Integer</a>
         </td><td>
             <a href="#IP">IP</a>
-        </td><td>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <a href="#IPv4">IPv4</a>
         </td><td>
             <a href="#IPv6">IPv6</a>
         </td><td>
             <a href="#JSON">JSON</a>
+        </td><td>
+            <a href="#List">List</a>
+        </td><td>
+            <a href="#Mail">Mail</a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="#List">List</a>
-        </td><td>
-            <a href="#Mail">Mail</a>
-        </td><td>
             <a href="#Max">Max</a>
         </td><td>
             <a href="#Min">Min</a>
         </td><td>
             <a href="#Octal">Octal</a>
+        </td><td>
+            <a href="#Regex">Regex</a>
+        </td><td>
+            <a href="#Required">Required</a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="#Regex">Regex</a>
-        </td><td>
-            <a href="#Required">Required</a>
+            <a href="#RequiredIf">RequiredIf</a>
         </td><td>
             <a href="#Same">Same</a>
         </td><td>
             <a href="#Size">Size</a>
         </td><td>
             <a href="#String">String</a>
+        </td><td>
+            <a href="#UUIDv3">UUIDv3</a>
         </td>
     </tr>
     <tr>
@@ -61,6 +74,44 @@
 
 
 
+
+<a name="Accepted" />
+
+#### Accepted
+
+The field under validation must be 'yes', 'on', '1', or 'true' as String or True as boolena. This is useful for validating "Terms of Service" acceptance.
+```python
+>>> from validator import validate
+
+>>> reqs = {'value' : '1'}
+>>> rule = {'value' : 'accepted'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'value' : '0'}
+>>> rule = {'value' : 'accepted'}
+>>> validate(reqs, rule)
+False
+```
+
+<a name="Alpha" />
+
+#### Alpha
+
+The field under validation must be entirely alphabetic characters
+```python
+>>> from validator import validate
+
+>>> reqs = {'value' : 'KillerBunny'}
+>>> rule = {'value' : 'alpha'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'value' : '326forever'}
+>>> rule = {'value' : 'alpha'}
+>>> validate(reqs, rule)
+False
+```
 
 <a name="Between" />
 
@@ -124,6 +175,8 @@ True
 False
 ```
 
+
+
 <a name="Decimal" />
 
 #### Decimal
@@ -139,6 +192,25 @@ True
 
 >>> reqs = {'value' : '2F'}
 >>> rule = {'value' : 'decimal'}
+>>> validate(reqs, rule)
+False
+```
+
+<a name="Dict" />
+
+#### Dict
+
+The field under validation must be a dictionary (Python map)
+```python
+>>> from validator import validate
+
+>>> reqs = {"data" : {"key1" : "val1", "key2" : "val2"} }
+>>> rule = {"data" : "dict"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"data" : ["val1", "val2", "val3", "val4"]}
+>>> rule = {"data" : "dict"}
 >>> validate(reqs, rule)
 False
 ```
@@ -166,8 +238,6 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
 
 <a name="Integer" />
 
@@ -206,6 +276,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+
+
 
 <a name="IPv4" />
 
@@ -264,8 +336,6 @@ True
 False
 ```
 
-
-
 <a name="List" />
 
 #### List
@@ -303,6 +373,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+
+
 
 <a name="Max" />
 
@@ -368,8 +440,6 @@ True
 False
 ```
 
-
-
 <a name="Regex" />
 
 #### Regex
@@ -404,6 +474,33 @@ True
 
 >>> reqs = {"value" : ""}
 >>> rule = {"value" : "required"}
+>>> validate(reqs, rule)
+False
+```
+
+
+
+<a name="RequiredIf" />
+
+#### RequiredIf
+
+The field under validation must be present and not empty if the anotherfield field is equal to any value.
+```python
+>>> from validator import validate
+
+>>> reqs = {'under_age' : 'no'}
+>>> rule = {'parent' : 'required_if:under_age,yes'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'under_age' : 'yes',
+...         'parent': 'Jon Doe'}
+>>> rule = {'parent' : 'required_if:under_age,yes'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'under_age' : 'yes'}
+>>> rule = {'parent' : 'required_if:under_age,yes'}
 >>> validate(reqs, rule)
 False
 ```
@@ -495,6 +592,25 @@ True
 >>> reqs = {"value" : 17}
 >>> rule = {"value" : "string"}
 >>> validate(reqs, rule)
+False
+```
+
+<a name="UUIDv3" />
+
+#### UUIDv3
+
+The field under validation must be a valid Universally Unique Identifier version 3
+```python
+>>> from validator import validate
+>>> reqs = {'data' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
+>>> rule = {'data' : 'uuidv3'}
+>>> validate(reqs, rule) # True
+True
+
+>>> from validator import validate
+>>> reqs = {'data' : 'bba617b4-364b-4a0d-9e96-cb8a24ef1bec'}
+>>> rule = {'data' : 'uuidv3'}
+>>> validate(reqs, rule) # True
 False
 ```
 

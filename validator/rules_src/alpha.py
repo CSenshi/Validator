@@ -23,7 +23,17 @@ class Alpha(Rule):
         Rule.__init__(self)
 
     def check(self, arg):
-        return arg.isalpha()
+        if not isinstance(arg, str):
+            self.set_errror_message(f"Expected: Type str, Got: {type(arg)}")
+            return False
+
+        if not arg.isalpha():
+            self.set_errror_message(
+                f"Expected all characters to be alphabetic [a-zA-z]"
+            )
+            return False
+
+        return True
 
     def __from_str__(self):
         pass
