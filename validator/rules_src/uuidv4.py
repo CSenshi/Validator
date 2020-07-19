@@ -15,7 +15,7 @@ class UUIDv4(Rule):
 
     >>> reqs = {'val' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
     >>> rule = {'val' : 'uuidv4'}
-    >>> validate(reqs, rule) #It fails because data is uuidv3
+    >>> validate(reqs, rule) # It fails because data is uuidv3
     False
     """
 

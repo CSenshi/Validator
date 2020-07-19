@@ -610,7 +610,7 @@ True
 >>> from validator import validate
 >>> reqs = {'data' : 'bba617b4-364b-4a0d-9e96-cb8a24ef1bec'}
 >>> rule = {'data' : 'uuidv3'}
->>> validate(reqs, rule) # True
+>>> validate(reqs, rule) # It fails because data is uuidv4
 False
 ```
 
@@ -630,7 +630,7 @@ True
 
 >>> reqs = {'val' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
 >>> rule = {'val' : 'uuidv4'}
->>> validate(reqs, rule) #It fails because data is uuidv3
+>>> validate(reqs, rule) # It fails because data is uuidv3
 False
 ```
 
