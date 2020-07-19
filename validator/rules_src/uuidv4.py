@@ -5,6 +5,7 @@ from uuid import UUID
 class UUIDv4(Rule):
     """
     The field under validation must be formatted as an uuidv4
+    
     Examples:
     >>> from validator import validate
     >>> reqs = {'val' : '81368b76-31e9-41db-b28c-8c029cb435f0'}
@@ -24,15 +25,18 @@ class UUIDv4(Rule):
     def check(self, arg):
         try:
             uuid = UUID(arg)
-            if uuid.version == 4:
-                return True
-            else:
-                self.set_errror_message(
-                    f"Expected a uuid of version 4, Got uuid of version {uuid.version}"
-                )
-            return False
+
+            if uuid.version == None:
+                self.set_errror_message(f"Expected: UUIDv4, but no version was found")
+                return False
+
+            if uuid.version != 4:
+                self.set_errror_message(f"Expected: UUIDv4, Got: UUIDv{uuid.version}")
+                return False
+
+            return True
         except Exception as e:
-            self.set_errror_message(f"Expected a UUIDv4, Got: {e}")
+            self.set_errror_message(f"Expected: UUIDv4, Got: {e}")
             return False
 
         return True
