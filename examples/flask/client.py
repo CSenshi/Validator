@@ -14,7 +14,7 @@ def register_1_pass():
         "age": "23",
         "first_name": "John",
         "last_name": "Doe",
-        "mail": "jon.doe@gmail.com",
+        "mail": "john.doe@gmail.com",
     }
 
     # Create URL on specific route
@@ -38,7 +38,7 @@ def register_2_pass():
         "age": "23",
         "first_name": "John",
         "last_name": "Doe",
-        "mail": "jon.doe@gmail.com",
+        "mail": "john.doe@gmail.com",
     }
 
     # Create URL on specific route
@@ -85,7 +85,7 @@ def register_4_fail():
         "age": "13",
         "first_name": "John",
         "last_name": "Doe",
-        "mail": "jon.doe",
+        "mail": "john.doe",
     }
 
     # Create URL on specific route

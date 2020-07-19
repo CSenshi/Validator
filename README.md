@@ -39,7 +39,7 @@ from validator import validate
 
 request = {"name": "John Doe",
            "age": 33,
-           "mail": "jon_doe@gmail.com"}
+           "mail": "john_doe@gmail.com"}
 
 rules = {"name": "required",
          "age": "integer|min:18",
@@ -72,7 +72,7 @@ Validator allows user to have a look at failed validations and passed validation
     request = {"first_name": "John",
                "last_name": "Doe",
                "age": 33,
-               "mail": "jondoe@gmail.com",
+               "mail": "johndoe@gmail.com",
                "_token": "WpH0UPfy0AXzMtK2UWtJ",
                "_cookie_data": "e9Uixp8hzUySy6bw3MuZ",
                "_session_id": "ZB7q7uIVdWBKgSCSSWAa"}
@@ -88,7 +88,7 @@ Validator allows user to have a look at failed validations and passed validation
     validated_data = {"first_name": "John",
                       "last_name": "Doe",
                       "age": 33,
-                      "mail": "jondoe@gmail.com"}
+                      "mail": "johndoe@gmail.com"}
     """
     ```
 * Error Messages
@@ -96,7 +96,7 @@ Validator allows user to have a look at failed validations and passed validation
     from validator import validate
 
     request = {"name": "",
-               "mail": "jon_doe"}
+               "mail": "john_doe"}
 
     rule = {"name": "required",
             "mail": "mail"}
@@ -106,7 +106,7 @@ Validator allows user to have a look at failed validations and passed validation
     """
     result = False
     errors = {"name": {"Required': "Field was empty"},
-              "mail": {"Mail': "Expected a Mail, Got: jon_doe"}}
+              "mail": {"Mail': "Expected a Mail, Got: john_doe"}}
     """
     ```
 

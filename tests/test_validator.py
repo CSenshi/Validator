@@ -404,7 +404,7 @@ def test_13_validated_data():
         "first_name": "John",
         "last_name": "Doe",
         "age": 33,
-        "mail": "jondoe@gmail.com",
+        "mail": "johndoe@gmail.com",
         "_token": "WpH0UPfy0AXzMtK2UWtJ",
         "_cookie_data": "e9Uixp8hzUySy6bw3MuZ",
         "_session_id": "ZB7q7uIVdWBKgSCSSWAa",
