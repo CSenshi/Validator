@@ -1,6 +1,7 @@
 from validator.rules_src import Rule
 import base64
 
+
 class Base32(Rule):
     """
     The field under validation must be a valid Base32 encoded
