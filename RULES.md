@@ -93,6 +93,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['accepted']
 
 <a name="Alpha" />
 
@@ -112,6 +114,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['alpha']
 
 <a name="Between" />
 
@@ -131,6 +135,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['between']
 
 <a name="Binary" />
 
@@ -155,6 +161,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['binary', 'bin']
 
 <a name="Date" />
 
@@ -174,6 +182,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['date']
 
 
 
@@ -195,6 +205,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['dec', 'decimal']
 
 <a name="Dict" />
 
@@ -214,6 +226,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['dict']
 
 <a name="Hex" />
 
@@ -238,6 +252,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['hexadecimal', 'hex']
 
 <a name="Integer" />
 
@@ -257,6 +273,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['integer']
 
 <a name="IP" />
 
@@ -276,6 +294,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['ip']
 
 
 
@@ -297,6 +317,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['ipv4']
 
 <a name="IPv6" />
 
@@ -316,6 +338,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['ipv6']
 
 <a name="JSON" />
 
@@ -335,6 +359,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['json']
 
 <a name="List" />
 
@@ -354,6 +380,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['list']
 
 <a name="Mail" />
 
@@ -373,6 +401,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['mail']
 
 
 
@@ -395,6 +425,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['max']
 
 <a name="Min" />
 
@@ -415,6 +447,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['min']
 
 <a name="Octal" />
 
@@ -439,6 +473,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['oct', 'octal']
 
 <a name="Regex" />
 
@@ -458,6 +494,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['regex']
 
 <a name="Required" />
 
@@ -477,6 +515,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['required']
 
 
 
@@ -504,6 +544,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['requiredif']
 
 <a name="Same" />
 
@@ -525,6 +567,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['same']
 
 <a name="Size" />
 
@@ -584,6 +628,8 @@ True
 >>> validate(reqs, rule) # Checks for JSON length
 True
 ```
+Aliases:
+['size']
 
 <a name="String" />
 
@@ -603,6 +649,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['string']
 
 <a name="UUIDv3" />
 
@@ -622,6 +670,8 @@ True
 >>> validate(reqs, rule) # It fails because data is uuidv4
 False
 ```
+Aliases:
+['uuidv3']
 
 
 
@@ -642,4 +692,6 @@ True
 >>> validate(reqs, rule) # It fails because data is uuidv3
 False
 ```
+Aliases:
+['uuidv4']
 

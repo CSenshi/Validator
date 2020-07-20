@@ -24,6 +24,8 @@ class Octal(Rule):
     False
     """
 
+    aliases = ["oct", "octal"]
+
     def __init__(self):
         Rule.__init__(self)
 

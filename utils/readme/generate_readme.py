@@ -57,6 +57,12 @@ with open(RULES_MD, "w") as re:
         description = description.strip()
         rule["description"] = description
 
+        # 3. Get aliases
+        class_vars = cur_class.__dict__
+        aliases = {class_name.lower()}
+        if "aliases" in class_vars:
+            aliases.update({x for x in class_vars["aliases"]})
+        rule["aliases"] = [x for x in aliases]
         RULES_ALL.append(rule)
 
     # Divide into chunks

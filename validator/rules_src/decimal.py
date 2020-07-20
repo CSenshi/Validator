@@ -19,6 +19,8 @@ class Decimal(Rule):
     False
     """
 
+    aliases = ["dec", "decimal"]
+
     def __init__(self):
         Rule.__init__(self)
 

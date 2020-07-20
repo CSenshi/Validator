@@ -24,6 +24,8 @@ class Hex(Rule):
     False
     """
 
+    aliases = ["hex", "hexadecimal"]
+
     def __init__(self):
         Rule.__init__(self)
 

@@ -24,6 +24,8 @@ class Binary(Rule):
     False
     """
 
+    aliases = ["bin", "binary"]
+
     def __init__(self):
         Rule.__init__(self)
 
