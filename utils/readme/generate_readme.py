@@ -19,6 +19,7 @@ with open(RULES_MD, "w") as re:
     files = [file for (_, file, _) in pkgutil.iter_modules(["validator/rules_src"])]
     files = sorted(files, key=lambda x: x.lower())
 
+    table_of_contents = []
     for file in files:
         rule = {"name": "", "description": "", "code": ""}
 
@@ -31,6 +32,7 @@ with open(RULES_MD, "w") as re:
         class_name = names[-1]
 
         rule["name"] = class_name
+        table_of_contents.append(class_name)
 
         # get all clases from file
         clsmembers = inspect.getmembers(sys.modules[module_abs_path], inspect.isclass)
@@ -71,6 +73,9 @@ with open(RULES_MD, "w") as re:
         for i in range(0, len(lst), n):
             yield lst[i : i + n]
 
+    table_of_contents = list(chunks(table_of_contents, rule_per_row))
+    # ToDo: Transpose table_of_contents
+
     tm = Template(open(TEMPLATE_HTML).read())
-    msg = tm.render(rules=list(chunks(RULES_ALL, rule_per_row)))
+    msg = tm.render(rules=RULES_ALL, table_of_contents=table_of_contents)
     re.write(msg)

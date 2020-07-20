@@ -5,15 +5,17 @@
         </td><td>
             <a href="#Alpha">Alpha</a>
         </td><td>
+            <a href="#Base32">Base32</a>
+        </td><td>
             <a href="#Between">Between</a>
         </td><td>
             <a href="#Binary">Binary</a>
-        </td><td>
-            <a href="#Date">Date</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Date">Date</a>
+        </td><td>
             <a href="#Decimal">Decimal</a>
         </td><td>
             <a href="#Dict">Dict</a>
@@ -21,12 +23,12 @@
             <a href="#Hex">Hex</a>
         </td><td>
             <a href="#Integer">Integer</a>
-        </td><td>
-            <a href="#IP">IP</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#IP">IP</a>
+        </td><td>
             <a href="#IPv4">IPv4</a>
         </td><td>
             <a href="#IPv6">IPv6</a>
@@ -34,12 +36,12 @@
             <a href="#JSON">JSON</a>
         </td><td>
             <a href="#List">List</a>
-        </td><td>
-            <a href="#Mail">Mail</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Mail">Mail</a>
+        </td><td>
             <a href="#Max">Max</a>
         </td><td>
             <a href="#Min">Min</a>
@@ -47,12 +49,12 @@
             <a href="#Octal">Octal</a>
         </td><td>
             <a href="#Regex">Regex</a>
-        </td><td>
-            <a href="#Required">Required</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Required">Required</a>
+        </td><td>
             <a href="#RequiredIf">RequiredIf</a>
         </td><td>
             <a href="#Same">Same</a>
@@ -60,18 +62,17 @@
             <a href="#Size">Size</a>
         </td><td>
             <a href="#String">String</a>
-        </td><td>
-            <a href="#UUIDv3">UUIDv3</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#UUIDv3">UUIDv3</a>
+        </td><td>
             <a href="#UUIDv4">UUIDv4</a>
         </td>
     </tr>
     
 </table>
-
 
 
 
@@ -116,6 +117,27 @@ False
 ```
 Aliases:
 ['alpha']
+
+<a name="Base32" />
+
+#### Base32
+
+The field under validation must be a valid Base32 encoded
+```python
+>>> from validator import validate
+
+>>> reqs = {"data" : "KZAUYSKEIFKE6URAIZKFOII="}
+>>> rule = {"data" : "base32"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"data" : "Not Encoded"}
+>>> rule = {"data" : "base32"}
+>>> validate(reqs, rule)
+False
+```
+Aliases:
+['base32']
 
 <a name="Between" />
 
@@ -162,7 +184,7 @@ True
 False
 ```
 Aliases:
-['binary', 'bin']
+['bin', 'binary']
 
 <a name="Date" />
 
@@ -184,8 +206,6 @@ False
 ```
 Aliases:
 ['date']
-
-
 
 <a name="Decimal" />
 
@@ -297,8 +317,6 @@ False
 Aliases:
 ['ip']
 
-
-
 <a name="IPv4" />
 
 #### IPv4
@@ -403,8 +421,6 @@ False
 ```
 Aliases:
 ['mail']
-
-
 
 <a name="Max" />
 
@@ -517,8 +533,6 @@ False
 ```
 Aliases:
 ['required']
-
-
 
 <a name="RequiredIf" />
 
@@ -673,8 +687,6 @@ False
 Aliases:
 ['uuidv3']
 
-
-
 <a name="UUIDv4" />
 
 #### UUIDv4
@@ -694,4 +706,3 @@ False
 ```
 Aliases:
 ['uuidv4']
-
