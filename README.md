@@ -116,7 +116,7 @@ Or you can use `Validator` class for error messages as well as for validated dat
 val = Validator(request, rules)
 result = val.validate()
 validated_data = val.get_validated_data()
-errors = val.get_error_messages()
+errors = val.get_errors()
 ```
 
 

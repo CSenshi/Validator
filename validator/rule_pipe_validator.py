@@ -16,10 +16,10 @@ class RulePipeValidator:
         for rule in self.rules:
             if not rule(self.data):
                 result = False
-                self.errors_on_key[rule.get_class_name()] = rule.get_error_message()
+                self.errors_on_key[rule.get_class_name()] = rule.get_error()
         return result
 
-    def get_error_messages(self):
+    def get_errors(self):
         return self.errors_on_key
 
     def __contains__(self, item):

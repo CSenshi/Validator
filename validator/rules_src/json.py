@@ -27,7 +27,7 @@ class JSON(Rule):
         try:
             _ = JSON.convert(arg)
         except Exception as e:
-            self.set_errror_message(f"Incorrect JSON: {e}")
+            self.set_error(f"Incorrect JSON: {e}")
             return False
 
         return True

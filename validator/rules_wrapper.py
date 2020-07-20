@@ -25,7 +25,7 @@ class RulesWrapper:
             # Interface for rules
             rpv = RPV(data, rules, self)
             rpv_result = rpv.execute()
-            errors_on_key = rpv.get_error_messages()
+            errors_on_key = rpv.get_errors()
 
             # if current validation fails change final result
             if rpv_result:

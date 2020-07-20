@@ -39,7 +39,7 @@ class Validator:
         # 5. return result
         return rw.get_result()
 
-    def get_error_messages(self):
+    def get_errors(self):
         # return error messages logged on validation
         return self.errors
 
@@ -81,7 +81,7 @@ def validate(req, rules, return_info=False):
     val = Validator(req, rules)
     result = val.validate()
     if return_info:
-        errors = val.get_error_messages()
+        errors = val.get_errors()
         validated_data = val.get_validated_data()
         # if return_info was True return pair as a tuple
         return result, validated_data, errors

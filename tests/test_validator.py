@@ -55,7 +55,7 @@ def test_03_validator_error_msg():
     rule = {"age": [R.Integer, R.Between(18, 90)]}
     val = Validator(request, rule)
     result = val.validate()
-    errors = val.get_error_messages()
+    errors = val.get_errors()
     assert not result
     assert "age" in errors.keys()
     assert "Between" in errors["age"].keys()
@@ -68,7 +68,7 @@ def test_03_validator_error_msg():
     }
     val = Validator(request, rule)
     result = val.validate()
-    errors = val.get_error_messages()
+    errors = val.get_errors()
 
     # Test General
     assert not result
@@ -98,7 +98,7 @@ def test_04_validator_error_msg():
     }
     val = Validator(request, rule)
     result = val.validate()
-    errors = val.get_error_messages()
+    errors = val.get_errors()
 
     # Test General
     assert not result

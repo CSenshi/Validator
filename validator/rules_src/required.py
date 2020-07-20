@@ -24,7 +24,7 @@ class Required(Rule):
 
     def check(self, arg):
         if arg is None or (hasattr(arg, "__len__") and len(arg) == 0):
-            self.set_errror_message("Field was empty")
+            self.set_error("Field was empty")
             return False
         return True
 

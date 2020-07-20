@@ -26,7 +26,7 @@ class Accepted(Rule):
     def check(self, arg):
         if isinstance(arg, bool):
             if arg == False:
-                self.set_errror_message(f"Expected True, Got: {arg} ({type(arg)})")
+                self.set_error(f"Expected True, Got: {arg} ({type(arg)})")
                 return False
             return True
         elif isinstance(arg, str):
@@ -35,10 +35,10 @@ class Accepted(Rule):
                 if valid_str.lower() == arg.lower():
                     return True
 
-            self.set_errror_message(f"Expected to be any of valid strings, Got: {arg}")
+            self.set_error(f"Expected to be any of valid strings, Got: {arg}")
             return False
         else:
-            self.set_errror_message(f"Expected type [Str/Bool], Got: {type(arg)}")
+            self.set_error(f"Expected type [Str/Bool], Got: {type(arg)}")
             return False
 
     def __from_str__(self):

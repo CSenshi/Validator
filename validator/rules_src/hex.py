@@ -36,9 +36,7 @@ class Hex(Rule):
             return True
         except:
             # if transfered to exception we know its not hex.
-            self.set_errror_message(
-                f"Expected String to be in Hexadecimal format, Got: {arg}"
-            )
+            self.set_error(f"Expected String to be in Hexadecimal format, Got: {arg}")
             return False
 
     @staticmethod

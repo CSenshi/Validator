@@ -36,9 +36,7 @@ class Binary(Rule):
             return True
         except:
             # if transfered to exception we know its not binary.
-            self.set_errror_message(
-                f"Expected String to be in Binary format, Got: {arg}"
-            )
+            self.set_error(f"Expected String to be in Binary format, Got: {arg}")
             return False
 
     @staticmethod

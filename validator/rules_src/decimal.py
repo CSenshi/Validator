@@ -31,9 +31,7 @@ class Decimal(Rule):
             return True
         except:
             # if transfered to exception we know its not octal.
-            self.set_errror_message(
-                f"Expected String to be in Octal format, Got: {arg}"
-            )
+            self.set_error(f"Expected String to be in Octal format, Got: {arg}")
             return False
 
     @staticmethod

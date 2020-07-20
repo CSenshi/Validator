@@ -24,13 +24,11 @@ class Alpha(Rule):
 
     def check(self, arg):
         if not isinstance(arg, str):
-            self.set_errror_message(f"Expected: Type str, Got: {type(arg)}")
+            self.set_error(f"Expected: Type str, Got: {type(arg)}")
             return False
 
         if not arg.isalpha():
-            self.set_errror_message(
-                f"Expected all characters to be alphabetic [a-zA-z]"
-            )
+            self.set_error(f"Expected all characters to be alphabetic [a-zA-z]")
             return False
 
         return True

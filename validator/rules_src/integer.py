@@ -31,16 +31,14 @@ class Integer(Rule):
             return True
 
         if not isinstance(arg, str):
-            self.set_errror_message(f"Expected Type of Int or Str, Got: {type(arg)}")
+            self.set_error(f"Expected Type of Int or Str, Got: {type(arg)}")
             return False
 
         try:
             _ = Integer.convert(arg)
             return True
         except:
-            self.set_errror_message(
-                f"Expected String to be in Binary format, Got: {arg}"
-            )
+            self.set_error(f"Expected String to be in Binary format, Got: {arg}")
             return False
 
     @staticmethod

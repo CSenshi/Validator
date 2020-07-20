@@ -31,10 +31,10 @@ class Rule(metaclass=ABCMeta):
         self.class_name = name
 
     # Get/Set Error Message
-    def get_error_message(self):
+    def get_error(self):
         return self.error_message
 
-    def set_errror_message(self, message):
+    def set_error(self, message):
         self.error_message = message
 
     # Get/Set RPV
@@ -61,7 +61,7 @@ class Rule(metaclass=ABCMeta):
         elif hasattr(new_func, "__class__") and hasattr(new_func.__class__, "__name__"):
             self.set_class_name(new_func.__class__.__name__)
         # Override error message
-        self.set_errror_message("Error: Custom Rule Failed")
+        self.set_error("Error: Custom Rule Failed")
 
 
 # Iterate each module in the given package and fill __all__ dictionary

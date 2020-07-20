@@ -27,13 +27,13 @@ class UUIDv3(Rule):
         try:
             uuid = UUID(arg)
             if uuid.version is None:
-                self.set_errror_message(f"Expected: UUIDv3, but no version was found")
+                self.set_error(f"Expected: UUIDv3, but no version was found")
                 return False
             elif uuid.version != 3:
-                self.set_errror_message(f"Expected: UUIDv3, Got: UUIDv{uuid.version}")
+                self.set_error(f"Expected: UUIDv3, Got: UUIDv{uuid.version}")
                 return False
         except Exception as e:
-            self.set_errror_message(f"Expected: UUIDv3, Got: {e}")
+            self.set_error(f"Expected: UUIDv3, Got: {e}")
             return False
         return True
 

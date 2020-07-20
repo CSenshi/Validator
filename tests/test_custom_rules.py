@@ -166,7 +166,7 @@ def test_rule_func_08():
         def __call__(self, arg):
             if "@" in arg:
                 return True
-            self.set_errror_message("Mail Rule Failed")
+            self.set_error("Mail Rule Failed")
 
     rule = {"name": NameRule("John Doe"), "ages": AgesRule(18), "mail": MailRule()}
     req = {"name": "John Doe", "ages": 33, "mail": "John.Doe@gmail.com"}

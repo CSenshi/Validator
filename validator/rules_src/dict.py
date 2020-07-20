@@ -27,7 +27,7 @@ class Dict(Rule):
         if isinstance(arg, dict):
             return True
 
-        self.set_errror_message(f"Expected type dict, Got:{type(arg)}")
+        self.set_error(f"Expected type dict, Got:{type(arg)}")
         return False
 
     def __from_str__(self):

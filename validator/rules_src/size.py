@@ -76,11 +76,11 @@ class Size(Integer, List):
     def check(self, arg):
         converted_size = Size.size_value(arg, self.rpv)
         if converted_size == None:
-            self.set_errror_message(f"Could not get size from data. type = {type(arg)}")
+            self.set_error(f"Could not get size from data. type = {type(arg)}")
             return False
 
         if converted_size != self.size:
-            self.set_errror_message(f"Expected Size:{self.size}, Got:{converted_size}")
+            self.set_error(f"Expected Size:{self.size}, Got:{converted_size}")
             return False
 
         return True

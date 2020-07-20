@@ -27,16 +27,16 @@ class UUIDv4(Rule):
             uuid = UUID(arg)
 
             if uuid.version == None:
-                self.set_errror_message(f"Expected: UUIDv4, but no version was found")
+                self.set_error(f"Expected: UUIDv4, but no version was found")
                 return False
 
             if uuid.version != 4:
-                self.set_errror_message(f"Expected: UUIDv4, Got: UUIDv{uuid.version}")
+                self.set_error(f"Expected: UUIDv4, Got: UUIDv{uuid.version}")
                 return False
 
             return True
         except Exception as e:
-            self.set_errror_message(f"Expected: UUIDv4, Got: {e}")
+            self.set_error(f"Expected: UUIDv4, Got: {e}")
             return False
 
         return True

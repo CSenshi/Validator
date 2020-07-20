@@ -30,10 +30,10 @@ class Min(Rule):
         # Evaluate to Size rule
         size = Size.size_value(arg, self.rpv)
         if size == None:
-            self.set_errror_message(f"Could not get size from data. type = {type(arg)}")
+            self.set_error(f"Could not get size from data. type = {type(arg)}")
             return False
         if size < self.min:
-            self.set_errror_message(f"Expected Maximum: {self.min}, Got: {size}")
+            self.set_error(f"Expected Maximum: {self.min}, Got: {size}")
             return False
 
         return True
