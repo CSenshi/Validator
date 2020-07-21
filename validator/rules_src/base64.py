@@ -28,9 +28,7 @@ class Base32(Rule):
         try:
             base64.b64decode(arg)
             for i in arg:
-                if(i.isalnum() or i=='+' or i=='/'):
-                    continue
-                else:
+                if((not i.isalnum()) and i not in ['+','/','=']):
                     self.set_error('Invalid literal in input')
                     return False
             return True
