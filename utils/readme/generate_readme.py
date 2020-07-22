@@ -84,24 +84,28 @@ with open(RULES_MD, "w") as re:
             # if nested fill it with '_' case.
             temp_list = table_of_contents[each_table]
             if true_length != len(temp_list):
-                temp_list += ['_']*(true_length - len(temp_list))
+                temp_list += ["_"] * (true_length - len(temp_list))
                 table_of_contents[each_table] = temp_list
-        
+
         # Transpose matrix and return it
         table_of_contents = list(map(list, zip(*table_of_contents)))
         return table_of_contents
 
     # This method filters nested list and returns True values.
     def remove_nested_values(value):
-        if value == '_':
+        if value == "_":
             return False
         return True
-    
-    # transpose nested list. 
-    table_of_contents = transpose_nested_matrix(table_of_contents, len(table_of_contents))
+
+    # transpose nested list.
+    table_of_contents = transpose_nested_matrix(
+        table_of_contents, len(table_of_contents)
+    )
     # remove extra values.
-    table_of_contents = [filter(remove_nested_values,each_list) for each_list in table_of_contents]  
-    
+    table_of_contents = [
+        filter(remove_nested_values, each_list) for each_list in table_of_contents
+    ]
+
     tm = Template(open(TEMPLATE_HTML).read())
     msg = tm.render(rules=RULES_ALL, table_of_contents=table_of_contents)
     re.write(msg)
