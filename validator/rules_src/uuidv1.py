@@ -2,20 +2,20 @@ from validator.rules_src import Rule
 from uuid import UUID
 
 
-class UUIDv3(Rule):
+class UUIDv1(Rule):
     """
-    The field under validation must be formatted as an uuidv3
+    The field under validation must be formatted as an uuidv1
 
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {'data' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
-    >>> rule = {'data' : 'uuidv3'}
+    >>> reqs = {'data' : 'eb241bb4-c087-11ea-b3de-0242ac130004'}
+    >>> rule = {'data' : 'uuidv1'}
     >>> validate(reqs, rule)
     True
 
     >>> reqs = {'data' : 'bba617b4-364b-4a0d-9e96-cb8a24ef1bec'}
-    >>> rule = {'data' : 'uuidv3'}
+    >>> rule = {'data' : 'uuidv1'}
     >>> validate(reqs, rule) # It fails because data is uuidv4
     False
     """
@@ -28,16 +28,16 @@ class UUIDv3(Rule):
             uuid = UUID(arg)
 
             if uuid.version == None:
-                self.set_error(f"Expected: UUIDv3, but no version was found")
+                self.set_error(f"Expected: UUIDv1, but no version was found")
                 return False
 
-            if uuid.version != 3:
-                self.set_error(f"Expected: UUIDv3, Got: UUIDv{uuid.version}")
+            if uuid.version != 1:
+                self.set_error(f"Expected: UUIDv1, Got: UUIDv{uuid.version}")
                 return False
 
             return True
         except Exception as e:
-            self.set_error(f"Expected: UUIDv3, Got: {e}")
+            self.set_error(f"Expected: UUIDv1, Got: {e}")
             return False
 
     def __from_str__(self):
