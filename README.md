@@ -12,6 +12,7 @@ Validator is a Python library for dealing with request validating.
    * **[Rules](#Rules)**
    * **[Rules Interconnection](#Rules-Interconnection)**
    * **[Custom Rules](#Custom-Rules)**
+* **[Examples](#Examples)**
 * **[Contributing](#Contributing)**
 * **[License](#License)**
 
@@ -36,9 +37,9 @@ Please see examples below:
 ```python
 from validator import validate
 
-request = {"name": "Jon Doe",
+request = {"name": "John Doe",
            "age": 33,
-           "mail": "jon_doe@gmail.com"}
+           "mail": "john_doe@gmail.com"}
 
 rules = {"name": "required",
          "age": "integer|min:18",
@@ -68,10 +69,10 @@ Validator allows user to have a look at failed validations and passed validation
     ```python
     from validator import validate
 
-    request = {"first_name": "Jon",
+    request = {"first_name": "John",
                "last_name": "Doe",
                "age": 33,
-               "mail": "jondoe@gmail.com",
+               "mail": "johndoe@gmail.com",
                "_token": "WpH0UPfy0AXzMtK2UWtJ",
                "_cookie_data": "e9Uixp8hzUySy6bw3MuZ",
                "_session_id": "ZB7q7uIVdWBKgSCSSWAa"}
@@ -84,10 +85,10 @@ Validator allows user to have a look at failed validations and passed validation
     result, validated_data, _ = validate(request, rule, return_info=True)
     """
     result = True
-    validated_data = {"first_name": "Jon",
+    validated_data = {"first_name": "John",
                       "last_name": "Doe",
                       "age": 33,
-                      "mail": "jondoe@gmail.com"}
+                      "mail": "johndoe@gmail.com"}
     """
     ```
 * Error Messages
@@ -95,7 +96,7 @@ Validator allows user to have a look at failed validations and passed validation
     from validator import validate
 
     request = {"name": "",
-               "mail": "jon_doe"}
+               "mail": "john_doe"}
 
     rule = {"name": "required",
             "mail": "mail"}
@@ -103,9 +104,9 @@ Validator allows user to have a look at failed validations and passed validation
     result, _, errors = validate(request, rule, return_info=True)
 
     """
-    result = True
+    result = False
     errors = {"name": {"Required': "Field was empty"},
-              "mail": {"Mail': "Expected a Mail, Got: jon_doe"}}
+              "mail": {"Mail': "Expected a Mail, Got: john_doe"}}
     """
     ```
 
@@ -115,7 +116,7 @@ Or you can use `Validator` class for error messages as well as for validated dat
 val = Validator(request, rules)
 result = val.validate()
 validated_data = val.get_validated_data()
-errors = val.get_error_messages()
+errors = val.get_errors()
 ```
 
 
@@ -127,7 +128,7 @@ Validation Passes:
 ```python
 from validator import validate_many
 
-requests = [{"name": "Jon"},
+requests = [{"name": "John"},
             {"name": "Rob"},
             {"name": "Tom"},
             {"name": "Greg"}]
@@ -141,7 +142,7 @@ Validation Fails:
 ```python
 from validator import validate_many
 
-requests = [{"name": "Jon"},
+requests = [{"name": "John"},
             {"name": ""},
             {"name": "Yo"},
             {"name": "Greg"}]
@@ -289,6 +290,11 @@ We give users ability to advance and use their own checkers. Write function and 
 
     validate(req, rules)
     ```
+
+<a name="Examples"></a>
+## Examples
+We have written some examples for you to get started easier. Please view [Examples](examples) folder, where you can find validator usages with frameworks like Flask, Django and etc.
+
 
 <a name="Contributing"></a>
 ## Contributing
