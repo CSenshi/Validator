@@ -24,20 +24,26 @@ class Binary(Rule):
     False
     """
 
+    aliases = ["bin", "binary"]
+
     def __init__(self):
         Rule.__init__(self)
 
     def check(self, arg):
         # Try to convert it to the binary.
         try:
-            _ = int(arg, 2)
+            _ = Binary.convert(arg)
             return True
         except:
             # if transfered to exception we know its not binary.
-            self.set_errror_message(
-                f"Expected String to be in Binary format, Got: {arg}"
-            )
+            self.set_error(f"Expected String to be in Binary format, Got: {arg}")
             return False
+
+    @staticmethod
+    def convert(val):
+        if isinstance(val, int):
+            return val
+        return int(val, 2)
 
     def __from_str__(self):
         pass

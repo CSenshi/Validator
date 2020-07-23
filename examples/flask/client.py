@@ -12,9 +12,9 @@ def register_1_pass():
     # Data to validate
     data = {
         "age": "23",
-        "first_name": "Jon",
+        "first_name": "John",
         "last_name": "Doe",
-        "mail": "jon.doe@gmail.com",
+        "mail": "john.doe@gmail.com",
     }
 
     # Create URL on specific route
@@ -36,9 +36,9 @@ def register_2_pass():
     # Data to validate
     data = {
         "age": "23",
-        "first_name": "Jon",
+        "first_name": "John",
         "last_name": "Doe",
-        "mail": "jon.doe@gmail.com",
+        "mail": "john.doe@gmail.com",
     }
 
     # Create URL on specific route
@@ -83,9 +83,9 @@ def register_4_fail():
     # Data to validate
     data = {
         "age": "13",
-        "first_name": "Jon",
+        "first_name": "John",
         "last_name": "Doe",
-        "mail": "jon.doe",
+        "mail": "john.doe",
     }
 
     # Create URL on specific route

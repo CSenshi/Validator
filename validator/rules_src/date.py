@@ -28,7 +28,7 @@ class Date(Rule):
             resp = parse(arg)
             return True
         except ValueError as err:
-            self.set_errror_message(f"Invalid: {err}")
+            self.set_error(f"Invalid: {err}")
         return False
 
     def __from_str__(self):

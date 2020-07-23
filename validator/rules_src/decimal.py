@@ -1,30 +1,25 @@
 from validator.rules_src import Rule
 
 
-class Octal(Rule):
+class Decimal(Rule):
     """
-    The field under validation must be an octal number
+    The field under validation must be a decimal number
 
     Examples:
     >>> from validator import validate
 
-    >>> reqs = {"date" : "73021"}
-    >>> rule = {"date" : "octal"}
+    >>> reqs = {'value' : '23'}
+    >>> rule = {'value' : 'decimal'}
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {"date" : "0o73021"}
-    >>> rule = {"date" : "octal"}
-    >>> validate(reqs, rule)
-    True
-
-    >>> reqs = {"date" : "23489"}
-    >>> rule = {"date" : "octal"}
+    >>> reqs = {'value' : '2F'}
+    >>> rule = {'value' : 'decimal'}
     >>> validate(reqs, rule)
     False
     """
 
-    aliases = ["oct", "octal"]
+    aliases = ["dec", "decimal"]
 
     def __init__(self):
         Rule.__init__(self)
@@ -32,7 +27,7 @@ class Octal(Rule):
     def check(self, arg):
         # Try to convert it to the octal.
         try:
-            _ = Octal.convert(arg)
+            _ = Decimal.convert(arg)
             return True
         except:
             # if transfered to exception we know its not octal.
@@ -43,7 +38,7 @@ class Octal(Rule):
     def convert(val):
         if isinstance(val, int):
             return val
-        return int(val, 8)
+        return int(val, 10)
 
     def __from_str__(self):
         pass

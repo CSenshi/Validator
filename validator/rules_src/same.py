@@ -27,21 +27,21 @@ class Same(Rule):
 
     def check(self, arg):
         if not self.rw.req_contains_field(self.field_name):
-            self.set_errror_message(f"Field {self.field_name} is not in the list")
+            self.set_error(f"Field {self.field_name} is not in the list")
             return False
 
         field_value = self.rw.get_field_data(self.field_name)
 
         # 1. check for type
         if type(field_value) != type(arg):
-            self.set_errror_message(
+            self.set_error(
                 f"Expected: {arg}({type(arg)}), Got: {field_value}({type(field_value)})"
             )
             return False
 
         # 2. check for value
         if field_value != arg:
-            self.set_errror_message(f"Expected: {arg}, Got: {field_value}")
+            self.set_error(f"Expected: {arg}, Got: {field_value}")
             return False
 
         return True

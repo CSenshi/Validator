@@ -26,7 +26,7 @@ class List(Rule):
         if isinstance(arg, list):
             return True
 
-        self.set_errror_message(f"Expected type list, Got:{type(arg)}")
+        self.set_error(f"Expected type list, Got:{type(arg)}")
         return False
 
     def __from_str__(self):

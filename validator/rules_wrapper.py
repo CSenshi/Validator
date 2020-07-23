@@ -16,12 +16,16 @@ class RulesWrapper:
         # at this point all rules are being correctly passed
         for key in self.rules:
             rules = self.rules[key]
-            data = self.request[key]
+
+            if key not in self.request:
+                data = None
+            else:
+                data = self.request[key]
 
             # Interface for rules
             rpv = RPV(data, rules, self)
             rpv_result = rpv.execute()
-            errors_on_key = rpv.get_error_messages()
+            errors_on_key = rpv.get_errors()
 
             # if current validation fails change final result
             if rpv_result:

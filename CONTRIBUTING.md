@@ -98,7 +98,7 @@ class NewRule(Rule):
 <a name="Error-Messages"></a>
 * **Error Messages:**
 
-    Each rule is child of main `Rule` Class, which has method `set_errror_message(str)`. Please use this method to set error message when validation fails.
+    Each rule is child of main `Rule` Class, which has method `set_error(str)`. Please use this method to set error message when validation fails.
                 
 
     Example:
@@ -107,7 +107,7 @@ class NewRule(Rule):
     def check(self, arg):
         if self.min_value <= arg <= self.max_value:
             return True
-        self.set_errror_message(f"Expected Between: {self.min_value} and {self.min_value}, Got: {size}")
+        self.set_error(f"Expected Between: {self.min_value} and {self.min_value}, Got: {size}")
         return False
     ```
 
@@ -146,7 +146,7 @@ class NewRule(Rule):
         Min.__from_str__(self)
         Max.__from_str__(self)
     ```
-    5. Change `check`(when using parrent rule's check method it is not necessary to use `set_error_message()` as parrent rule will set it automaticaly):
+    5. Change `check`(when using parrent rule's check method it is not necessary to use `set_error()` as parrent rule will set it automaticaly):
     ```python
     def check(self, arg):
         if Min.check(self, arg) and Max.check(self, arg):

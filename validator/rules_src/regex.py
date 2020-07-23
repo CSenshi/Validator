@@ -28,9 +28,7 @@ class Regex(Rule):
         if self.pattern.search(arg):
             return True
 
-        self.set_errror_message(
-            f"Expected to follow regex {self.pattern.pattern}, Got: {arg}"
-        )
+        self.set_error(f"Expected to follow regex {self.pattern.pattern}, Got: {arg}")
         return False
 
     def __from_str__(self):

@@ -1,52 +1,73 @@
 <table>
     <tr>
         <td>
-            <a href="#Between">Between</a>
+            <a href="#Accepted">Accepted</a>
         </td><td>
             <a href="#Binary">Binary</a>
         </td><td>
-            <a href="#Date">Date</a>
-        </td><td>
-            <a href="#Hex">Hex</a>
-        </td><td>
             <a href="#Integer">Integer</a>
+        </td><td>
+            <a href="#List">List</a>
+        </td><td>
+            <a href="#Regex">Regex</a>
+        </td><td>
+            <a href="#String">String</a>
         </td>
     </tr>
     <tr>
         <td>
+            <a href="#Alpha">Alpha</a>
+        </td><td>
+            <a href="#Date">Date</a>
+        </td><td>
             <a href="#IP">IP</a>
+        </td><td>
+            <a href="#Mail">Mail</a>
+        </td><td>
+            <a href="#Required">Required</a>
+        </td><td>
+            <a href="#UUIDv3">UUIDv3</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#Base32">Base32</a>
+        </td><td>
+            <a href="#Decimal">Decimal</a>
         </td><td>
             <a href="#IPv4">IPv4</a>
         </td><td>
-            <a href="#IPv6">IPv6</a>
+            <a href="#Max">Max</a>
         </td><td>
-            <a href="#JSON">JSON</a>
+            <a href="#RequiredIf">RequiredIf</a>
         </td><td>
-            <a href="#List">List</a>
+            <a href="#UUIDv4">UUIDv4</a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="#Mail">Mail</a>
+            <a href="#Base64">Base64</a>
         </td><td>
-            <a href="#Max">Max</a>
+            <a href="#Dict">Dict</a>
+        </td><td>
+            <a href="#IPv6">IPv6</a>
         </td><td>
             <a href="#Min">Min</a>
         </td><td>
-            <a href="#Octal">Octal</a>
-        </td><td>
-            <a href="#Regex">Regex</a>
+            <a href="#Same">Same</a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="#Required">Required</a>
+            <a href="#Between">Between</a>
         </td><td>
-            <a href="#Same">Same</a>
+            <a href="#Hex">Hex</a>
+        </td><td>
+            <a href="#JSON">JSON</a>
+        </td><td>
+            <a href="#Octal">Octal</a>
         </td><td>
             <a href="#Size">Size</a>
-        </td><td>
-            <a href="#String">String</a>
         </td>
     </tr>
     
@@ -54,6 +75,89 @@
 
 
 
+<a name="Accepted" />
+
+#### Accepted
+
+The field under validation must be 'yes', 'on', '1', or 'true' as String or True as boolena. This is useful for validating "Terms of Service" acceptance.
+```python
+>>> from validator import validate
+
+>>> reqs = {'value' : '1'}
+>>> rule = {'value' : 'accepted'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'value' : '0'}
+>>> rule = {'value' : 'accepted'}
+>>> validate(reqs, rule)
+False
+```
+Aliases:
+['accepted']
+
+<a name="Alpha" />
+
+#### Alpha
+
+The field under validation must be entirely alphabetic characters
+```python
+>>> from validator import validate
+
+>>> reqs = {'value' : 'KillerBunny'}
+>>> rule = {'value' : 'alpha'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'value' : '326forever'}
+>>> rule = {'value' : 'alpha'}
+>>> validate(reqs, rule)
+False
+```
+Aliases:
+['alpha']
+
+<a name="Base32" />
+
+#### Base32
+
+The field under validation must be a valid Base32 encoded
+```python
+>>> from validator import validate
+
+>>> reqs = {"data" : "KZAUYSKEIFKE6URAIZKFOII="}
+>>> rule = {"data" : "base32"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"data" : "Not Encoded"}
+>>> rule = {"data" : "base32"}
+>>> validate(reqs, rule)
+False
+```
+Aliases:
+['base32']
+
+<a name="Base64" />
+
+#### Base64
+
+The field under validation must be a valid Base64 encoded
+```python
+>>> from validator import validate
+
+>>> reqs = {"data" : "VmFsaWRhdG9yIEZUVyE="}
+>>> rule = {"data" : "base64"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"data" : "Not Encoded"}
+>>> rule = {"data" : "base64"}
+>>> validate(reqs, rule)
+False
+```
+Aliases:
+['base64']
 
 <a name="Between" />
 
@@ -73,6 +177,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['between']
 
 <a name="Binary" />
 
@@ -97,6 +203,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['binary', 'bin']
 
 <a name="Date" />
 
@@ -116,6 +224,50 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['date']
+
+<a name="Decimal" />
+
+#### Decimal
+
+The field under validation must be a decimal number
+```python
+>>> from validator import validate
+
+>>> reqs = {'value' : '23'}
+>>> rule = {'value' : 'decimal'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'value' : '2F'}
+>>> rule = {'value' : 'decimal'}
+>>> validate(reqs, rule)
+False
+```
+Aliases:
+['decimal', 'dec']
+
+<a name="Dict" />
+
+#### Dict
+
+The field under validation must be a dictionary (Python map)
+```python
+>>> from validator import validate
+
+>>> reqs = {"data" : {"key1" : "val1", "key2" : "val2"} }
+>>> rule = {"data" : "dict"}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {"data" : ["val1", "val2", "val3", "val4"]}
+>>> rule = {"data" : "dict"}
+>>> validate(reqs, rule)
+False
+```
+Aliases:
+['dict']
 
 <a name="Hex" />
 
@@ -140,6 +292,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['hex', 'hexadecimal']
 
 <a name="Integer" />
 
@@ -159,8 +313,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
+Aliases:
+['integer']
 
 <a name="IP" />
 
@@ -180,6 +334,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['ip']
 
 <a name="IPv4" />
 
@@ -199,6 +355,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['ipv4']
 
 <a name="IPv6" />
 
@@ -218,6 +376,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['ipv6']
 
 <a name="JSON" />
 
@@ -237,6 +397,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['json']
 
 <a name="List" />
 
@@ -256,8 +418,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
+Aliases:
+['list']
 
 <a name="Mail" />
 
@@ -277,12 +439,15 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['mail']
 
 <a name="Max" />
 
 #### Max
 
-The field under validation must be less than or equal to a maximum value. Given value is evaluated according to `Size` rule
+The field under validation must be less than or equal to a maximum value
+Given value is evaluated according to `Size` rule
 ```python
 >>> from validator import validate
 
@@ -296,12 +461,15 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['max']
 
 <a name="Min" />
 
 #### Min
 
-The field under validation must be greater than or equal to a minimum value. Given value is evaluated according to `Size` rule
+The field under validation must be greater than or equal to a minimum value.
+Given value is evaluated according to `Size` rule
 ```python
 >>> from validator import validate
 
@@ -315,6 +483,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['min']
 
 <a name="Octal" />
 
@@ -339,6 +509,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['octal', 'oct']
 
 <a name="Regex" />
 
@@ -358,8 +530,8 @@ True
 >>> validate(reqs, rule)
 False
 ```
-
-
+Aliases:
+['regex']
 
 <a name="Required" />
 
@@ -379,6 +551,35 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['required']
+
+<a name="RequiredIf" />
+
+#### RequiredIf
+
+The field under validation must be present and not empty if the anotherfield field is equal to any value.
+```python
+>>> from validator import validate
+
+>>> reqs = {'under_age' : 'no'}
+>>> rule = {'parent' : 'required_if:under_age,yes'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'under_age' : 'yes',
+...         'parent': 'John Doe'}
+>>> rule = {'parent' : 'required_if:under_age,yes'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'under_age' : 'yes'}
+>>> rule = {'parent' : 'required_if:under_age,yes'}
+>>> validate(reqs, rule)
+False
+```
+Aliases:
+['requiredif']
 
 <a name="Same" />
 
@@ -400,48 +601,69 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['same']
 
 <a name="Size" />
 
 #### Size
 
-The field under validation must have a size matching the given value. For string data, value corresponds to the number of characters. For numeric data, value corresponds to a given integer value (the attribute must also have the numeric or integer rule). For an array, size corresponds to the count of the array.
+The field under validation must have a size matching the given value.
+
+
+* For string data, value corresponds to the number of characters.
+
+* For numeric data, value corresponds to a given integer value. The attribute must also have any of the number rules: decimal, binary, octal, hex.
+If Integer rule is given it checks for all four systems with given order
+
+* For collectons, size corresponds to the len() of the given argument. It works for: String, List, Dict, JSON
 ```python
 >>> from validator import validate
 
 # Checks for given number system
->>> reqs = {"value" : "42"} # Checks for Decimal Integer value
->>> rule = {"value" : "integer|size:42"}
->>> validate(reqs, rule)
+>>> reqs = {"value" : "42"}
+>>> rule = {"value" : "decimal|size:42"}
+>>> validate(reqs, rule) # Checks for Decimal Integer value
 True
 
->>> reqs = {"value" : "0b101010"} # Checks for Binary Integer value
+>>> reqs = {"value" : "0b101010"}
 >>> rule = {"value" : "binary|size:42"}
->>> validate(reqs, rule)
+>>> validate(reqs, rule) # Checks for Binary Integer value
 True
 
->>> reqs = {"value" : "0o52"} # Checks for Octal Integer value
+>>> reqs = {"value" : "0o52"}
 >>> rule = {"value" : "octal|size:42"}
->>> validate(reqs, rule)
+>>> validate(reqs, rule) # Checks for Octal Integer value
 True
 
->>> reqs = {"value" : "0x2a"} # Checks for Hex Integer value
+>>> reqs = {"value" : "0x2a"}
 >>> rule = {"value" : "hex|size:42"}
->>> validate(reqs, rule)
+>>> validate(reqs, rule) # Checks for Hex Integer value
 True
 
-# Checks for string length
+# Checks len() for given collections
 >>> reqs = {"value" : "something"}
 >>> rule = {"value" : "string|size:9"}
->>> validate(reqs, rule)
+>>> validate(reqs, rule) # Checks for string length
 True
 
-# Checks for List length
 >>> reqs = {"value" : ["a", "b", "c"]}
 >>> rule = {"value" : "list|size:3"}
->>> validate(reqs, rule)
+>>> validate(reqs, rule) # Checks for List length
+True
+
+>>> reqs = {"value" : {"k1":"v1", "k2":"v2", "k3":"v3", "k4":"v4"}}
+>>> rule = {"value" : "dict|size:4"}
+>>> validate(reqs, rule) # Checks for Dictionary length
+True
+
+>>> reqs = {"value" : '{"name":"John", "age":31, "city":"New York"}'}
+>>> rule = {"value" : "json|size:3"}
+>>> validate(reqs, rule) # Checks for JSON length
 True
 ```
+Aliases:
+['size']
 
 <a name="String" />
 
@@ -461,4 +683,46 @@ True
 >>> validate(reqs, rule)
 False
 ```
+Aliases:
+['string']
 
+<a name="UUIDv3" />
+
+#### UUIDv3
+
+The field under validation must be a valid Universally Unique Identifier version 3
+```python
+>>> from validator import validate
+>>> reqs = {'data' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
+>>> rule = {'data' : 'uuidv3'}
+>>> validate(reqs, rule) # True
+True
+
+>>> from validator import validate
+>>> reqs = {'data' : 'bba617b4-364b-4a0d-9e96-cb8a24ef1bec'}
+>>> rule = {'data' : 'uuidv3'}
+>>> validate(reqs, rule) # It fails because data is uuidv4
+False
+```
+Aliases:
+['uuidv3']
+
+<a name="UUIDv4" />
+
+#### UUIDv4
+
+The field under validation must be formatted as an uuidv4
+```python
+>>> from validator import validate
+>>> reqs = {'val' : '81368b76-31e9-41db-b28c-8c029cb435f0'}
+>>> rule = {'val' : 'uuidv4'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'val' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
+>>> rule = {'val' : 'uuidv4'}
+>>> validate(reqs, rule) # It fails because data is uuidv3
+False
+```
+Aliases:
+['uuidv4']

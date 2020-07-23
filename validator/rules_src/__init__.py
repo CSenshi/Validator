@@ -12,7 +12,10 @@ class Rule(metaclass=ABCMeta):
         self.class_name = type(self).__name__
 
     def __call__(self, arg):
-        return self.check(arg)
+        result = self.check(arg)
+        if isinstance(result, bool):
+            return result
+        return False
 
     def check(self, arg):
         pass
@@ -28,10 +31,10 @@ class Rule(metaclass=ABCMeta):
         self.class_name = name
 
     # Get/Set Error Message
-    def get_error_message(self):
+    def get_error(self):
         return self.error_message
 
-    def set_errror_message(self, message):
+    def set_error(self, message):
         self.error_message = message
 
     # Get/Set RPV
@@ -58,7 +61,7 @@ class Rule(metaclass=ABCMeta):
         elif hasattr(new_func, "__class__") and hasattr(new_func.__class__, "__name__"):
             self.set_class_name(new_func.__class__.__name__)
         # Override error message
-        self.set_errror_message("Error: Custom Rule Failed")
+        self.set_error("Error: Custom Rule Failed")
 
 
 # Iterate each module in the given package and fill __all__ dictionary
@@ -71,7 +74,13 @@ for (_, file, _) in pkgutil.iter_modules([Path(__file__).parent]):
     pkg = importlib.import_module(module_abs_path)
 
     # Import all classes from given modules
-    names = [x for x in pkg.__dict__ if not x.startswith("_")]
+    rule_class = [x for x in pkg.__dict__ if not x.startswith("_")][-1:]
 
     # add class from module to globals() adn all (e.g. add 'min.Min')
-    __all__.update({k.lower(): getattr(pkg, k) for k in names})
+    for i in rule_class:
+        rule_class = getattr(pkg, i)
+        if "aliases" in rule_class.__dict__:
+            for alias in rule_class.aliases:
+                __all__.update({alias.lower(): rule_class})
+
+        __all__.update({i.lower(): rule_class})
