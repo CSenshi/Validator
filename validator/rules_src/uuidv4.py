@@ -8,13 +8,14 @@ class UUIDv4(Rule):
     
     Examples:
     >>> from validator import validate
-    >>> reqs = {'val' : '81368b76-31e9-41db-b28c-8c029cb435f0'}
-    >>> rule = {'val' : 'uuidv4'}
+
+    >>> reqs = {'data' : '81368b76-31e9-41db-b28c-8c029cb435f0'}
+    >>> rule = {'data' : 'uuidv4'}
     >>> validate(reqs, rule) 
     True
 
-    >>> reqs = {'val' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
-    >>> rule = {'val' : 'uuidv4'}
+    >>> reqs = {'data' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
+    >>> rule = {'data' : 'uuidv4'}
     >>> validate(reqs, rule) # It fails because data is uuidv3
     False
     """
@@ -38,8 +39,6 @@ class UUIDv4(Rule):
         except Exception as e:
             self.set_error(f"Expected: UUIDv4, Got: {e}")
             return False
-
-        return True
 
     def __from_str__(self):
         pass
