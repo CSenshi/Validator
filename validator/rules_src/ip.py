@@ -1,7 +1,7 @@
 import re
 from validator.rules_src import Rule
-from validator.rules_src.IPv4 import IPv4
-from validator.rules_src.IPv6 import IPv6
+from validator.rules_src.ipv4 import IPv4
+from validator.rules_src.ipv6 import IPv6
 
 
 class IP(IPv4, IPv6):

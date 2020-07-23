@@ -26,7 +26,7 @@
         </td><td>
             <a href="#Required">Required</a>
         </td><td>
-            <a href="#UUIDv3">UUIDv3</a>
+            <a href="#UUIDv1">UUIDv1</a>
         </td>
     </tr>
     <tr>
@@ -41,7 +41,7 @@
         </td><td>
             <a href="#RequiredIf">RequiredIf</a>
         </td><td>
-            <a href="#UUIDv4">UUIDv4</a>
+            <a href="#UUIDv3">UUIDv3</a>
         </td>
     </tr>
     <tr>
@@ -55,6 +55,8 @@
             <a href="#Min">Min</a>
         </td><td>
             <a href="#Same">Same</a>
+        </td><td>
+            <a href="#UUIDv4">UUIDv4</a>
         </td>
     </tr>
     <tr>
@@ -246,7 +248,7 @@ True
 False
 ```
 Aliases:
-['decimal', 'dec']
+['dec', 'decimal']
 
 <a name="Dict" />
 
@@ -293,7 +295,7 @@ True
 False
 ```
 Aliases:
-['hex', 'hexadecimal']
+['hexadecimal', 'hex']
 
 <a name="Integer" />
 
@@ -510,7 +512,7 @@ True
 False
 ```
 Aliases:
-['octal', 'oct']
+['oct', 'octal']
 
 <a name="Regex" />
 
@@ -686,19 +688,40 @@ False
 Aliases:
 ['string']
 
+<a name="UUIDv1" />
+
+#### UUIDv1
+
+The field under validation must be formatted as an uuidv1
+```python
+>>> from validator import validate
+
+>>> reqs = {'data' : 'eb241bb4-c087-11ea-b3de-0242ac130004'}
+>>> rule = {'data' : 'uuidv1'}
+>>> validate(reqs, rule)
+True
+
+>>> reqs = {'data' : 'bba617b4-364b-4a0d-9e96-cb8a24ef1bec'}
+>>> rule = {'data' : 'uuidv1'}
+>>> validate(reqs, rule) # It fails because data is uuidv4
+False
+```
+Aliases:
+['uuidv1']
+
 <a name="UUIDv3" />
 
 #### UUIDv3
 
-The field under validation must be a valid Universally Unique Identifier version 3
+The field under validation must be formatted as an uuidv3
 ```python
 >>> from validator import validate
+
 >>> reqs = {'data' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
 >>> rule = {'data' : 'uuidv3'}
->>> validate(reqs, rule) # True
+>>> validate(reqs, rule)
 True
 
->>> from validator import validate
 >>> reqs = {'data' : 'bba617b4-364b-4a0d-9e96-cb8a24ef1bec'}
 >>> rule = {'data' : 'uuidv3'}
 >>> validate(reqs, rule) # It fails because data is uuidv4
@@ -714,13 +737,14 @@ Aliases:
 The field under validation must be formatted as an uuidv4
 ```python
 >>> from validator import validate
->>> reqs = {'val' : '81368b76-31e9-41db-b28c-8c029cb435f0'}
->>> rule = {'val' : 'uuidv4'}
+
+>>> reqs = {'data' : '81368b76-31e9-41db-b28c-8c029cb435f0'}
+>>> rule = {'data' : 'uuidv4'}
 >>> validate(reqs, rule)
 True
 
->>> reqs = {'val' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
->>> rule = {'val' : 'uuidv4'}
+>>> reqs = {'data' : 'a3bb189e-8bf9-3888-9912-ace4e6543002'}
+>>> rule = {'data' : 'uuidv4'}
 >>> validate(reqs, rule) # It fails because data is uuidv3
 False
 ```
