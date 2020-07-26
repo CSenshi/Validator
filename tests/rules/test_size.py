@@ -123,31 +123,83 @@ def test_size_10_hex():
 
 def test_size_11_list():
     assert validate({"val": [1, 2, 3, 4, 5]}, {"val": "list|size:5"})
-    # ToDo : More True Tests with list
+
+    assert validate({"val": [1]}, {"val": "list|size:1"})
+
+    assert validate({"val": []}, {"val": "list|size:0"})
+
+    assert validate({"val": [1, 1, 1]}, {"val": "list|size:3"})
 
     assert not validate({"val": [1, 2, 3, 4, 5]}, {"val": "list|size:25"})
-    # ToDo : More False Tests with list
+
+    assert not validate({"val": [1]}, {"val": "list|size:12"})
+
+    assert not validate({"val": []}, {"val": "list|size:-1"})
+
+    assert not validate({"val": [1, 1, 1]}, {"val": "list|size:33"})
 
 
 def test_size_12_dict():
     assert validate(
         {"val": {"k1": "v1", "k2": "v2", "k3": "v3"}}, {"val": "dict|size:3"},
     )
-    # ToDo : More True Tests with dict
+
+    assert validate(
+        {"val": {}}, {"val": "dict|size:0"},
+    )
+
+    assert validate(
+        {"val": {"k1": "v1"}}, {"val": "dict|size:1"},
+    )
 
     assert not validate(
         {"val": {"k1": "v1", "k2": "v2", "k3": "v3"}}, {"val": "dict|size:25"},
     )
-    # ToDo : More False Tests with dict
+
+    assert not validate(
+        {"val": {}}, {"val": "dict|size:12"},
+    )
+
+    assert not validate(
+        {"val": {"k1": "v1"}}, {"val": "dict|size:11"},
+    )
 
 
 def test_size_13_json():
     assert validate(
         {"val": '{"name":"John", "age":31, "city":"New York"}'}, {"val": "json|size:3"}
     )
-    # ToDo : More True Tests with json
+
+    assert validate(
+        {"val": '{}'}, {"val": "json|size:0"},
+    )
+
+    assert validate(
+        {"val": '{"k1": "v1"}'}, {"val": "json|size:1"},
+    )
 
     assert not validate(
         {"val": '{"name":"John", "age":31, "city":"New York"}'}, {"val": "json|size:25"}
     )
-    # ToDo : More False Tests with json
+
+    assert not validate(
+        {"val": '{}'}, {"val": "dict|size:12"},
+    )
+
+    assert not validate(
+        {"val": '{"k1": "v1"}'}, {"val": "dict|size:11"},
+    )
+
+
+def test_size_14_string():
+    assert validate({"val": "string"}, {"val": "string|size:6"})
+
+    assert validate({"val": "string2"}, {"val": "string|size:7"})
+
+    assert validate({"val": ""}, {"val": "string|size:0"})
+
+    assert not validate({"val": "string"}, {"val": "string|size:66"})
+
+    assert not validate({"val": "string2"}, {"val": "string|size:77"})
+
+    assert not validate({"val": ""}, {"val": "string|size:10"})
