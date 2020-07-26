@@ -1,6 +1,5 @@
 from validator.rules import RequiredIf
 from validator.rules_wrapper import RulesWrapper as RW
-from validator import validate
 
 
 def test_required_if_01():

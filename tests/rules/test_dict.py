@@ -1,5 +1,4 @@
 from validator.rules import Dict
-from validator import validate
 
 
 def test_dict_01():

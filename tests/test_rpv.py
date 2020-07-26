@@ -1,6 +1,5 @@
+from validator import Validator, rules as R
 from validator.rule_pipe_validator import RulePipeValidator as RPV
-from validator import rules as R
-from validator import Validator, validate, validate_many, rules as R
 
 
 def test_rpv_001_simple():
