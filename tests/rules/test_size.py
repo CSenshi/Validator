@@ -108,6 +108,7 @@ def test_size_07_decimal():
 
     assert not validate({"val": "10"}, {"val": "decimal|size:111"})
 
+
 def test_size_08_binary():
     assert validate({"val": "0b10111"}, {"val": "binary|size:23"})
 
