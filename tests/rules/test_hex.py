@@ -46,3 +46,11 @@ def test_hex_03():
     assert not validate({"val": "A123BP"}, {"val": "hex"})
 
     assert not validate({"val": "0bk123123"}, {"val": "hex"})
+
+
+def test_hex_04():
+    assert validate({"val": "-0x3A"}, {"val": "hex"})
+
+    assert validate({"val": "-0x3ABB"}, {"val": "hex"})
+
+    assert validate({"val": "-0x34"}, {"val": "hex"})

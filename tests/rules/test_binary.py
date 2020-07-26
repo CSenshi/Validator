@@ -46,3 +46,11 @@ def test_binary_03():
     assert not validate({"val": "b111111"}, {"val": "binary"})
 
     assert not validate({"val": "0b1111112"}, {"val": "binary"})
+
+
+def test_binary_04():
+    assert validate({"val": "-0101000001111"}, {"val": "binary"})
+
+    assert validate({"val": "-1101000001111"}, {"val": "binary"})
+
+    assert validate({"val": "-1101000001111"}, {"val": "binary"})
