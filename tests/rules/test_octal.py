@@ -38,3 +38,11 @@ def test_octal_03():
     assert not validate({"val": "PD010DP"}, {"val": "octal"})
 
     assert not validate({"val": "ll000ll"}, {"val": "octal"})
+
+
+def test_octal_04():
+    assert validate({"val": "-122333444555"}, {"val": "octal"})
+
+    assert validate({"val": "-1234"}, {"val": "octal"})
+
+    assert validate({"val": "-1"}, {"val": "octal"})
