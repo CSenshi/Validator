@@ -144,25 +144,17 @@ def test_size_12_dict():
         {"val": {"k1": "v1", "k2": "v2", "k3": "v3"}}, {"val": "dict|size:3"},
     )
 
-    assert validate(
-        {"val": {}}, {"val": "dict|size:0"},
-    )
+    assert validate({"val": {}}, {"val": "dict|size:0"},)
 
-    assert validate(
-        {"val": {"k1": "v1"}}, {"val": "dict|size:1"},
-    )
+    assert validate({"val": {"k1": "v1"}}, {"val": "dict|size:1"},)
 
     assert not validate(
         {"val": {"k1": "v1", "k2": "v2", "k3": "v3"}}, {"val": "dict|size:25"},
     )
 
-    assert not validate(
-        {"val": {}}, {"val": "dict|size:12"},
-    )
+    assert not validate({"val": {}}, {"val": "dict|size:12"},)
 
-    assert not validate(
-        {"val": {"k1": "v1"}}, {"val": "dict|size:11"},
-    )
+    assert not validate({"val": {"k1": "v1"}}, {"val": "dict|size:11"},)
 
 
 def test_size_13_json():
@@ -170,25 +162,17 @@ def test_size_13_json():
         {"val": '{"name":"John", "age":31, "city":"New York"}'}, {"val": "json|size:3"}
     )
 
-    assert validate(
-        {"val": '{}'}, {"val": "json|size:0"},
-    )
+    assert validate({"val": "{}"}, {"val": "json|size:0"},)
 
-    assert validate(
-        {"val": '{"k1": "v1"}'}, {"val": "json|size:1"},
-    )
+    assert validate({"val": '{"k1": "v1"}'}, {"val": "json|size:1"},)
 
     assert not validate(
         {"val": '{"name":"John", "age":31, "city":"New York"}'}, {"val": "json|size:25"}
     )
 
-    assert not validate(
-        {"val": '{}'}, {"val": "dict|size:12"},
-    )
+    assert not validate({"val": "{}"}, {"val": "dict|size:12"},)
 
-    assert not validate(
-        {"val": '{"k1": "v1"}'}, {"val": "dict|size:11"},
-    )
+    assert not validate({"val": '{"k1": "v1"}'}, {"val": "dict|size:11"},)
 
 
 def test_size_14_string():
