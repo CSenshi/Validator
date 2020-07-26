@@ -83,42 +83,75 @@ def test_size_05_string():
 
 def test_size_06_integer():
     assert validate({"val": "23"}, {"val": "integer|size:23"})
-    # ToDo : More True Tests with integer
+
+    assert validate({"val": 11}, {"val": "integer|size:11"})
+
+    assert validate({"val": 0}, {"val": "integer|size:0"})
 
     assert not validate({"val": "23"}, {"val": "integer|size:35"})
-    # ToDo : More False Tests with integer
+
+    assert not validate({"val": 11}, {"val": "integer|size:12"})
+
+    assert not validate({"val": 0}, {"val": "integer|size:1"})
 
 
 def test_size_07_decimal():
     assert validate({"val": "23"}, {"val": "decimal|size:23"})
-    # ToDo : More True Tests with decimal
+
+    assert validate({"val": "305"}, {"val": "decimal|size:305"})
+
+    assert validate({"val": "10"}, {"val": "decimal|size:10"})
 
     assert not validate({"val": "23"}, {"val": "decimal|size:35"})
-    # ToDo : More False Tests with decimal
 
+    assert not validate({"val": "306"}, {"val": "decimal|size:305"})
+
+    assert not validate({"val": "10"}, {"val": "decimal|size:111"})
 
 def test_size_08_binary():
     assert validate({"val": "0b10111"}, {"val": "binary|size:23"})
-    # ToDo : More True Tests with binary
+
+    assert validate({"val": "0"}, {"val": "binary|size:0"})
+
+    assert validate({"val": "1"}, {"val": "binary|size:1"})
+
+    assert validate({"val": "1000"}, {"val": "binary|size:8"})
 
     assert not validate({"val": "0b10111"}, {"val": "binary|size:35"})
-    # ToDo : More False Tests with binary
+
+    assert not validate({"val": "0"}, {"val": "binary|size:213"})
+
+    assert not validate({"val": "1"}, {"val": "binary|size:3331"})
+
+    assert not validate({"val": "1000"}, {"val": "binary|size:28"})
 
 
 def test_size_09_octal():
     assert validate({"val": "0o27"}, {"val": "octal|size:23"})
-    # ToDo : More True Tests with octal
+
+    assert validate({"val": "157"}, {"val": "octal|size:111"})
+
+    assert validate({"val": "26"}, {"val": "octal|size:22"})
 
     assert not validate({"val": "0o27"}, {"val": "octal|size:35"})
-    # ToDo : More False Tests with octal
+
+    assert not validate({"val": "157"}, {"val": "octal|size:112"})
+
+    assert not validate({"val": "26"}, {"val": "octal|size:26"})
 
 
 def test_size_10_hex():
     assert validate({"val": "0x17"}, {"val": "hex|size:23"})
-    # ToDo : More True Tests with hex
+
+    assert validate({"val": "6F"}, {"val": "hex|size:111"})
+
+    assert validate({"val": "29A"}, {"val": "hex|size:666"})
 
     assert not validate({"val": "0x17"}, {"val": "hex|size:35"})
-    # ToDo : More False Tests with hex
+
+    assert not validate({"val": "6F"}, {"val": "hex|size:1166"})
+
+    assert not validate({"val": "29A"}, {"val": "hex|size:777"})
 
 
 def test_size_11_list():
