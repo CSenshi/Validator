@@ -1,4 +1,4 @@
-from validator import validate, rules as R
+from validator import validate
 from validator.rules import Rule
 
 CUSTOM_ERROR_MSG = "Error: Custom Rule Failed"

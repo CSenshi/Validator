@@ -1,5 +1,4 @@
 from validator.rules import Base64
-from validator import validate
 
 
 def test_base64_01():

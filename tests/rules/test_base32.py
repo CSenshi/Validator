@@ -1,5 +1,4 @@
 from validator.rules import Base32
-from validator import validate
 
 
 def test_base32_01():

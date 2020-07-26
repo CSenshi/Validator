@@ -1,6 +1,5 @@
 from validator.rules import Between
 from validator.rules import Integer
-from validator.rules import List
 from validator.rule_pipe_validator import RulePipeValidator as RPV
 from validator import validate
 import pytest
