@@ -46,4 +46,3 @@ def test_octal_04():
     assert validate({"val": "-1234"}, {"val": "octal"})
 
     assert validate({"val": "-1"}, {"val": "octal"})
-
