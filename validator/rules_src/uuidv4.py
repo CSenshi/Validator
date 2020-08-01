@@ -27,7 +27,7 @@ class UUIDv4(Rule):
         try:
             uuid = UUID(arg)
 
-            if uuid.version == None:
+            if uuid.version is None:
                 self.set_error(f"Expected: UUIDv4, but no version was found")
                 return False
 

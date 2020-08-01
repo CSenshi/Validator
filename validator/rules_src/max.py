@@ -29,7 +29,7 @@ class Max(Rule):
     def check(self, arg):
         # Evaluate to Size rule
         size = Size.size_value(arg, self.rpv)
-        if size == None:
+        if size is None:
             self.set_error(f"Could not get size from data. type = {type(arg)}")
             return False
 

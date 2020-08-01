@@ -25,7 +25,7 @@ class Accepted(Rule):
 
     def check(self, arg):
         if isinstance(arg, bool):
-            if arg == False:
+            if not arg:
                 self.set_error(f"Expected True, Got: {arg} ({type(arg)})")
                 return False
             return True
