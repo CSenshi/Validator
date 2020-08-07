@@ -15,7 +15,7 @@
 <a name="Setting-up-environment"></a>
 ## Setting up environment
 First of all we need to set up our project with easy to go commands. Just run following commands and you will be ready to go:
-* ``` make install ``` Will install all of packages used by project
+* ``` pip install -r requirements/dev.txt  ``` Will install all of packages used by project
 * ``` make ``` Will generate rules.py file which is used to import rules
 
 At this point you are done with setting up your project and should be able to start coding.

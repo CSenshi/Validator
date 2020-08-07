@@ -16,9 +16,6 @@ endif
 init:
 	$(RULES_IMPORT_GENERATOR_SCRIPT) $(GENERATED_RULES_FILE)
 
-install:
-	pip3 install -r requirements.txt
-
 clean:
 	git clean -Xdf
 

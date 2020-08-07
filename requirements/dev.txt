@@ -1,0 +1,9 @@
+# Specifies only dev-specific requirements
+# But imports the production ones too
+-r prod.txt
+black
+pytest
+flask
+pprint
+jinja2
+requests

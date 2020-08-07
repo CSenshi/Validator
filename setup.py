@@ -4,16 +4,16 @@ import os
 from setuptools import setup
 
 # Requirements
-with open('requirements.txt') as f:
-    reqs = f.read().strip().split('\n')
-    
+with open("requirements/prod.txt") as f:
+    reqs = f.read().strip().split("\n")
+
 # Readme
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
 __major__ = 0
-__minor__ = 6
+__minor__ = 7
 __patch__ = 0
 __version__ = ".".join([str(__major__), str(__minor__), str(__patch__)])
 
