@@ -3,14 +3,18 @@
 import os
 from setuptools import setup
 
-
+# Requirements
+with open('requirements.txt') as f:
+    reqs = f.read().strip().split('\n')
+    
+# Readme
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
 __major__ = 0
 __minor__ = 5
-__patch__ = 2
+__patch__ = 3
 __version__ = ".".join([str(__major__), str(__minor__), str(__patch__)])
 
 setup(
@@ -28,8 +32,8 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    extras_require={"dev": ["pytest", "black"]},
     url="https://github.com/CSenshi/Validator",
     author="Saba Pockhua",
+    install_requires=reqs,
     author_email="saba.pochkhua@gmail.com",
 )
