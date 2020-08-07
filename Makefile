@@ -50,7 +50,7 @@ readme: init
 	$(README_TEMPLATE_GENERATOR_SCRIPT)
 
 # Upload to pip
-pip-upload: build-dist upload-dist
+pip-upload: init build-dist upload-dist
 
 build-dist:
 	python3 setup.py bdist_wheel sdist
