@@ -5,7 +5,7 @@ from validator import utils
 
 class Max(Rule):
     """
-    The field under validation must be less than or equal to a maximum value 
+    The field under validation must be less than or equal to a maximum value
     Given value is evaluated according to `Size` rule
 
     Examples:

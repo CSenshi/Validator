@@ -4,7 +4,7 @@ from validator.rules_src.min import Min
 
 class Between(Max, Min):
     """
-    The field under validation must have a size between the given min and max 
+    The field under validation must have a size between the given min and max
 
     Examples:
     >>> from validator import validate

@@ -4,6 +4,5 @@
 black
 pytest
 flask
-pprint
 jinja2
 requests

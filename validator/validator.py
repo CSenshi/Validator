@@ -65,15 +65,15 @@ class Validator:
 
 
 def validate(req, rules, return_info=False):
-    """ 
+    """
     Validates request with given rules
-  
-    Parameters: 
+
+    Parameters:
         req (dict): request
         rules (dict): rules
         return_info (bool): True/False according the necessity of returning error messages (False by default)
-  
-    Returns: 
+
+    Returns:
         result (bool): the result of the validation (if return_info parameter was False)
         OR
         (result, error_messages): pair of the validation result and error messages object (if return_info was True)
@@ -91,18 +91,18 @@ def validate(req, rules, return_info=False):
 
 def validate_many(requests, rules, return_info=False):
     """
-       Validates many requests with given rules
+    Validates many requests with given rules
 
-       Parameters:
-           requests (list): requests
-           rules (dict): rules
-           return_info (bool): True/False according the necessity of returning error messages (False by default)
+    Parameters:
+        requests (list): requests
+        rules (dict): rules
+        return_info (bool): True/False according the necessity of returning error messages (False by default)
 
-       Returns:
-           result (bool): the result of the validation (if return_info parameter was False)
-           OR
-           (result, error_messages): pair of the validation result and error messages object (if return_info was True)
-       """
+    Returns:
+        result (bool): the result of the validation (if return_info parameter was False)
+        OR
+        (result, error_messages): pair of the validation result and error messages object (if return_info was True)
+    """
 
     def get_validation_result(
         _results, _validated_datas, _errors, _return_info=return_info

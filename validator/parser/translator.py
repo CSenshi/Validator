@@ -114,7 +114,7 @@ class Translator:
     def _translate_func(self, elem):
         """
         Translates Function to Rule Instances
-        
+
         def test_func(x):
             ...
             return True

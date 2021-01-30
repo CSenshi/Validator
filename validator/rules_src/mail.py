@@ -4,7 +4,7 @@ from validator.rules_src import Rule
 
 class Mail(Rule):
     """
-    The field under validation must be formatted as an e-mail address 
+    The field under validation must be formatted as an e-mail address
 
     Examples:
     >>> from validator import validate

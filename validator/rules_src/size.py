@@ -13,36 +13,36 @@ from validator import utils
 
 class Size(Integer, List):
     """
-    The field under validation must have a size matching the given value. 
-    
-    
+    The field under validation must have a size matching the given value.
+
+
     * For string data, value corresponds to the number of characters.
-    
+
     * For numeric data, value corresponds to a given integer value. The attribute must also have any of the number rules: decimal, binary, octal, hex.
       If Integer rule is given it checks for all four systems with given order
-    
-    * For collectons, size corresponds to the len() of the given argument. It works for: String, List, Dict, JSON 
+
+    * For collectons, size corresponds to the len() of the given argument. It works for: String, List, Dict, JSON
 
     Examples:
     >>> from validator import validate
-    
+
     # Checks for given number system
-    >>> reqs = {"value" : "42"} 
+    >>> reqs = {"value" : "42"}
     >>> rule = {"value" : "decimal|size:42"}
     >>> validate(reqs, rule) # Checks for Decimal Integer value
     True
 
-    >>> reqs = {"value" : "0b101010"} 
+    >>> reqs = {"value" : "0b101010"}
     >>> rule = {"value" : "binary|size:42"}
     >>> validate(reqs, rule) # Checks for Binary Integer value
     True
-    
-    >>> reqs = {"value" : "0o52"} 
+
+    >>> reqs = {"value" : "0o52"}
     >>> rule = {"value" : "octal|size:42"}
     >>> validate(reqs, rule) # Checks for Octal Integer value
     True
 
-    >>> reqs = {"value" : "0x2a"} 
+    >>> reqs = {"value" : "0x2a"}
     >>> rule = {"value" : "hex|size:42"}
     >>> validate(reqs, rule) # Checks for Hex Integer value
     True
@@ -58,7 +58,7 @@ class Size(Integer, List):
     >>> validate(reqs, rule) # Checks for List length
     True
 
-    >>> reqs = {"value" : {"k1":"v1", "k2":"v2", "k3":"v3", "k4":"v4"}} 
+    >>> reqs = {"value" : {"k1":"v1", "k2":"v2", "k3":"v3", "k4":"v4"}}
     >>> rule = {"value" : "dict|size:4"}
     >>> validate(reqs, rule) # Checks for Dictionary length
     True

@@ -14,7 +14,7 @@ class Same(Rule):
     >>> validate(reqs, rule)
     True
 
-    >>> reqs = {"old_pass": "password", 
+    >>> reqs = {"old_pass": "password",
     ...         "new_pass": "changed_password"}
     >>> rule = {"new_pass": "same:old_pass"}
     >>> validate(reqs, rule)
