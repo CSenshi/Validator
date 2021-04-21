@@ -52,7 +52,6 @@ class Rule(metaclass=ABCMeta):
         self.rw = rw
 
     def override_check(self, new_func):
-        print(new_func.__class__.__name__)
         # Override function
         self.check = new_func
         # Override class_name
