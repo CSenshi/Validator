@@ -65,7 +65,7 @@ class Rule(metaclass=ABCMeta):
 
 # Iterate each module in the given package and fill __all__ dictionary
 __all__ = {}
-for (_, file, _) in pkgutil.iter_modules([Path(__file__).parent]):
+for (_, file, _) in pkgutil.iter_modules([str(Path(__file__).parent)]):
     # Get Absolute Path
     module_abs_path = f"validator.rules_src.{file}"
 
