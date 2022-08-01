@@ -51,7 +51,12 @@ class Translator:
     def _value_to_array(self):
         # if value is string transform to string
         if isinstance(self.value, str):
-            return re.split("[" + target_regex + "]", self.value)
+            # list of rule str
+            # suffix of pattern ensures regex-related `|` are not split upon
+            # splits on `|` only if it's followed by a validator rule + ":"
+            return re.split(
+                "[" + target_regex + f"](?=({':|'.join(R.__all__)}))", self.value
+            )
 
         # if value is array return
         if isinstance(self.value, list):
@@ -74,7 +79,6 @@ class Translator:
         if target_char in elem:
             # extract rule_name and arguments from string
             class_str, args_str = elem.split(target_char, 1)
-
             class_str = class_str.lower()
             # Split arguments into array
             args = args_str.split(target_args)
