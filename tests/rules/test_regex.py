@@ -37,6 +37,10 @@ def test_regex_03_string():
 
     assert validate({"val": "dcdcdc"}, {"val": "regex:(dc)*"})
 
+    assert validate({"val": "dcdcdc"}, {"val": "required|regex:(dc|ab)*"})
+
+    assert not validate({"val": "foobar"}, {"val": "regex:foo(baz|foo)$"})
+
     assert not validate({"val": "groy"}, {"val": "regex:gr[ae]y"})
 
     assert not validate({"val": "xyzabc"}, {"val": "regex:xyz$"})
