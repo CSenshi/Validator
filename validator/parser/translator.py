@@ -49,13 +49,18 @@ class Translator:
         return rules_arr
 
     def _value_to_array(self):
-        # if value is string transform to string
+        # if value is string transform to list
         if isinstance(self.value, str):
             # list of rule str
             # suffix of pattern ensures regex-related `|` are not split upon
-            # splits on `|` only if it's followed by a validator rule + ":"
+            # splits on `|` only if it's followed by a validator rule without args
+            # or a validator rule that requires args + ":"
+            rules_with_args = ":|".join(R.rules_with_args)
+            rules_no_args = "|".join([rule for rule in list(R.__all__.keys()) if rule not in R.rules_with_args])
+            pattern = "[" + target_regex + f"](?={rules_with_args + ':|' + rules_no_args})"
+            
             return re.split(
-                "[" + target_regex + f"](?=({':|'.join(R.__all__)}))", self.value
+                pattern, self.value
             )
 
         # if value is array return
@@ -87,7 +92,7 @@ class Translator:
 
         # Remove underscore from class string ('ip_v4' will be same as 'ipv4')
         class_str = class_str.replace("_", "")
-
+        
         # Check if class string is in the list
         if not class_str in R.__all__:
             raise exc.NoRuleError
