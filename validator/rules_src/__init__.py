@@ -65,6 +65,7 @@ class Rule(metaclass=ABCMeta):
 
 # Iterate each module in the given package and fill __all__ dictionary
 __all__ = {}
+rules_with_args = []
 for (_, file, _) in pkgutil.iter_modules([str(Path(__file__).parent)]):
     # Get Absolute Path
     module_abs_path = f"validator.rules_src.{file}"
@@ -81,5 +82,8 @@ for (_, file, _) in pkgutil.iter_modules([str(Path(__file__).parent)]):
         if "aliases" in rule_class.__dict__:
             for alias in rule_class.aliases:
                 __all__.update({alias.lower(): rule_class})
+
+        if len(rule_class.__init__.__code__.co_varnames) > 1:
+            rules_with_args.append(i.lower())
 
         __all__.update({i.lower(): rule_class})
