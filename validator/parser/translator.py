@@ -3,7 +3,6 @@ import re
 import inspect
 from validator import exceptions as exc
 
-
 # Some needed Variables
 target_char, target_regex, target_args = ":", "|", ","
 
@@ -52,16 +51,24 @@ class Translator:
         # if value is string transform to list
         if isinstance(self.value, str):
             # list of rule str
-            # suffix of pattern ensures regex-related `|` are not split upon
-            # splits on `|` only if it's followed by a validator rule without args
-            # or a validator rule that requires args + ":"
-            rules_with_args = ":|".join(R.rules_with_args)
-            rules_no_args = "|".join([rule for rule in list(R.__all__.keys()) if rule not in R.rules_with_args])
-            pattern = "[" + target_regex + f"](?={rules_with_args + ':|' + rules_no_args})"
-            
-            return re.split(
-                pattern, self.value
+
+            # ensures regex-related `|` are not split upon
+
+            # creates lookaheads for rules with args (e.g. `|min:|max:|`)
+            rules_with_args = ":|".join(R.rules_with_args) + ":|"
+            # creates lookaheads for rules without args (e.g. `|json|ipv4|`)
+            rules_no_args = "|".join(
+                [
+                    rule
+                    for rule in list(R.__all__.keys())
+                    if rule not in R.rules_with_args
+                ]
             )
+            rules = rules_with_args + rules_no_args
+            # pattern group 1: finds all `regex:` rules
+            # pattern group 2: finds all other rules
+            pattern = f"((?:(?<=^)|(?<=\|))regex:.+?(?:(?=\|(?={rules}))|(?=$))|(?:(?<=^)|(?<=\|)).+?(?:(?=\|)|(?=$)))"
+            return re.findall(pattern, self.value)
 
         # if value is array return
         if isinstance(self.value, list):
@@ -92,7 +99,7 @@ class Translator:
 
         # Remove underscore from class string ('ip_v4' will be same as 'ipv4')
         class_str = class_str.replace("_", "")
-        
+
         # Check if class string is in the list
         if not class_str in R.__all__:
             raise exc.NoRuleError
