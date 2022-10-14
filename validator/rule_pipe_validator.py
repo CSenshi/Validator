@@ -1,5 +1,7 @@
 class RulePipeValidator:
-    def __init__(self, data, rules, rw=[]):
+    def __init__(self, data, rules, rw=None):
+        if rw is None:
+            rw = []
         # data to validate
         self.data = data
 
@@ -23,4 +25,4 @@ class RulePipeValidator:
         return self.errors_on_key
 
     def __contains__(self, item):
-        return any([type(rule) == item for rule in self.rules])
+        return any(type(rule) == item for rule in self.rules)
